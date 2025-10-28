@@ -3,7 +3,7 @@ package dominio;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Area implements Serializable {
+public class Area implements Serializable, Comparable<Area> {
 
     private String nombre;
     private String descripcion;
@@ -67,7 +67,7 @@ public class Area implements Serializable {
     public double getMontoAsignado() {
         double total = 0;
         for (int i = 0; i < listaEmpleados.size(); i++) {
-            total += listaEmpleados.get(i).getSalarioMensual();
+            total += listaEmpleados.get(i).getSalarioAnual();
         }
         return total;
     }
@@ -80,7 +80,7 @@ public class Area implements Serializable {
         double salarioMensual = e.getSalarioMensual();
         return this.getPresupuestoDisponible() >= (13 - mesActual) * salarioMensual;
     }
-
+    
     public boolean sinEmpleados() {
         return listaEmpleados.isEmpty();
     }
@@ -88,5 +88,10 @@ public class Area implements Serializable {
     @Override
     public String toString() {
         return this.getNombre() + " ($" + this.getPresupuestoAnual() + ")";
+    }
+
+    @Override
+    public int compareTo(Area o) {
+        return nombre.compareToIgnoreCase(o.getNombre());
     }
 }

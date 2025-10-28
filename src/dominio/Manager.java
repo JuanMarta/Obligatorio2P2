@@ -2,7 +2,7 @@ package dominio;
 
 import java.util.ArrayList;
 
-public class Manager extends Persona {
+public class Manager extends Persona implements Comparable<Manager> {
 
     private int antiguedad;
     private ArrayList<Empleado> listaEmpleados;
@@ -35,8 +35,27 @@ public class Manager extends Persona {
         this.listaEmpleados = listaEmpleados;
     }
 
+    public void agregarEmpleado(Empleado elEmpleado){
+        listaEmpleados.add(elEmpleado);
+    }
+    public void quitarEmpleado(Empleado elEmpleado){
+        listaEmpleados.remove(elEmpleado);
+    }
+    
+    public int getCantidadEmpleados(){
+        return listaEmpleados.size();
+    }
+    public boolean sinEmpleados(){
+        return listaEmpleados.isEmpty();
+    }
+    
     @Override
     public String toString() {
         return super.toString() + " - Antigüedad: " + this.getAntiguedad();
+    }
+
+    @Override
+    public int compareTo(Manager o) {
+        return o.getAntiguedad() - this.antiguedad;
     }
 }

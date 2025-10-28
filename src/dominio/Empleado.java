@@ -1,7 +1,6 @@
-
 package dominio;
 
-public class Empleado extends Persona {
+public class Empleado extends Persona implements Comparable<Empleado> {
 
     private double salarioMensual;
     private String cv;
@@ -55,9 +54,18 @@ public class Empleado extends Persona {
     public void setArea(Area area) {
         this.area = area;
     }
-    
+
+    public double getSalarioAnual() {
+        return salarioMensual * 12;
+    }
+
     @Override
     public String toString() {
         return super.toString() + " - $" + this.getSalarioMensual();
+    }
+
+    @Override
+    public int compareTo(Empleado o) {
+        return Double.compare(salarioMensual, o.getSalarioMensual());
     }
 }

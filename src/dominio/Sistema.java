@@ -1,6 +1,7 @@
 
 package dominio;
 
+import java.util.Collections;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -70,6 +71,7 @@ public class Sistema implements Serializable {
         for (int i = 0; i < listaManagers.size()&&!aux; i++) {
             if(listaManagers.get(i).getCedula().equalsIgnoreCase(elCi)){
                 encontrado = listaManagers.get(i);
+                aux = true;
             }
         }
         return encontrado;
@@ -80,8 +82,47 @@ public class Sistema implements Serializable {
         for (int i = 0; i < listaEmpleados.size()&&!aux; i++) {
             if(listaEmpleados.get(i).getCedula().equalsIgnoreCase(elCi)){
                 encontrado = listaEmpleados.get(i);
+                aux = true;
             }
         }
         return encontrado;
     }
+    
+    public ArrayList<Area> areasOrdenadasPorNombre(){
+        Collections.sort(listaAreas);
+        return listaAreas;
+    }
+    public ArrayList<Manager> managersOrdenadosPorAntiguedad(){
+        Collections.sort(listaManagers);
+        return listaManagers;
+    }
+    public ArrayList<Empleado> empleadosOrdenadosPorSalario(){
+        Collections.sort(listaEmpleados);
+        return listaEmpleados;
+    }
+    
+    public boolean moverEmpleado (Empleado e, int mesActual, Area nuevoArea){
+        boolean movido = false;
+        if(nuevoArea.puedeAceptar(e, mesActual)){
+            Area areaOrigen = e.getArea();
+            this.agregarEmpleado(e);
+            areaOrigen.quitarEmpleado(e);
+            e.setArea(nuevoArea);
+            movido = true;
+        }
+        return movido;
+    }
+    
+    public void eleiminarArea(Area a){
+        if(a.sinEmpleados()){
+            listaAreas.remove(a);
+        }
+    }
+    
+    public void eliminarManager(Manager m){
+        if(m.sinEmpleados()){
+            listaManagers.remove(m);
+        }
+    }
+    
 }
