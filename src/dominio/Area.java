@@ -8,6 +8,7 @@ public class Area implements Serializable, Comparable<Area> {
     private String nombre;
     private String descripcion;
     private double presupuestoAnual;
+    private double presupuestoActual;
     private ArrayList<Empleado> listaEmpleados;
 
     public Area(String elNombre, String laDescripcion, double elPresupuesto) {
@@ -21,7 +22,16 @@ public class Area implements Serializable, Comparable<Area> {
         nombre = "Sin nombre";
         descripcion = "Sin descripción";
         presupuestoAnual = 0;
+        presupuestoActual = 0;
         listaEmpleados = new ArrayList<>();
+    }
+
+    public double getPresupuestoActual() {
+        return presupuestoActual;
+    }
+
+    public void setPresupuestoActual(double presupuestoActual) {
+        this.presupuestoActual = presupuestoActual;
     }
 
     public String getNombre() {
@@ -64,21 +74,10 @@ public class Area implements Serializable, Comparable<Area> {
         listaEmpleados.remove(elEmpleado);
     }
 
-    public double getMontoAsignado() {
-        double total = 0;
-        for (int i = 0; i < listaEmpleados.size(); i++) {
-            total += listaEmpleados.get(i).getSalarioAnual();
-        }
-        return total;
-    }
 
-    public double getPresupuestoDisponible() {
-        return presupuestoAnual - this.getMontoAsignado();
-    }
-
-    public boolean puedeAceptar(Empleado e, int mesActual) {
+    public boolean puedeAceptar(Empleado e, int mesIngreso) {
         double salarioMensual = e.getSalarioMensual();
-        return this.getPresupuestoDisponible() >= (13 - mesActual) * salarioMensual;
+        return this.getPresupuestoActual() >= (13 - mesIngreso) * salarioMensual;
     }
     
     public boolean sinEmpleados() {
@@ -93,5 +92,10 @@ public class Area implements Serializable, Comparable<Area> {
     @Override
     public int compareTo(Area o) {
         return nombre.compareToIgnoreCase(o.getNombre());
+    }
+    @Override
+    public boolean equals(Object o){
+        Area otra = (Area) o;
+        return this.nombre.equals(otra.getNombre());
     }
 }

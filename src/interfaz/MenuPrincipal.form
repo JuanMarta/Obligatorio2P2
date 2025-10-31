@@ -20,37 +20,37 @@
             <Property name="text" type="java.lang.String" value="&#xc1;reas"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="openAltaAreas">
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuAltaAreas">
               <Properties>
                 <Property name="mnemonic" type="int" value="111"/>
                 <Property name="text" type="java.lang.String" value="Alta"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="openAltaAreasActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuAltaAreasActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="openBajaAreas">
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuBajaAreas">
               <Properties>
                 <Property name="mnemonic" type="int" value="115"/>
                 <Property name="text" type="java.lang.String" value="Baja"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="openBajaAreasActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuBajaAreasActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="openModificacionArea">
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuModificacionArea">
               <Properties>
                 <Property name="mnemonic" type="int" value="97"/>
                 <Property name="text" type="java.lang.String" value="Modificaci&#xf3;n"/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="openMovimientoAreas">
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuRealizarMovimiento">
               <Properties>
                 <Property name="mnemonic" type="int" value="120"/>
-                <Property name="text" type="java.lang.String" value="Realizar movimiento"/>
+                <Property name="text" type="java.lang.String" value="Realizar Movimiento"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="openMovimientoAreasActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuRealizarMovimientoActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -61,28 +61,28 @@
             <Property name="text" type="java.lang.String" value="Managers"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="openAltaManagers">
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuAltaManagers">
               <Properties>
                 <Property name="mnemonic" type="int" value="116"/>
                 <Property name="text" type="java.lang.String" value="Alta"/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="openBajaManagers">
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuBajaManagers">
               <Properties>
                 <Property name="mnemonic" type="int" value="121"/>
                 <Property name="text" type="java.lang.String" value="Baja"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="openBajaManagersActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuBajaManagersActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="openModificacionManagers">
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuModificacionManagers">
               <Properties>
                 <Property name="mnemonic" type="int" value="112"/>
                 <Property name="text" type="java.lang.String" value="Modificaci&#xf3;n"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="openModificacionManagersActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuModificacionManagersActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -93,7 +93,7 @@
             <Property name="text" type="java.lang.String" value="Empleados"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="openAltaEmpleados">
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuAltaEmpleados">
               <Properties>
                 <Property name="mnemonic" type="int" value="99"/>
                 <Property name="text" type="java.lang.String" value="Alta"/>
@@ -106,11 +106,24 @@
             <Property name="text" type="java.lang.String" value="Reportes"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="openReporteInteligente">
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuReporteInteligente">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Reporte inteligente"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuReporteInteligenteActionPerformed"/>
+              </Events>
             </MenuItem>
+            <Menu class="javax.swing.JMenu" name="jMenuReporteArea">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Reporte de estado de &#xc1;rea"/>
+              </Properties>
+            </Menu>
+            <Menu class="javax.swing.JMenu" name="jMenuReporteMovimiento">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Reporte de Movimiento"/>
+              </Properties>
+            </Menu>
           </SubComponents>
         </Menu>
       </SubComponents>

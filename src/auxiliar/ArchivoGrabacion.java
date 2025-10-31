@@ -1,4 +1,4 @@
-package lecturaYGrabacion;
+package auxiliar;
 
 
 import java.io.*;

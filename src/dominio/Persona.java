@@ -45,6 +45,12 @@ public abstract class Persona implements Serializable {
     }
 
     @Override
+    public boolean equals(Object o){
+        Persona otra = (Persona) o;
+        return this.cedula.equals(otra.getCedula());
+    }
+    
+    @Override
     public String toString() {
         return this.getNombre() + " (" + this.getCedula() + ")";
     }

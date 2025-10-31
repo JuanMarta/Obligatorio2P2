@@ -1,21 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package interfaz;
 
-/**
- *
- * @author juanm
- */
+import dominio.Sistema;
+
 public class seleccionSistema extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(seleccionSistema.class.getName());
 
-    /**
-     * Creates new form seleccionSistema
-     */
-    public seleccionSistema() {
+    private Sistema sistema;
+    
+    public seleccionSistema(Sistema elSistema) {
+        sistema = elSistema;
         initComponents();
         this.setTitle("Comenzar con...");
     }
@@ -84,7 +79,7 @@ public class seleccionSistema extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       MenuPrincipal m = new MenuPrincipal();
+       MenuPrincipal m = new MenuPrincipal(sistema);
        m.setVisible(true);
        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed

@@ -4,17 +4,28 @@ package dominio;
 import java.util.Collections;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Observable;
 
-public class Sistema implements Serializable {
+public class Sistema extends Observable  implements Serializable {
     
     private ArrayList<Area> listaAreas;
     private ArrayList<Manager> listaManagers;
     private ArrayList<Empleado> listaEmpleados;
+    private ArrayList<Movimiento> listaMovimientos;
     
     public Sistema(){
         listaAreas = new ArrayList<>();
         listaManagers = new ArrayList<>();
         listaEmpleados = new ArrayList<>();
+        listaMovimientos = new ArrayList<>();
+    }
+
+    public ArrayList<Movimiento> getListaMovimientos() {
+        return listaMovimientos;
+    }
+
+    public void setListaMovimientos(ArrayList<Movimiento> listaMovimientos) {
+        this.listaMovimientos = listaMovimientos;
     }
 
     public ArrayList<Area> getListaAreas() {
@@ -43,49 +54,50 @@ public class Sistema implements Serializable {
     
     public void agregarArea(Area elArea){
         listaAreas.add(elArea);
+        setChanged();
+        notifyObservers();
     }
     
     public void agregarManager(Manager elManager){
         listaManagers.add(elManager);
+        setChanged();
+        notifyObservers();
     }
     
     public void agregarEmpleado(Empleado elEmpleado){
         listaEmpleados.add(elEmpleado);
+        setChanged();
+        notifyObservers();
     }
     
-    public Area buscarAreaPorNombre(String elNombre){
-        Area encontrada = null;
-        boolean aux = false;
-        for (int i = 0; i < listaAreas.size()&&!aux; i++) {
+    public void agregarMovimiento(Movimiento elMovimiento){
+        listaMovimientos.add(elMovimiento);
+        setChanged();
+        notifyObservers();
+    }
+    
+    public boolean buscarAreaPorNombre(String elNombre){
+        boolean ret = false;
+        for (int i = 0; i < listaAreas.size()&&!ret; i++) {
             if(listaAreas.get(i).getNombre().equalsIgnoreCase(elNombre)){
-                encontrada = listaAreas.get(i);
-                aux = true;
+                ret = true;
             }
         }
-        return encontrada;
+        return ret;
     }
-    
-    public Manager buscarManagerPorCi(String elCi){
-        Manager encontrado = null;
-        boolean aux = false;
-        for (int i = 0; i < listaManagers.size()&&!aux; i++) {
-            if(listaManagers.get(i).getCedula().equalsIgnoreCase(elCi)){
-                encontrado = listaManagers.get(i);
-                aux = true;
+    public boolean buscarPersonaporCedula(String laCi){
+        boolean ret = false;
+        for (int i = 0; i < listaManagers.size()&&!ret; i++) {
+            if(listaManagers.get(i).getCedula().equalsIgnoreCase(laCi)){
+                ret = true;
             }
         }
-        return encontrado;
-    }
-    public Empleado buscarEmpleadoPorCi(String elCi){
-        Empleado encontrado = null;
-        boolean aux = false;
-        for (int i = 0; i < listaEmpleados.size()&&!aux; i++) {
-            if(listaEmpleados.get(i).getCedula().equalsIgnoreCase(elCi)){
-                encontrado = listaEmpleados.get(i);
-                aux = true;
+        for (int i = 0; i < listaEmpleados.size()&&!ret; i++) {
+            if(listaEmpleados.get(i).getCedula().equalsIgnoreCase(laCi)){
+                ret = true;
             }
         }
-        return encontrado;
+        return ret;
     }
     
     public ArrayList<Area> areasOrdenadasPorNombre(){
@@ -109,19 +121,26 @@ public class Sistema implements Serializable {
             areaOrigen.quitarEmpleado(e);
             e.setArea(nuevoArea);
             movido = true;
+            setChanged();
+            notifyObservers();
         }
         return movido;
+        
     }
     
     public void eleiminarArea(Area a){
         if(a.sinEmpleados()){
             listaAreas.remove(a);
+            setChanged();
+            notifyObservers();
         }
     }
     
     public void eliminarManager(Manager m){
         if(m.sinEmpleados()){
             listaManagers.remove(m);
+            setChanged();
+            notifyObservers();
         }
     }
     

@@ -1,5 +1,7 @@
 package dominio;
 
+import java.io.File;
+
 public class Empleado extends Persona implements Comparable<Empleado> {
 
     private double salarioMensual;
