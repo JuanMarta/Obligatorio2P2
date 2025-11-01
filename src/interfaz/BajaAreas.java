@@ -29,14 +29,14 @@ public class BajaAreas extends javax.swing.JFrame implements Observer{
     private void initComponents() {
 
         jScrollPane2 = new javax.swing.JScrollPane();
-        jListAreas = new javax.swing.JList<>();
+        jListAreasBaja = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
         jButtonEliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jListAreas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane2.setViewportView(jListAreas);
+        jListAreasBaja.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane2.setViewportView(jListAreasBaja);
 
         jLabel1.setText("Areas");
 
@@ -80,14 +80,18 @@ public class BajaAreas extends javax.swing.JFrame implements Observer{
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
-        Area seleccionada = (Area)jListAreas.getSelectedValue();
-        if(seleccionada.sinEmpleados()) {
-            sistema.eliminarArea(seleccionada);
+        Area seleccionadaBaja = (Area) jListAreasBaja.getSelectedValue();
+        if (seleccionadaBaja == null) {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un área de la lista", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        if (seleccionadaBaja.sinEmpleados()) {
+            sistema.eliminarArea(seleccionadaBaja);
             JOptionPane.showMessageDialog(this, "Área eliminada exitosamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
-        }else {
+        } else {
             JOptionPane.showMessageDialog(this, "No pueden haber empleados en el área a eliminar", "Error", JOptionPane.ERROR_MESSAGE);
 
         }
+
     }//GEN-LAST:event_jButtonEliminarActionPerformed
 
     /**
@@ -97,7 +101,7 @@ public class BajaAreas extends javax.swing.JFrame implements Observer{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonEliminar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JList<Object> jListAreas;
+    private javax.swing.JList<Object> jListAreasBaja;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 
@@ -107,6 +111,6 @@ public class BajaAreas extends javax.swing.JFrame implements Observer{
     }
     
     private void refrescarPantalla(){
-        jListAreas.setListData(sistema.areasOrdenadasPorNombre().toArray());
+        jListAreasBaja.setListData(sistema.areasOrdenadasPorNombre().toArray());
     }
 }

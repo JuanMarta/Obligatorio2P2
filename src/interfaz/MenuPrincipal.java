@@ -51,10 +51,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         desktopPane.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        areasMenu.setMnemonic('f');
         areasMenu.setText("Áreas");
 
-        jMenuAltaAreas.setMnemonic('o');
         jMenuAltaAreas.setText("Alta");
         jMenuAltaAreas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -63,7 +61,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         areasMenu.add(jMenuAltaAreas);
 
-        jMenuBajaAreas.setMnemonic('s');
         jMenuBajaAreas.setText("Baja");
         jMenuBajaAreas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -72,11 +69,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         areasMenu.add(jMenuBajaAreas);
 
-        jMenuModificacionArea.setMnemonic('a');
         jMenuModificacionArea.setText("Modificación");
+        jMenuModificacionArea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuModificacionAreaActionPerformed(evt);
+            }
+        });
         areasMenu.add(jMenuModificacionArea);
 
-        jMenuRealizarMovimiento.setMnemonic('x');
         jMenuRealizarMovimiento.setText("Realizar Movimiento");
         jMenuRealizarMovimiento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,14 +87,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         menuBar.add(areasMenu);
 
-        managersMenu.setMnemonic('e');
         managersMenu.setText("Managers");
 
-        jMenuAltaManagers.setMnemonic('t');
         jMenuAltaManagers.setText("Alta");
         managersMenu.add(jMenuAltaManagers);
 
-        jMenuBajaManagers.setMnemonic('y');
         jMenuBajaManagers.setText("Baja");
         jMenuBajaManagers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,7 +100,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         managersMenu.add(jMenuBajaManagers);
 
-        jMenuModificacionManagers.setMnemonic('p');
         jMenuModificacionManagers.setText("Modificación");
         jMenuModificacionManagers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,10 +110,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         menuBar.add(managersMenu);
 
-        empleadosMenu.setMnemonic('h');
         empleadosMenu.setText("Empleados");
 
-        jMenuAltaEmpleados.setMnemonic('c');
         jMenuAltaEmpleados.setText("Alta");
         empleadosMenu.add(jMenuAltaEmpleados);
 
@@ -182,6 +176,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void jMenuReporteInteligenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuReporteInteligenteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuReporteInteligenteActionPerformed
+
+    private void jMenuModificacionAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuModificacionAreaActionPerformed
+        ModificacionAreas m = new ModificacionAreas(sistema);
+        m.setVisible(true);
+    }//GEN-LAST:event_jMenuModificacionAreaActionPerformed
 
     /**
      * @param args the command line arguments
