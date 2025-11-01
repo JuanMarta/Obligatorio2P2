@@ -113,6 +113,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         empleadosMenu.setText("Empleados");
 
         jMenuAltaEmpleados.setText("Alta");
+        jMenuAltaEmpleados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuAltaEmpleadosActionPerformed(evt);
+            }
+        });
         empleadosMenu.add(jMenuAltaEmpleados);
 
         menuBar.add(empleadosMenu);
@@ -181,6 +186,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         ModificacionAreas m = new ModificacionAreas(sistema);
         m.setVisible(true);
     }//GEN-LAST:event_jMenuModificacionAreaActionPerformed
+
+    private void jMenuAltaEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAltaEmpleadosActionPerformed
+        AltaEmpleados ventana = new AltaEmpleados(sistema);
+    }//GEN-LAST:event_jMenuAltaEmpleadosActionPerformed
+
 
     /**
      * @param args the command line arguments

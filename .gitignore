@@ -1,3 +1,45 @@
+# Compiled class files
+*.class
+
+# Jar, War, Ear files
+*.jar
+*.war
+*.ear
+
+# Ant build artifacts
+build/
+dist/
+tmp/
+*.log
+*.zip
+*.tar.gz
+
+# IDE specific files (if applicable, e.g., for Eclipse or IntelliJ)
+.classpath
+.project
+.settings/
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Operating System files
+.DS_Store
+Thumbs.db
+
+# Maven specific files (if you also use Maven alongside Ant)
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/
 /nbproject/private/
+<<<<<<< HEAD
 /build/
 /dist/
+=======
+>>>>>>> origin/master

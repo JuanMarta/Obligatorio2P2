@@ -76,6 +76,10 @@ public class Sistema extends Observable  implements Serializable {
         notifyObservers();
     }
     
+    public boolean unicidadPersona(Persona p) {
+        return ! getListaEmpleados().contains(p) && ! getListaManagers().contains(p);
+    }
+    
     public boolean buscarAreaPorNombre(String elNombre){
         boolean ret = false;
         for (int i = 0; i < listaAreas.size()&&!ret; i++) {

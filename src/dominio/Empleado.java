@@ -24,6 +24,11 @@ public class Empleado extends Persona implements Comparable<Empleado> {
         manager = null;
         area = null;
     }
+    
+    // Generalmente usado en la unicidad de la cedula
+    public Empleado(String laCedula) {
+        super(laCedula);
+    }
 
     public double getSalarioMensual() {
         return salarioMensual;
@@ -60,7 +65,7 @@ public class Empleado extends Persona implements Comparable<Empleado> {
     public double getSalarioAnual() {
         return salarioMensual * 12;
     }
-
+    
     @Override
     public String toString() {
         return super.toString() + " - $" + this.getSalarioMensual();

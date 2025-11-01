@@ -13,6 +13,10 @@ public abstract class Persona implements Serializable {
         cedula = laCedula;
         celular = elCelular;
     }
+    
+    public Persona(String laCedula) {
+        cedula = laCedula;
+    }
 
     public Persona() {
         nombre = "";
