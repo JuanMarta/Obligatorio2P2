@@ -1,5 +1,5 @@
 package dominio;
-
+import excepciones.StringVacioException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -11,10 +11,10 @@ public class Area implements Serializable, Comparable<Area> {
     private double presupuestoActual;
     private ArrayList<Empleado> listaEmpleados;
 
-    public Area(String elNombre, String laDescripcion, double elPresupuesto) {
-        nombre = elNombre;
-        descripcion = laDescripcion;
-        presupuestoAnual = elPresupuesto;
+    public Area(String elNombre, String laDescripcion, double elPresupuesto) throws StringVacioException {
+        setNombre(elNombre);
+        setDescripcion(laDescripcion);
+        setPresupuestoAnual(elPresupuesto);
         listaEmpleados = new ArrayList<>();
     }
 
@@ -38,16 +38,24 @@ public class Area implements Serializable, Comparable<Area> {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombre(String nombre) throws StringVacioException {
+        if(nombre.equals("")){
+            throw new StringVacioException();
+        }else{
+            this.nombre = nombre;
+        }
     }
 
     public String getDescripcion() {
         return descripcion;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setDescripcion(String descripcion) throws StringVacioException {
+        if(descripcion.equals("")){
+            throw new StringVacioException();
+        }else{
+            this.descripcion = descripcion;
+        }
     }
 
     public double getPresupuestoAnual() {

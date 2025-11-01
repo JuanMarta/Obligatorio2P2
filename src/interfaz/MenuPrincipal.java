@@ -175,7 +175,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuModificacionManagersActionPerformed
 
     private void jMenuBajaAreasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuBajaAreasActionPerformed
-        // TODO add your handling code here:
+        BajaAreas b = new BajaAreas(sistema);
+        b.setVisible(true);
     }//GEN-LAST:event_jMenuBajaAreasActionPerformed
 
     private void jMenuReporteInteligenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuReporteInteligenteActionPerformed
