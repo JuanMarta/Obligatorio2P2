@@ -70,6 +70,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         areasMenu.add(jMenuBajaAreas);
 
         jMenuModificacionArea.setText("Modificación");
+        jMenuModificacionArea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuModificacionAreaActionPerformed(evt);
+            }
+        });
         areasMenu.add(jMenuModificacionArea);
 
         jMenuRealizarMovimiento.setText("Realizar Movimiento");
@@ -105,10 +110,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         menuBar.add(managersMenu);
 
-        empleadosMenu.setMnemonic('h');
         empleadosMenu.setText("Empleados");
 
-        jMenuAltaEmpleados.setMnemonic('c');
         jMenuAltaEmpleados.setText("Alta");
         jMenuAltaEmpleados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -171,16 +174,23 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuModificacionManagersActionPerformed
 
     private void jMenuBajaAreasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuBajaAreasActionPerformed
-        // TODO add your handling code here:
+        BajaAreas b = new BajaAreas(sistema);
+        b.setVisible(true);
     }//GEN-LAST:event_jMenuBajaAreasActionPerformed
 
     private void jMenuReporteInteligenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuReporteInteligenteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuReporteInteligenteActionPerformed
 
+    private void jMenuModificacionAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuModificacionAreaActionPerformed
+        ModificacionAreas m = new ModificacionAreas(sistema);
+        m.setVisible(true);
+    }//GEN-LAST:event_jMenuModificacionAreaActionPerformed
+
     private void jMenuAltaEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAltaEmpleadosActionPerformed
         AltaEmpleados ventana = new AltaEmpleados(sistema);
     }//GEN-LAST:event_jMenuAltaEmpleadosActionPerformed
+
 
     /**
      * @param args the command line arguments

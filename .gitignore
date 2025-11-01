@@ -38,3 +38,8 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/
 /nbproject/private/
+<<<<<<< HEAD
+/build/
+/dist/
+=======
+>>>>>>> origin/master

@@ -7,14 +7,17 @@ import javax.swing.JOptionPane;
 import java.util.Observable;
 import java.util.Observer;
 
-public class AltaAreas extends javax.swing.JFrame implements Observer{
+public class ModificacionAreas extends javax.swing.JFrame implements Observer{
     
     private final Sistema sistema;
+    private Area seleccionadaMod;
 
-    public AltaAreas(Sistema elSistema) {
+    public ModificacionAreas(Sistema elSistema) {
         sistema = elSistema;
         initComponents();
-        this.setTitle("Crear Área");
+        jTextNombre.setEditable(false);
+        jTextPresupuesto.setEditable(false);
+        this.setTitle("Modifcar Área");
         refrescarPantalla();
         sistema.addObserver(this);
 
@@ -30,7 +33,7 @@ public class AltaAreas extends javax.swing.JFrame implements Observer{
     private void initComponents() {
 
         jScrollPane2 = new javax.swing.JScrollPane();
-        jListAreasAlta = new javax.swing.JList<>();
+        jListAreasModificacion = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -42,17 +45,23 @@ public class AltaAreas extends javax.swing.JFrame implements Observer{
         jTextPresupuesto = new javax.swing.JTextPane();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTextDescripcion = new javax.swing.JTextPane();
-        jButtonAgregar = new javax.swing.JButton();
+        jButtonModificar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jListAreasAlta.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane2.setViewportView(jListAreasAlta);
+        jListAreasModificacion.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jListAreasModificacion.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jListAreasModificacionValueChanged(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jListAreasModificacion);
 
         jLabel1.setText("Areas");
 
-        jLabel2.setText("Crear Area");
+        jLabel2.setText("Modificar Descripción");
 
+        jTextNombre.setCaretColor(new java.awt.Color(102, 102, 102));
         jScrollPane1.setViewportView(jTextNombre);
 
         jLabel3.setText("Nombre");
@@ -61,14 +70,15 @@ public class AltaAreas extends javax.swing.JFrame implements Observer{
 
         jLabel5.setText("Presupuesto Anual");
 
+        jTextPresupuesto.setCaretColor(new java.awt.Color(102, 102, 102));
         jScrollPane3.setViewportView(jTextPresupuesto);
 
         jScrollPane4.setViewportView(jTextDescripcion);
 
-        jButtonAgregar.setText("Agregar");
-        jButtonAgregar.addActionListener(new java.awt.event.ActionListener() {
+        jButtonModificar.setText("Modificar");
+        jButtonModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAgregarActionPerformed(evt);
+                jButtonModificarActionPerformed(evt);
             }
         });
 
@@ -85,7 +95,7 @@ public class AltaAreas extends javax.swing.JFrame implements Observer{
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(35, 35, 35)
-                        .addComponent(jButtonAgregar)))
+                        .addComponent(jButtonModificar)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(134, 134, 134))
@@ -94,17 +104,16 @@ public class AltaAreas extends javax.swing.JFrame implements Observer{
                     .addGroup(layout.createSequentialGroup()
                         .addGap(132, 132, 132)
                         .addComponent(jLabel3)
-                        .addGap(94, 94, 94)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jLabel4)
-                                .addGap(79, 79, 79)
-                                .addComponent(jLabel5))))
+                        .addGap(100, 100, 100)
+                        .addComponent(jLabel4)
+                        .addGap(79, 79, 79)
+                        .addComponent(jLabel5))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(287, 287, 287)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(248, 248, 248)
+                        .addComponent(jLabel2)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -128,49 +137,59 @@ public class AltaAreas extends javax.swing.JFrame implements Observer{
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonAgregar)
+                .addComponent(jButtonModificar)
                 .addContainerGap(135, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
+    private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
+
         try {
-            String nombre = jTextNombre.getText();
-            String descripcion = jTextDescripcion.getText();
-            double presupuesto = Double.parseDouble(jTextPresupuesto.getText());
-            if (!sistema.buscarAreaPorNombre(nombre)) {
-                Area nuevoArea = new Area(nombre, descripcion, presupuesto);
-                sistema.agregarArea(nuevoArea);
-                refrescarPantalla();
-                JOptionPane.showMessageDialog(this, "Area creada con exito", "Exito", JOptionPane.INFORMATION_MESSAGE);
+            if (seleccionadaMod == null) {
+                JOptionPane.showMessageDialog(this, "Error: No se selecciono un area o fue eliminada durante la modificación", "Error", JOptionPane.ERROR_MESSAGE);
+                seleccionadaMod = null;
                 jTextNombre.setText("");
                 jTextDescripcion.setText("");
                 jTextPresupuesto.setText("");
             } else {
-                JOptionPane.showMessageDialog(this, "Error: Ya existe un área con el nombre ingresado", "Error", JOptionPane.ERROR_MESSAGE);
+                seleccionadaMod.setDescripcion(jTextDescripcion.getText());
+                JOptionPane.showMessageDialog(this, "Área modificada exitosamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
+                jListAreasModificacion.clearSelection();
+                refrescarPantalla();
             }
         } catch (StringVacioException e) {
-            JOptionPane.showMessageDialog(this, "Error: Debe completar todos los espacios", "Error de Formato", JOptionPane.ERROR_MESSAGE);
-        } catch (NumberFormatException | NullPointerException e) {
-            JOptionPane.showMessageDialog(this, "Error: En presupuesto debe ingresarse un numero", "Error de Formato", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error: La descripción no puede estar vacía", "Error", JOptionPane.ERROR_MESSAGE);
         }
+    }//GEN-LAST:event_jButtonModificarActionPerformed
 
-    }//GEN-LAST:event_jButtonAgregarActionPerformed
+    private void jListAreasModificacionValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListAreasModificacionValueChanged
+            
+            seleccionadaMod = (Area) jListAreasModificacion.getSelectedValue();
+            if (seleccionadaMod == null) {
+                jTextNombre.setText("");
+                jTextDescripcion.setText("");
+                jTextPresupuesto.setText("");
+            } else {
+            jTextNombre.setText(seleccionadaMod.getNombre());
+            jTextDescripcion.setText(seleccionadaMod.getDescripcion());
+            jTextPresupuesto.setText("" + seleccionadaMod.getPresupuestoAnual());
+            }
+    }//GEN-LAST:event_jListAreasModificacionValueChanged
 
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonAgregar;
+    private javax.swing.JButton jButtonModificar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JList<Object> jListAreasAlta;
+    private javax.swing.JList<Object> jListAreasModificacion;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -186,6 +205,6 @@ public class AltaAreas extends javax.swing.JFrame implements Observer{
     }
     
     private void refrescarPantalla(){
-        jListAreasAlta.setListData(sistema.areasOrdenadasPorNombre().toArray());
+        jListAreasModificacion.setListData(sistema.areasOrdenadasPorNombre().toArray());
     }
 }

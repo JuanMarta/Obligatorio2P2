@@ -132,7 +132,7 @@ public class Sistema extends Observable  implements Serializable {
         
     }
     
-    public void eleiminarArea(Area a){
+    public void eliminarArea(Area a){
         if(a.sinEmpleados()){
             listaAreas.remove(a);
             setChanged();
