@@ -107,7 +107,7 @@ public class Area extends Observable implements Serializable, Comparable<Area> {
 
     @Override
     public String toString() {
-        return this.getNombre() + " ($" + this.getPresupuestoAnual() + ")";
+        return this.getNombre() + " ($" + this.getPresupuestoActual() + ")";
     }
 
     @Override
