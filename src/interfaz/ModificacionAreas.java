@@ -126,8 +126,7 @@ public class ModificacionAreas extends javax.swing.JFrame implements Observer{
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel2)))
+                    .addComponent(jLabel2))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(35, 35, 35)
@@ -166,7 +165,6 @@ public class ModificacionAreas extends javax.swing.JFrame implements Observer{
             } else {
                 seleccionadaMod.setDescripcion(jTextDescripcion.getText());
                 JOptionPane.showMessageDialog(this, "Área modificada exitosamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
-                jListAreasModificacion.clearSelection();
                 refrescarPantalla();
             }
         } catch (StringVacioException e) {
@@ -216,6 +214,5 @@ public class ModificacionAreas extends javax.swing.JFrame implements Observer{
     
     private void refrescarPantalla(){
         jListAreasModificacion.setListData(sistema.areasOrdenadasPorNombre().toArray());
-        jListAreasModificacion.setSelectedIndex(-1);
     }
 }

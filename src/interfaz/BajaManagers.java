@@ -6,14 +6,14 @@ import javax.swing.JOptionPane;
 import java.util.Observable;
 import java.util.Observer;
 
-public class BajaAreas extends javax.swing.JFrame implements Observer{
+public class BajaManagers extends javax.swing.JFrame implements Observer{
     
     private final Sistema sistema;
 
-    public BajaAreas(Sistema elSistema) {
+    public BajaManagers(Sistema elSistema) {
         sistema = elSistema;
         initComponents();
-        this.setTitle("Eliminar Área");
+        this.setTitle("Eliminar Manager");
         refrescarPantalla();
         sistema.addObserver(this);
 
@@ -29,16 +29,16 @@ public class BajaAreas extends javax.swing.JFrame implements Observer{
     private void initComponents() {
 
         jScrollPane2 = new javax.swing.JScrollPane();
-        jListAreasBaja = new javax.swing.JList<>();
+        jListManagersBaja = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
         jButtonEliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jListAreasBaja.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane2.setViewportView(jListAreasBaja);
+        jListManagersBaja.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane2.setViewportView(jListManagersBaja);
 
-        jLabel1.setText("Areas");
+        jLabel1.setText("Managers");
 
         jButtonEliminar.setText("Eliminar");
         jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -61,15 +61,14 @@ public class BajaAreas extends javax.swing.JFrame implements Observer{
                 .addGap(43, 43, 43))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58))
+                .addComponent(jLabel1)
+                .addGap(53, 53, 53))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(12, 12, 12)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonEliminar)
@@ -80,14 +79,14 @@ public class BajaAreas extends javax.swing.JFrame implements Observer{
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
-        Area seleccionadaBaja = (Area) jListAreasBaja.getSelectedValue();
+        Manager seleccionadaBaja = (Manager) jListManagersBaja.getSelectedValue();
         if (seleccionadaBaja == null) {
-            JOptionPane.showMessageDialog(this, "Debe seleccionar un área de la lista", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un manager de la lista", "Error", JOptionPane.ERROR_MESSAGE);
         } else if (seleccionadaBaja.sinEmpleados()) {
-            sistema.eliminarArea(seleccionadaBaja);
-            JOptionPane.showMessageDialog(this, "Área eliminada exitosamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
+            sistema.eliminarManager(seleccionadaBaja);
+            JOptionPane.showMessageDialog(this, "Manager eliminado/a exitosamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(this, "No pueden haber empleados en el área a eliminar", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "El manager a eliminar no puede tener empleados", "Error", JOptionPane.ERROR_MESSAGE);
 
         }
 
@@ -101,7 +100,7 @@ public class BajaAreas extends javax.swing.JFrame implements Observer{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonEliminar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JList<Object> jListAreasBaja;
+    private javax.swing.JList<Object> jListManagersBaja;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 
@@ -111,6 +110,6 @@ public class BajaAreas extends javax.swing.JFrame implements Observer{
     }
     
     private void refrescarPantalla(){
-        jListAreasBaja.setListData(sistema.areasOrdenadasPorNombre().toArray());
+        jListManagersBaja.setListData(sistema.managersOrdenadosPorAntiguedad().toArray());
     }
 }

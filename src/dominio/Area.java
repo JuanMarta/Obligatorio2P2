@@ -3,6 +3,7 @@ package dominio;
 import excepciones.StringVacioException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Observable;
 
 public class Area extends Observable implements Serializable, Comparable<Area> {
@@ -107,6 +108,11 @@ public class Area extends Observable implements Serializable, Comparable<Area> {
 
     public boolean sinEmpleados() {
         return listaEmpleados.isEmpty();
+    }
+    
+    public ArrayList<Empleado> empleadosOrdenadosPorSalario() {
+        Collections.sort(listaEmpleados);
+        return listaEmpleados;
     }
 
     @Override
