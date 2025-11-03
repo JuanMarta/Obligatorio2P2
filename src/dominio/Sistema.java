@@ -108,32 +108,34 @@ public class Sistema extends Observable  implements Serializable {
         Collections.sort(listaAreas);
         return listaAreas;
     }
-    public ArrayList<Manager> managersOrdenadosPorAntiguedad(){
+
+    public ArrayList<Manager> managersOrdenadosPorAntiguedad() {
         Collections.sort(listaManagers);
         return listaManagers;
     }
-    public ArrayList<Empleado> empleadosOrdenadosPorSalario(){
+
+    public ArrayList<Empleado> empleadosOrdenadosPorSalario() {
         Collections.sort(listaEmpleados);
         return listaEmpleados;
     }
-    
-    public boolean moverEmpleado (Empleado e, int mesActual, Area nuevoArea){
+
+    public boolean moverEmpleado(Empleado e, int mesActual, Area destino) {
         boolean movido = false;
-        if(nuevoArea.puedeAceptar(e, mesActual)){
+        if (destino.puedeAceptar(e, mesActual)) {
             Area areaOrigen = e.getArea();
-            this.agregarEmpleado(e);
-            areaOrigen.quitarEmpleado(e);
-            e.setArea(nuevoArea);
+            areaOrigen.quitarEmpleado(e, mesActual);
+            e.setArea(destino);
+            destino.agregarEmpleado(e, mesActual);
             movido = true;
             setChanged();
             notifyObservers();
         }
         return movido;
-        
+
     }
-    
-    public void eliminarArea(Area a){
-        if(a.sinEmpleados()){
+
+    public void eliminarArea(Area a) {
+        if (a.sinEmpleados()) {
             listaAreas.remove(a);
             setChanged();
             notifyObservers();

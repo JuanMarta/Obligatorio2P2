@@ -52,28 +52,28 @@ public class BajaAreas extends javax.swing.JFrame implements Observer{
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(287, 287, 287)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(227, 227, 227)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(265, 265, 265)
-                        .addComponent(jButtonEliminar)))
-                .addContainerGap(296, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButtonEliminar)
+                .addGap(43, 43, 43))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonEliminar)
-                .addContainerGap(135, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -83,14 +83,14 @@ public class BajaAreas extends javax.swing.JFrame implements Observer{
         Area seleccionadaBaja = (Area) jListAreasBaja.getSelectedValue();
         if (seleccionadaBaja == null) {
             JOptionPane.showMessageDialog(this, "Debe seleccionar un área de la lista", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        if (seleccionadaBaja.sinEmpleados()) {
+        } else if (seleccionadaBaja.sinEmpleados()) {
             sistema.eliminarArea(seleccionadaBaja);
             JOptionPane.showMessageDialog(this, "Área eliminada exitosamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(this, "No pueden haber empleados en el área a eliminar", "Error", JOptionPane.ERROR_MESSAGE);
 
         }
+
 
     }//GEN-LAST:event_jButtonEliminarActionPerformed
 
@@ -112,5 +112,6 @@ public class BajaAreas extends javax.swing.JFrame implements Observer{
     
     private void refrescarPantalla(){
         jListAreasBaja.setListData(sistema.areasOrdenadasPorNombre().toArray());
+        jListAreasBaja.setSelectedIndex(-1);
     }
 }

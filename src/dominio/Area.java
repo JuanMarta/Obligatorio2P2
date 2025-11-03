@@ -17,15 +17,25 @@ public class Area extends Observable implements Serializable, Comparable<Area> {
         setNombre(elNombre);
         setDescripcion(laDescripcion);
         setPresupuestoAnual(elPresupuesto);
+        setPresupuestoActual(elPresupuesto);
         listaEmpleados = new ArrayList<>();
     }
 
     public Area() {
         nombre = "Sin nombre";
         descripcion = "Sin descripción";
-        presupuestoAnual = 0;
         presupuestoActual = 0;
         listaEmpleados = new ArrayList<>();
+    }
+
+    public double getPresupuestoAnual() {
+        return presupuestoAnual;
+    }
+
+    public void setPresupuestoAnual(double presupuestoAnual) {
+        this.presupuestoAnual = presupuestoAnual;
+        setChanged();
+        notifyObservers();
     }
 
     public double getPresupuestoActual() {
@@ -34,6 +44,8 @@ public class Area extends Observable implements Serializable, Comparable<Area> {
 
     public void setPresupuestoActual(double presupuestoActual) {
         this.presupuestoActual = presupuestoActual;
+        setChanged();
+        notifyObservers();
     }
 
     public String getNombre() {
@@ -64,16 +76,6 @@ public class Area extends Observable implements Serializable, Comparable<Area> {
         }
     }
 
-    public double getPresupuestoAnual() {
-        return presupuestoAnual;
-    }
-
-    public void setPresupuestoAnual(double presupuestoAnual) {
-        this.presupuestoAnual = presupuestoAnual;
-        setChanged();
-        notifyObservers();
-    }
-
     public ArrayList<Empleado> getListaEmpleados() {
         return listaEmpleados;
     }
@@ -84,14 +86,16 @@ public class Area extends Observable implements Serializable, Comparable<Area> {
         notifyObservers();
     }
 
-    public void agregarEmpleado(Empleado elEmpleado) {
+    public void agregarEmpleado(Empleado elEmpleado, int mesIngreso) {
         listaEmpleados.add(elEmpleado);
+        setPresupuestoActual(presupuestoActual - (13 - mesIngreso) * elEmpleado.getSalarioMensual());
         setChanged();
         notifyObservers();
     }
 
-    public void quitarEmpleado(Empleado elEmpleado) {
+    public void quitarEmpleado(Empleado elEmpleado, int mesEgreso) {
         listaEmpleados.remove(elEmpleado);
+        setPresupuestoActual(presupuestoActual + (13 - mesEgreso) * elEmpleado.getSalarioMensual());
         setChanged();
         notifyObservers();
     }
