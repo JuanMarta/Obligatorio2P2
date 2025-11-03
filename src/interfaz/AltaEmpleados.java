@@ -11,7 +11,6 @@ import javax.swing.JOptionPane;
 
 public class AltaEmpleados extends javax.swing.JFrame {
 
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AltaEmpleados.class.getName());
     private Sistema sistema;
 
     public AltaEmpleados(Sistema sis) {
@@ -49,7 +48,7 @@ public class AltaEmpleados extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jListEmpleados.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
@@ -62,6 +61,12 @@ public class AltaEmpleados extends javax.swing.JFrame {
         jBtnAlta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnAltaActionPerformed(evt);
+            }
+        });
+
+        jTextNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextNombreActionPerformed(evt);
             }
         });
 
@@ -202,11 +207,17 @@ public class AltaEmpleados extends javax.swing.JFrame {
             
             Empleado empleado = new Empleado(nombre, cedula, celular, salario, curriculum, manager, area);
             sistema.agregarEmpleado(empleado);
+            area.agregarEmpleado(empleado,1);
+            manager.agregarEmpleado(empleado);
             JOptionPane.showMessageDialog(this, "Empleado creado correctamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(this, "La cedula ingresada ya existe", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jBtnAltaActionPerformed
+
+    private void jTextNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextNombreActionPerformed
 
     private void inicio() {
         // Arregla el tamaño de los jText, sin esto usa el layout y se hacen muy chicos

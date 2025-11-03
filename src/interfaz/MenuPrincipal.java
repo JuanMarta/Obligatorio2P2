@@ -90,6 +90,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         managersMenu.setText("Managers");
 
         jMenuAltaManagers.setText("Alta");
+        jMenuAltaManagers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuAltaManagersActionPerformed(evt);
+            }
+        });
         managersMenu.add(jMenuAltaManagers);
 
         jMenuBajaManagers.setText("Baja");
@@ -157,7 +162,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuRealizarMovimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuRealizarMovimientoActionPerformed
-        
+        MovimientoAreas m = new MovimientoAreas(sistema);
+        m.setVisible(true);
     }//GEN-LAST:event_jMenuRealizarMovimientoActionPerformed
 
     private void jMenuAltaAreasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAltaAreasActionPerformed
@@ -190,6 +196,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void jMenuAltaEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAltaEmpleadosActionPerformed
         AltaEmpleados ventana = new AltaEmpleados(sistema);
     }//GEN-LAST:event_jMenuAltaEmpleadosActionPerformed
+
+    private void jMenuAltaManagersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAltaManagersActionPerformed
+        AltaManagers a = new AltaManagers(sistema);
+        a.setVisible(true);
+    }//GEN-LAST:event_jMenuAltaManagersActionPerformed
 
 
     /**
