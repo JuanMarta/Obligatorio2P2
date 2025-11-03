@@ -210,12 +210,9 @@ public class MovimientoAreas extends javax.swing.JFrame implements Observer{
     
     private void refrescarPantalla(){
         jListAreaDestino.setListData(sistema.areasOrdenadasPorNombre().toArray());
-        jListAreaDestino.clearSelection();
         jListAreaOrigen.setListData(sistema.areasOrdenadasPorNombre().toArray());
-        jListAreaOrigen.clearSelection();
         jListEmpleadoMover.clearSelection();
         jListEmpleadoMover.setListData(new String[0]);
-        jListMes.clearSelection();
         
     }
 }

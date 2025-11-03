@@ -1,6 +1,7 @@
 package dominio;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Manager extends Persona implements Comparable<Manager> {
 
@@ -35,20 +36,27 @@ public class Manager extends Persona implements Comparable<Manager> {
         this.listaEmpleados = listaEmpleados;
     }
 
-    public void agregarEmpleado(Empleado elEmpleado){
+    public void agregarEmpleado(Empleado elEmpleado) {
         listaEmpleados.add(elEmpleado);
     }
-    public void quitarEmpleado(Empleado elEmpleado){
+
+    public void quitarEmpleado(Empleado elEmpleado) {
         listaEmpleados.remove(elEmpleado);
     }
-    
-    public int getCantidadEmpleados(){
+
+    public int getCantidadEmpleados() {
         return listaEmpleados.size();
     }
-    public boolean sinEmpleados(){
+
+    public boolean sinEmpleados() {
         return listaEmpleados.isEmpty();
     }
-    
+
+    public ArrayList<Empleado> empleadosOrdenadosPorSalario() {
+        Collections.sort(listaEmpleados);
+        return listaEmpleados;
+    }
+
     @Override
     public String toString() {
         return super.toString() + " - Antigüedad: " + this.getAntiguedad();
