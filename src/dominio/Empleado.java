@@ -1,5 +1,7 @@
 package dominio;
 
+import auxiliar.ArchivoGrabacion;
+import excepciones.StringVacioException;
 import java.io.File;
 
 public class Empleado extends Persona implements Comparable<Empleado> {
@@ -9,12 +11,12 @@ public class Empleado extends Persona implements Comparable<Empleado> {
     private Manager manager;
     private Area area;
 
-    public Empleado(String elNombre, String laCedula, String elCelular, double elSalario, String elCv, Manager elManager, Area elArea) {
+    public Empleado(String elNombre, String laCedula, String elCelular, double elSalario, String elCv, Manager elManager, Area elArea) throws StringVacioException {
         super(elNombre, laCedula, elCelular);
-        salarioMensual = elSalario;
-        cv = elCv;
-        manager = elManager;
-        area = elArea;
+        this.setSalarioMensual(elSalario);
+        this.setCv(elCv);
+        this.setManager(elManager);
+        this.setArea(elArea);
     }
 
     public Empleado() {
@@ -42,8 +44,19 @@ public class Empleado extends Persona implements Comparable<Empleado> {
         return cv;
     }
 
-    public void setCv(String cv) {
-        this.cv = cv;
+    public void setCv(String elCv) throws StringVacioException {
+        if (elCv == null) {
+            throw new StringVacioException();
+        } else {
+            File carpeta = new File("cvs");
+            if (!carpeta.exists()) {
+                carpeta.mkdir();
+            }
+            cv = "cvs/CV" + super.getCedula() + ".txt";
+            ArchivoGrabacion ag = new ArchivoGrabacion(cv);
+            ag.grabarLinea(elCv);
+            ag.cerrar();
+        }
     }
 
     public Manager getManager() {

@@ -2,15 +2,18 @@
 package interfaz;
 
 import dominio.Sistema;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import javax.swing.JOptionPane;
 
 public class seleccionSistema extends javax.swing.JFrame {
-    
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(seleccionSistema.class.getName());
 
     private Sistema sistema;
     
-    public seleccionSistema(Sistema elSistema) {
-        sistema = elSistema;
+    public seleccionSistema() {
         initComponents();
         this.setTitle("Comenzar con...");
     }
@@ -24,30 +27,30 @@ public class seleccionSistema extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jButtonSistemaNuevo = new javax.swing.JButton();
+        jButtonSistemaGuardado = new javax.swing.JButton();
+        jButtonSistemaDemo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Sistema nuevo");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonSistemaNuevo.setText("Sistema nuevo");
+        jButtonSistemaNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonSistemaNuevoActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Sistema guardado");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonSistemaGuardado.setText("Sistema guardado");
+        jButtonSistemaGuardado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonSistemaGuardadoActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Sistema con datos precargados");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButtonSistemaDemo.setText("Sistema con datos precargados");
+        jButtonSistemaDemo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButtonSistemaDemoActionPerformed(evt);
             }
         });
 
@@ -57,11 +60,11 @@ public class seleccionSistema extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1)
+                .addComponent(jButtonSistemaNuevo)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(jButtonSistemaGuardado)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3)
+                .addComponent(jButtonSistemaDemo)
                 .addContainerGap(13, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -69,37 +72,55 @@ public class seleccionSistema extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(53, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(jButtonSistemaNuevo)
+                    .addComponent(jButtonSistemaGuardado)
+                    .addComponent(jButtonSistemaDemo))
                 .addGap(48, 48, 48))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       MenuPrincipal m = new MenuPrincipal(sistema);
-       m.setVisible(true);
-       this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jButtonSistemaNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSistemaNuevoActionPerformed
+        sistema = new Sistema();
+        CrearVentana(sistema);
+    }//GEN-LAST:event_jButtonSistemaNuevoActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButtonSistemaGuardadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSistemaGuardadoActionPerformed
+        try {
+            FileInputStream ff = new FileInputStream("datos/guardarDatos");
+            BufferedInputStream b = new BufferedInputStream(ff);
+            ObjectInputStream sss = new ObjectInputStream(b);
+            sistema = (Sistema) sss.readObject();
+            sss.close();
+            CrearVentana(sistema);
+        } catch (FileNotFoundException e) {
+            JOptionPane.showMessageDialog(this, "Error: No se ha creado un sistema previamente", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error al leer el archivo", "Error", JOptionPane.ERROR_MESSAGE);
+            sistema = new Sistema();
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, "Error: no se encontro sistema para leer los datos", "Error", JOptionPane.ERROR_MESSAGE);
+        } 
+    }//GEN-LAST:event_jButtonSistemaGuardadoActionPerformed
+
+    private void jButtonSistemaDemoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSistemaDemoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButtonSistemaDemoActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
-
+    private void CrearVentana(Sistema sistema) {
+        MenuPrincipal m = new MenuPrincipal(sistema);
+        m.setVisible(true);
+        this.dispose();
+    }
     /**
      * @param args the command line arguments
      */
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButtonSistemaDemo;
+    private javax.swing.JButton jButtonSistemaGuardado;
+    private javax.swing.JButton jButtonSistemaNuevo;
     // End of variables declaration//GEN-END:variables
 }

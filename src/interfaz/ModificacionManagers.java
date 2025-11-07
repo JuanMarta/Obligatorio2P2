@@ -1,4 +1,3 @@
-
 package interfaz;
 
 import dominio.*;
@@ -7,8 +6,8 @@ import javax.swing.JOptionPane;
 import java.util.Observable;
 import java.util.Observer;
 
-public class ModificacionManagers extends javax.swing.JFrame implements Observer{
-    
+public class ModificacionManagers extends javax.swing.JFrame implements Observer {
+
     private final Sistema sistema;
     private Manager seleccionado;
 
@@ -18,6 +17,7 @@ public class ModificacionManagers extends javax.swing.JFrame implements Observer
         jTextNombre.setEditable(false);
         jTextCedula.setEditable(false);
         jTextAntiguedad.setEditable(false);
+        jTextTelefono.setEditable(false);
         this.setTitle("Crear Área");
         refrescarPantalla();
         sistema.addObserver(this);
@@ -198,10 +198,16 @@ public class ModificacionManagers extends javax.swing.JFrame implements Observer
             jTextCedula.setText("");
             jTextTelefono.setText("");
             jTextAntiguedad.setText("");
+
         } else {
-            seleccionado.setCelular(jTextTelefono.getText());
-            JOptionPane.showMessageDialog(this, "Manager modificada exitosamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
-            refrescarPantalla();
+            try {
+                seleccionado.setCelular(jTextTelefono.getText());
+                JOptionPane.showMessageDialog(this, "Manager modificada exitosamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
+                refrescarPantalla();
+            } catch (StringVacioException e) {
+                JOptionPane.showMessageDialog(this, "Error: Deben completarse todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
         }
 
     }//GEN-LAST:event_jButtonModificarActionPerformed
@@ -214,12 +220,14 @@ public class ModificacionManagers extends javax.swing.JFrame implements Observer
             jTextCedula.setText("");
             jTextTelefono.setText("");
             jTextAntiguedad.setText("");
+            jTextTelefono.setEditable(false);
         } else {
             jListaEmpleadoManager.setListData(seleccionado.empleadosOrdenadosPorSalario().toArray());
             jTextNombre.setText(seleccionado.getNombre());
             jTextCedula.setText(seleccionado.getCedula());
             jTextTelefono.setText(seleccionado.getCelular());
             jTextAntiguedad.setText(seleccionado.getAntiguedad() + "");
+            jTextTelefono.setEditable(true);
         }
 
     }//GEN-LAST:event_jListaManagerModValueChanged
@@ -257,6 +265,8 @@ public class ModificacionManagers extends javax.swing.JFrame implements Observer
     }
     
     private void refrescarPantalla(){
-        jListaEmpleadoManager.setListData(sistema.managersOrdenadosPorAntiguedad().toArray());
+        jListaManagerMod.setListData(sistema.managersOrdenadosPorAntiguedad().toArray());
+        jListaEmpleadoManager.clearSelection();
+        jListaEmpleadoManager.setListData(new String[0]);
     }
 }

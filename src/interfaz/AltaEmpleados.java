@@ -3,8 +3,8 @@ package interfaz;
 import dominio.Area;
 import dominio.Empleado;
 import dominio.Manager;
-import dominio.Persona;
 import dominio.Sistema;
+import excepciones.StringVacioException;
 import java.awt.Dimension;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -204,12 +204,16 @@ public class AltaEmpleados extends javax.swing.JFrame {
             String curriculum = jTextAreaCurriculum.getText();
             Manager manager = (Manager) jComboManager.getSelectedItem();
             Area area = (Area) jComboAreas.getSelectedItem();
-            
-            Empleado empleado = new Empleado(nombre, cedula, celular, salario, curriculum, manager, area);
-            sistema.agregarEmpleado(empleado);
-            area.agregarEmpleado(empleado,1);
-            manager.agregarEmpleado(empleado);
-            JOptionPane.showMessageDialog(this, "Empleado creado correctamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+            Empleado empleado;
+            try {
+                empleado = new Empleado(nombre, cedula, celular, salario, curriculum, manager, area);
+                sistema.agregarEmpleado(empleado);
+                area.agregarEmpleado(empleado, 1);
+                manager.agregarEmpleado(empleado);
+                JOptionPane.showMessageDialog(this, "Empleado creado correctamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+            } catch (StringVacioException e) {
+                JOptionPane.showMessageDialog(this, "Error: Deben completarse todos los campos", "Error", JOptionPane.INFORMATION_MESSAGE);
+            }
         } else {
             JOptionPane.showMessageDialog(this, "La cedula ingresada ya existe", "Error", JOptionPane.ERROR_MESSAGE);
         }

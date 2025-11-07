@@ -54,7 +54,7 @@ public class Area extends Observable implements Serializable, Comparable<Area> {
     }
 
     public void setNombre(String nombre) throws StringVacioException {
-        if (nombre.equals("")) {
+        if (nombre == null) {
             throw new StringVacioException();
         } else {
             this.nombre = nombre;
@@ -68,7 +68,7 @@ public class Area extends Observable implements Serializable, Comparable<Area> {
     }
 
     public void setDescripcion(String descripcion) throws StringVacioException {
-        if (descripcion.equals("")) {
+        if (descripcion == null) {
             throw new StringVacioException();
         } else {
             this.descripcion = descripcion;
