@@ -4,6 +4,7 @@ import excepciones.StringVacioException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Observable;
 
 public class Area extends Observable implements Serializable, Comparable<Area> {
@@ -109,10 +110,25 @@ public class Area extends Observable implements Serializable, Comparable<Area> {
     public boolean sinEmpleados() {
         return listaEmpleados.isEmpty();
     }
-    
+
     public ArrayList<Empleado> empleadosOrdenadosPorSalario() {
         Collections.sort(listaEmpleados);
         return listaEmpleados;
+    }
+
+    public ArrayList<Empleado> empleadosOrdenadosPorNombre() {
+        Collections.sort(listaEmpleados, new Comparator<Empleado>() {
+            @Override
+            public int compare(Empleado o1, Empleado o2) {
+                return o1.getNombre().compareTo(o2.getNombre());
+            }
+        });
+        
+        return listaEmpleados;
+    }
+
+    public double porcentajePresupuestoAsignado() {
+        return ((this.getPresupuestoAnual() - this.getPresupuestoActual()) * 100) / this.getPresupuestoAnual();
     }
 
     @Override
@@ -127,7 +143,9 @@ public class Area extends Observable implements Serializable, Comparable<Area> {
 
     @Override
     public boolean equals(Object o) {
-        if (o == null) return false;
+        if (o == null) {
+            return false;
+        }
         Area otra = (Area) o;
         return this.nombre.equals(otra.getNombre());
     }

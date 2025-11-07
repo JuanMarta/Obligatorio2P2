@@ -123,11 +123,14 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuReporteInteligenteActionPerformed"/>
               </Events>
             </MenuItem>
-            <Menu class="javax.swing.JMenu" name="jMenuReporteArea">
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemReporteArea">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Reporte de estado de &#xc1;rea"/>
+                <Property name="text" type="java.lang.String" value="Reporte de estado de &#xe1;reas"/>
               </Properties>
-            </Menu>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemReporteAreaActionPerformed"/>
+              </Events>
+            </MenuItem>
             <Menu class="javax.swing.JMenu" name="jMenuReporteMovimiento">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Reporte de Movimiento"/>

@@ -3,6 +3,7 @@ package dominio;
 import java.util.Collections;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Observable;
 
 public class Sistema extends Observable implements Serializable {
@@ -50,6 +51,19 @@ public class Sistema extends Observable implements Serializable {
     public ArrayList<Area> areasOrdenadasPorNombre() {
         Collections.sort(listaAreas);
         return listaAreas;
+    }
+    
+    public ArrayList<Area> areasOrdenadasPorPresupuestoAsignado() {
+    Collections.sort(getListaAreas(), new Comparator<Area>() {
+            public int compare(Area a1, Area a2) {
+                double porcentajeArea1 = a1.porcentajePresupuestoAsignado();
+                double porcentajeArea2 = a2.porcentajePresupuestoAsignado();
+                
+                return Double.compare(porcentajeArea2, porcentajeArea1);
+            }
+        });
+    
+    return getListaAreas();
     }
     
     public void eliminarArea(Area a) {

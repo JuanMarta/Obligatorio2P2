@@ -51,7 +51,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuAltaEmpleados = new javax.swing.JMenuItem();
         reportesMenu = new javax.swing.JMenu();
         jMenuReporteInteligente = new javax.swing.JMenuItem();
-        jMenuReporteArea = new javax.swing.JMenu();
+        jMenuItemReporteArea = new javax.swing.JMenuItem();
         jMenuReporteMovimiento = new javax.swing.JMenu();
 
         jMenuItem1.setText("jMenuItem1");
@@ -159,8 +159,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         reportesMenu.add(jMenuReporteInteligente);
 
-        jMenuReporteArea.setText("Reporte de estado de Área");
-        reportesMenu.add(jMenuReporteArea);
+        jMenuItemReporteArea.setText("Reporte de estado de áreas");
+        jMenuItemReporteArea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemReporteAreaActionPerformed(evt);
+            }
+        });
+        reportesMenu.add(jMenuItemReporteArea);
 
         jMenuReporteMovimiento.setText("Reporte de Movimiento");
         reportesMenu.add(jMenuReporteMovimiento);
@@ -218,13 +223,19 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuModificacionAreaActionPerformed
 
     private void jMenuAltaEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAltaEmpleadosActionPerformed
-        AltaEmpleados ventana = new AltaEmpleados(sistema);
+        AltaEmpleados a = new AltaEmpleados(sistema);
+        a.setVisible(true);
     }//GEN-LAST:event_jMenuAltaEmpleadosActionPerformed
 
     private void jMenuAltaManagersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAltaManagersActionPerformed
         AltaManagers a = new AltaManagers(sistema);
         a.setVisible(true);
     }//GEN-LAST:event_jMenuAltaManagersActionPerformed
+
+    private void jMenuItemReporteAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemReporteAreaActionPerformed
+        ReporteEstadoAreas r = new ReporteEstadoAreas(sistema);
+        r.setVisible(true);
+    }//GEN-LAST:event_jMenuItemReporteAreaActionPerformed
     
     private void confirmarCierre(){
         int opcion = JOptionPane.showConfirmDialog(this, "Desea salir del sistema?", "Salir", JOptionPane.YES_NO_OPTION);
@@ -258,10 +269,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuBajaManagers;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItemReporteArea;
     private javax.swing.JMenuItem jMenuModificacionArea;
     private javax.swing.JMenuItem jMenuModificacionManagers;
     private javax.swing.JMenuItem jMenuRealizarMovimiento;
-    private javax.swing.JMenu jMenuReporteArea;
     private javax.swing.JMenuItem jMenuReporteInteligente;
     private javax.swing.JMenu jMenuReporteMovimiento;
     private javax.swing.JMenu managersMenu;
