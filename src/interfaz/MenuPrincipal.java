@@ -2,17 +2,28 @@
 package interfaz;
 
 import dominio.Sistema;
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import javax.swing.JOptionPane;
 
 
 public class MenuPrincipal extends javax.swing.JFrame {
 
     private Sistema sistema;
-    
+
     public MenuPrincipal(Sistema elSistema) {
         sistema = elSistema;
         initComponents();
         this.setTitle("ERP Empresarial");
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                confirmarCierre();
+            }
+        });
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -51,8 +62,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         desktopPane.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
+        areasMenu.setMnemonic('f');
         areasMenu.setText("Áreas");
 
+        jMenuAltaAreas.setMnemonic('o');
         jMenuAltaAreas.setText("Alta");
         jMenuAltaAreas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -61,6 +74,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         areasMenu.add(jMenuAltaAreas);
 
+        jMenuBajaAreas.setMnemonic('s');
         jMenuBajaAreas.setText("Baja");
         jMenuBajaAreas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,6 +83,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         areasMenu.add(jMenuBajaAreas);
 
+        jMenuModificacionArea.setMnemonic('a');
         jMenuModificacionArea.setText("Modificación");
         jMenuModificacionArea.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -77,6 +92,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         areasMenu.add(jMenuModificacionArea);
 
+        jMenuRealizarMovimiento.setMnemonic('x');
         jMenuRealizarMovimiento.setText("Realizar Movimiento");
         jMenuRealizarMovimiento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,8 +103,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         menuBar.add(areasMenu);
 
+        managersMenu.setMnemonic('e');
         managersMenu.setText("Managers");
 
+        jMenuAltaManagers.setMnemonic('t');
         jMenuAltaManagers.setText("Alta");
         jMenuAltaManagers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,6 +115,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         managersMenu.add(jMenuAltaManagers);
 
+        jMenuBajaManagers.setMnemonic('y');
         jMenuBajaManagers.setText("Baja");
         jMenuBajaManagers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,6 +124,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         managersMenu.add(jMenuBajaManagers);
 
+        jMenuModificacionManagers.setMnemonic('p');
         jMenuModificacionManagers.setText("Modificación");
         jMenuModificacionManagers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,8 +135,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         menuBar.add(managersMenu);
 
+        empleadosMenu.setMnemonic('h');
         empleadosMenu.setText("Empleados");
 
+        jMenuAltaEmpleados.setMnemonic('c');
         jMenuAltaEmpleados.setText("Alta");
         jMenuAltaEmpleados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -172,11 +194,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuAltaAreasActionPerformed
 
     private void jMenuBajaManagersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuBajaManagersActionPerformed
-        // TODO add your handling code here:
+        BajaManagers b = new BajaManagers(sistema);
+        b.setVisible(true);
     }//GEN-LAST:event_jMenuBajaManagersActionPerformed
 
     private void jMenuModificacionManagersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuModificacionManagersActionPerformed
-        // TODO add your handling code here:
+        ModificacionManagers m = new ModificacionManagers(sistema);
+        m.setVisible(true);
     }//GEN-LAST:event_jMenuModificacionManagersActionPerformed
 
     private void jMenuBajaAreasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuBajaAreasActionPerformed
@@ -201,7 +225,22 @@ public class MenuPrincipal extends javax.swing.JFrame {
         AltaManagers a = new AltaManagers(sistema);
         a.setVisible(true);
     }//GEN-LAST:event_jMenuAltaManagersActionPerformed
+    
+    private void confirmarCierre(){
+        int opcion = JOptionPane.showConfirmDialog(this, "Desea salir del sistema?", "Salir", JOptionPane.YES_NO_OPTION);
+        if (opcion == JOptionPane.YES_OPTION) {
+            try {
+                FileOutputStream ff = new FileOutputStream("datos/guardarDatos");
+                BufferedOutputStream b = new BufferedOutputStream(ff);
+                ObjectOutputStream sss = new ObjectOutputStream(b);
+                sss.writeObject(sistema);
+                sss.close();
+            }catch (IOException e){
+                    JOptionPane.showMessageDialog(this, "No se pudieron guardar los datos", "Error", JOptionPane.ERROR_MESSAGE);
+            }
 
+        }
+    }
 
     /**
      * @param args the command line arguments

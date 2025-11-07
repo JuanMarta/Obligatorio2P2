@@ -1,5 +1,6 @@
 package dominio;
 
+import excepciones.StringVacioException;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -8,7 +9,7 @@ public class Manager extends Persona implements Comparable<Manager> {
     private int antiguedad;
     private ArrayList<Empleado> listaEmpleados;
 
-    public Manager(String elNombre, String laCedula, String elCelular, int laAntiguedad) {
+    public Manager(String elNombre, String laCedula, String elCelular, int laAntiguedad) throws StringVacioException {
         super(elNombre, laCedula, elCelular);
         antiguedad = laAntiguedad;
         listaEmpleados = new ArrayList<>();

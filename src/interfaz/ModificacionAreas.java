@@ -17,6 +17,7 @@ public class ModificacionAreas extends javax.swing.JFrame implements Observer{
         initComponents();
         jTextNombre.setEditable(false);
         jTextPresupuesto.setEditable(false);
+        jTextDescripcion.setEditable(false);
         this.setTitle("Modifcar Área");
         refrescarPantalla();
         sistema.addObserver(this);
@@ -179,10 +180,12 @@ public class ModificacionAreas extends javax.swing.JFrame implements Observer{
                 jTextNombre.setText("");
                 jTextDescripcion.setText("");
                 jTextPresupuesto.setText("");
+                jTextDescripcion.setEditable(false);
             } else {
             jTextNombre.setText(seleccionadaMod.getNombre());
             jTextDescripcion.setText(seleccionadaMod.getDescripcion());
             jTextPresupuesto.setText("" + seleccionadaMod.getPresupuestoActual());
+            jTextDescripcion.setEditable(true);
             }
     }//GEN-LAST:event_jListAreasModificacionValueChanged
 

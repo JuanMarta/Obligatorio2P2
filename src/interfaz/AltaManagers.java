@@ -173,7 +173,7 @@ public class AltaManagers extends javax.swing.JFrame implements Observer{
             String telefono = jTextTelefono.getText();
             int antiguedad = Integer.parseInt(jTextAntiguedad.getText());
             if (!sistema.buscarPersonaporCedula(cedula)) {
-               Manager nuevo = new Manager(nombre, cedula, telefono, antiguedad);
+                Manager nuevo = new Manager(nombre, cedula, telefono, antiguedad);
                 sistema.agregarManager(nuevo);
                 refrescarPantalla();
                 JOptionPane.showMessageDialog(this, "Manager creado con exito", "Exito", JOptionPane.INFORMATION_MESSAGE);
@@ -184,10 +184,11 @@ public class AltaManagers extends javax.swing.JFrame implements Observer{
             } else {
                 JOptionPane.showMessageDialog(this, "Error: Ya existe personal con esta cédula", "Error", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (NumberFormatException | NullPointerException e) {
+        } catch (StringVacioException e) {
+            JOptionPane.showMessageDialog(this, "Error: Deben completarse todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Error: En antiguedad debe ingresarse un numero", "Error", JOptionPane.ERROR_MESSAGE);
         }
-
     }//GEN-LAST:event_jButtonAgregarActionPerformed
 
     /**
