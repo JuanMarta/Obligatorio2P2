@@ -52,7 +52,6 @@ public class Empleado extends Persona implements Comparable<Empleado> {
         }
     }
     
-    
     public void setManager(Manager manager) {
         this.manager = manager;
     }
