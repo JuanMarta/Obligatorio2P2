@@ -66,6 +66,8 @@ public class Sistema extends Observable  implements Serializable {
     
     public void agregarEmpleado(Empleado elEmpleado){
         listaEmpleados.add(elEmpleado);
+        elEmpleado.getArea().agregarEmpleado(elEmpleado, 1);
+        elEmpleado.getManager().agregarEmpleado(elEmpleado);
         setChanged();
         notifyObservers();
     }

@@ -31,21 +31,14 @@ public class Empleado extends Persona implements Comparable<Empleado> {
     public Empleado(String laCedula) {
         super(laCedula);
     }
-
-    public double getSalarioMensual() {
-        return salarioMensual;
-    }
-
+    
+    // Setters
     public void setSalarioMensual(double salarioMensual) {
         this.salarioMensual = salarioMensual;
     }
-
-    public String getCv() {
-        return cv;
-    }
-
+    
     public void setCv(String elCv) throws StringVacioException {
-        if (elCv == null) {
+        if (elCv == null && elCv.trim().isEmpty()) {
             throw new StringVacioException();
         } else {
             File carpeta = new File("cvs");
@@ -58,25 +51,35 @@ public class Empleado extends Persona implements Comparable<Empleado> {
             ag.cerrar();
         }
     }
+    
+    
+    public void setManager(Manager manager) {
+        this.manager = manager;
+    }
+    
+    public void setArea(Area area) {
+        this.area = area;
+    }
+    
+    // Getters
+    public double getSalarioAnual() {
+        return salarioMensual * 12;
+    }
+    
+    public double getSalarioMensual() {
+        return salarioMensual;
+    }
+
+    public String getCv() {
+        return cv;
+    }
 
     public Manager getManager() {
         return manager;
     }
 
-    public void setManager(Manager manager) {
-        this.manager = manager;
-    }
-
     public Area getArea() {
         return area;
-    }
-
-    public void setArea(Area area) {
-        this.area = area;
-    }
-
-    public double getSalarioAnual() {
-        return salarioMensual * 12;
     }
     
     @Override

@@ -127,6 +127,7 @@ public class Area extends Observable implements Serializable, Comparable<Area> {
 
     @Override
     public boolean equals(Object o) {
+        if (o == null) return false;
         Area otra = (Area) o;
         return this.nombre.equals(otra.getNombre());
     }
