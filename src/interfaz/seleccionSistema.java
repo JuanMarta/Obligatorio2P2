@@ -101,11 +101,25 @@ public class seleccionSistema extends javax.swing.JFrame {
             sistema = new Sistema();
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(this, "Error: no se encontro sistema para leer los datos", "Error", JOptionPane.ERROR_MESSAGE);
-        } 
+        }
     }//GEN-LAST:event_jButtonSistemaGuardadoActionPerformed
 
     private void jButtonSistemaDemoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSistemaDemoActionPerformed
-        // TODO add your handling code here:
+        try {
+            FileInputStream ff = new FileInputStream("datos/datosMuestra");
+            BufferedInputStream b = new BufferedInputStream(ff);
+            ObjectInputStream sss = new ObjectInputStream(b);
+            sistema = (Sistema) sss.readObject();
+            sss.close();
+            CrearVentana(sistema);
+        } catch (FileNotFoundException e) {
+            JOptionPane.showMessageDialog(this, "Error: No se ha creado un sistema previamente", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error al leer el archivo", "Error", JOptionPane.ERROR_MESSAGE);
+            sistema = new Sistema();
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, "Error: no se encontro sistema para leer los datos", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButtonSistemaDemoActionPerformed
 
     private void CrearVentana(Sistema sistema) {
