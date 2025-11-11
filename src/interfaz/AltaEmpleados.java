@@ -4,6 +4,8 @@ import dominio.Area;
 import dominio.Empleado;
 import dominio.Manager;
 import dominio.Sistema;
+import excepciones.CedulaInvalidaException;
+import excepciones.NumFueraDeRangoException;
 import excepciones.StringVacioException;
 import java.awt.Dimension;
 import javax.swing.DefaultListModel;
@@ -183,7 +185,7 @@ public class AltaEmpleados extends javax.swing.JFrame {
 
         jTextCedula.setText(e.getCedula());
         jTextNombre.setText(e.getNombre());
-        jTextCelular.setText(e.getCelular());
+        jTextCelular.setText(e.getTelefono());
         jTextSalario.setText(String.valueOf(e.getSalarioMensual()));
         jTextAreaCurriculum.setText(e.getCv());
         jComboManager.setSelectedItem(e.getManager());
@@ -206,13 +208,18 @@ public class AltaEmpleados extends javax.swing.JFrame {
             Area area = (Area) jComboAreas.getSelectedItem();
             Empleado empleado;
             try {
+                sistema.doubleEnRango(538, 83000, salario);
                 empleado = new Empleado(nombre, cedula, celular, salario, curriculum, manager, area);
                 sistema.agregarEmpleado(empleado);
                 area.agregarEmpleado(empleado, 1);
                 manager.agregarEmpleado(empleado);
                 JOptionPane.showMessageDialog(this, "Empleado creado correctamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
             } catch (StringVacioException e) {
-                JOptionPane.showMessageDialog(this, "Error: Deben completarse todos los campos", "Error", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Error: Deben completarse todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+            } catch (NumFueraDeRangoException ex) {
+                JOptionPane.showMessageDialog(this, "Error: Deben ingresarse un salario entre 538 y 83000 USD", "Error", JOptionPane.ERROR_MESSAGE);
+            } catch (CedulaInvalidaException ex) {
+                JOptionPane.showMessageDialog(this, "Error: Cedula invalida, ingrese solo números y verifique que el dígito veríficador sea el correcto", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } else {
             JOptionPane.showMessageDialog(this, "La cedula ingresada ya existe", "Error", JOptionPane.ERROR_MESSAGE);

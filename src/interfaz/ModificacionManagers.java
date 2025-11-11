@@ -201,7 +201,7 @@ public class ModificacionManagers extends javax.swing.JFrame implements Observer
 
         } else {
             try {
-                seleccionado.setCelular(jTextTelefono.getText());
+                seleccionado.setTelefono(jTextTelefono.getText());
                 JOptionPane.showMessageDialog(this, "Manager modificada exitosamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
                 refrescarPantalla();
             } catch (StringVacioException e) {
@@ -225,7 +225,7 @@ public class ModificacionManagers extends javax.swing.JFrame implements Observer
             jListaEmpleadoManager.setListData(seleccionado.empleadosOrdenadosPorSalario().toArray());
             jTextNombre.setText(seleccionado.getNombre());
             jTextCedula.setText(seleccionado.getCedula());
-            jTextTelefono.setText(seleccionado.getCelular());
+            jTextTelefono.setText(seleccionado.getTelefono());
             jTextAntiguedad.setText(seleccionado.getAntiguedad() + "");
             jTextTelefono.setEditable(true);
         }

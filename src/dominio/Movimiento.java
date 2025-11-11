@@ -3,23 +3,23 @@ package dominio;
 
 
 public class Movimiento {
-    private String mesRealizacion;
+    private int mesRealizacion;
     private String nombreAreaOrigen;
     private String nombreAreaDestino;
     private String nombreEmpleado;
     
-    public Movimiento(String elMes, String nombreOrigen, String nombreDestino, String nombreEmpleado){
+    public Movimiento(int elMes, String nombreOrigen, String nombreDestino, String nombreEmpleado){
         mesRealizacion = elMes;
         nombreAreaOrigen = nombreOrigen;
         nombreAreaDestino = nombreDestino;
         nombreEmpleado = nombreEmpleado;
     }
 
-    public String getMesRealizacion() {
+    public int getMesRealizacion() {
         return mesRealizacion;
     }
 
-    public void setMesRealizacion(String mesRealizacion) {
+    public void setMesRealizacion(int mesRealizacion) {
         this.mesRealizacion = mesRealizacion;
     }
 

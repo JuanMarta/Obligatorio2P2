@@ -1,6 +1,8 @@
 package dominio;
 
+import excepciones.CedulaInvalidaException;
 import excepciones.StringVacioException;
+import excepciones.TelefonoInvalidoException;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -9,7 +11,7 @@ public class Manager extends Persona implements Comparable<Manager> {
     private int antiguedad;
     private ArrayList<Empleado> listaEmpleados;
 
-    public Manager(String elNombre, String laCedula, String elCelular, int laAntiguedad) throws StringVacioException {
+    public Manager(String elNombre, String laCedula, String elCelular, int laAntiguedad) throws StringVacioException, CedulaInvalidaException, TelefonoInvalidoException {
         super(elNombre, laCedula, elCelular);
         antiguedad = laAntiguedad;
         listaEmpleados = new ArrayList<>();
