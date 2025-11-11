@@ -46,12 +46,12 @@ public abstract class Persona implements Serializable {
         if (cedula.isEmpty()) {
             throw new StringVacioException();
         }
-        if(cedula.length() != 8){
+        if (cedula.length() != 8) {
             throw new CedulaInvalidaException();
         }
-        try{
+        try {
             Integer.parseInt(cedula);
-        }catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             throw new CedulaInvalidaException();
         }
         verificarCedula(cedula);
@@ -66,15 +66,15 @@ public abstract class Persona implements Serializable {
         if (telefono.isEmpty()) {
             throw new StringVacioException();
         }
-        try{
+        try {
             Integer.parseInt(telefono);
-        }catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             throw new TelefonoInvalidoException();
         }
         this.telefono = telefono;
     }
-    
-    public void verificarCedula(String cedula) throws CedulaInvalidaException{
+
+    public void verificarCedula(String cedula) throws CedulaInvalidaException {
         int ver = Integer.parseInt("" + cedula.charAt(7));
         int[] mult = {2, 9, 8, 7, 6, 3, 4};
         int suma = 0;
@@ -83,14 +83,16 @@ public abstract class Persona implements Serializable {
         }
         int resto = suma % 10;
         int digitoVerificador = (10 - resto) % 10;
-        if(ver != digitoVerificador){
+        if (ver != digitoVerificador) {
             throw new CedulaInvalidaException();
         }
     }
 
     @Override
     public boolean equals(Object o) {
-        if (o == null) return false;
+        if (o == null || this.getClass() != o.getClass()) {
+            return false;
+        }
         Persona otra = (Persona) o;
         return this.cedula.equals(otra.getCedula());
     }

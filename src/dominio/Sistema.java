@@ -1,6 +1,7 @@
 package dominio;
 
 import excepciones.NumFueraDeRangoException;
+import excepciones.StringVacioException;
 import java.util.Collections;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -15,16 +16,32 @@ public class Sistema extends Observable implements Serializable {
     private ArrayList<Movimiento> listaMovimientos;
 
     public Sistema() {
-        listaAreas = new ArrayList<>();
-        listaManagers = new ArrayList<>();
-        listaEmpleados = new ArrayList<>();
-        listaMovimientos = new ArrayList<>();
+        try {
+            listaAreas = new ArrayList<>();
+            listaManagers = new ArrayList<>();
+            listaEmpleados = new ArrayList<>();
+            listaMovimientos = new ArrayList<>();
+            
+            Area a = new Area("RRHH", "RRHH", 5000);
+            listaAreas.add(a);
+            
+            Area a2 = new Area("HHRR", "HHRR", 5000);
+            listaAreas.add(a2);
+            
+            Manager m = new Manager("Mario", "42245135", "092854473", 12);
+            listaManagers.add(m);
+            
+            listaEmpleados.add(new Empleado("Santiago", "56667941", "092854473", 5000, "Pene", m, a));
+            
+            listaMovimientos.add(new Movimiento(12, "RRHH", "HHRR", "56667941", "Santiago"));
+        } catch (Exception ex) {
+            System.getLogger(Sistema.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
     }
 
     // ---------------------------------------------------
     // -------------------- Areas ------------------------
     // ---------------------------------------------------
-    
     public ArrayList<Area> getListaAreas() {
         return listaAreas;
     }
@@ -32,13 +49,13 @@ public class Sistema extends Observable implements Serializable {
     public void setListaAreas(ArrayList<Area> listaAreas) {
         this.listaAreas = listaAreas;
     }
-    
+
     public void agregarArea(Area elArea) {
         listaAreas.add(elArea);
         setChanged();
         notifyObservers();
     }
-    
+
     public boolean buscarAreaPorNombre(String elNombre) {
         boolean ret = false;
         for (int i = 0; i < listaAreas.size() && !ret; i++) {
@@ -53,20 +70,20 @@ public class Sistema extends Observable implements Serializable {
         Collections.sort(listaAreas);
         return listaAreas;
     }
-    
+
     public ArrayList<Area> areasOrdenadasPorPresupuestoAsignado() {
-    Collections.sort(getListaAreas(), new Comparator<Area>() {
+        Collections.sort(getListaAreas(), new Comparator<Area>() {
             public int compare(Area a1, Area a2) {
                 double porcentajeArea1 = a1.porcentajePresupuestoAsignado();
                 double porcentajeArea2 = a2.porcentajePresupuestoAsignado();
-                
+
                 return Double.compare(porcentajeArea2, porcentajeArea1);
             }
         });
-    
-    return getListaAreas();
+
+        return getListaAreas();
     }
-    
+
     public void eliminarArea(Area a) {
         if (a.sinEmpleados()) {
             listaAreas.remove(a);
@@ -74,11 +91,10 @@ public class Sistema extends Observable implements Serializable {
             notifyObservers();
         }
     }
-    
+
     // ---------------------------------------------------
     // -------------------- Managers ---------------------
     // ---------------------------------------------------
-    
     public ArrayList<Manager> getListaManagers() {
         return listaManagers;
     }
@@ -86,18 +102,18 @@ public class Sistema extends Observable implements Serializable {
     public void setListaManagers(ArrayList<Manager> listaManagers) {
         this.listaManagers = listaManagers;
     }
-    
+
     public void agregarManager(Manager elManager) {
         listaManagers.add(elManager);
         setChanged();
         notifyObservers();
     }
-    
+
     public ArrayList<Manager> managersOrdenadosPorAntiguedad() {
         Collections.sort(listaManagers);
         return listaManagers;
     }
-    
+
     public void eliminarManager(Manager m) {
         if (m.sinEmpleados()) {
             listaManagers.remove(m);
@@ -105,11 +121,10 @@ public class Sistema extends Observable implements Serializable {
             notifyObservers();
         }
     }
-    
+
     // ---------------------------------------------------
     // -------------------- Empleados --------------------
     // ---------------------------------------------------
-    
     public ArrayList<Empleado> getListaEmpleados() {
         return listaEmpleados;
     }
@@ -117,7 +132,7 @@ public class Sistema extends Observable implements Serializable {
     public void setListaEmpleados(ArrayList<Empleado> listaEmpleados) {
         this.listaEmpleados = listaEmpleados;
     }
-    
+
     public void agregarEmpleado(Empleado elEmpleado) {
         listaEmpleados.add(elEmpleado);
         elEmpleado.getArea().agregarEmpleado(elEmpleado, 1);
@@ -125,7 +140,7 @@ public class Sistema extends Observable implements Serializable {
         setChanged();
         notifyObservers();
     }
-    
+
     public ArrayList<Empleado> empleadosOrdenadosPorSalario() {
         Collections.sort(listaEmpleados);
         return listaEmpleados;
@@ -141,16 +156,15 @@ public class Sistema extends Observable implements Serializable {
             movido = true;
             setChanged();
             notifyObservers();
-            Movimiento m = new Movimiento(mesActual,areaOrigen.getNombre(),destino.getNombre(),e.getNombre());
+            Movimiento m = new Movimiento(mesActual, areaOrigen.getNombre(), destino.getNombre(), e.getCedula(), e.getNombre());
             this.agregarMovimiento(m);
         }
         return movido;
     }
-    
+
     // ----------------------------------------------------
     // ------------------- Movimientos --------------------
     // ----------------------------------------------------
-
     public ArrayList<Movimiento> getListaMovimientos() {
         return listaMovimientos;
     }
@@ -163,6 +177,24 @@ public class Sistema extends Observable implements Serializable {
         listaMovimientos.add(elMovimiento);
         setChanged();
         notifyObservers();
+    }
+
+    public ArrayList<Movimiento> filtroMovimiento(int mes, String nomAreaOrigen, String nomAreaDestino, String cedula) {
+        ArrayList<Movimiento> lista = new ArrayList<>();
+
+        for (Movimiento m : getListaMovimientos()) {
+            boolean coincideMes = (! (mes > 0) || m.getMesRealizacion() == mes);
+            boolean coincideOrigen = (nomAreaOrigen == null || m.getNombreAreaOrigen().equals(nomAreaOrigen));
+            boolean coincideDestino = (nomAreaDestino == null || m.getNombreAreaDestino().equals(nomAreaDestino));
+            boolean coincideCedula = (cedula == null || m.getCedulaEmpleado().equals(cedula));
+
+            if (coincideMes && coincideOrigen && coincideDestino && coincideCedula) {
+                lista.add(m);
+            }
+        }
+        Collections.sort(lista);
+        
+        return lista;
     }
 
     // ---------------------------------------------------
@@ -179,7 +211,7 @@ public class Sistema extends Observable implements Serializable {
             throw new NumFueraDeRangoException();
         }
     }
-    
+
     public boolean unicidadPersona(Persona p) {
         return !getListaEmpleados().contains(p) && !getListaManagers().contains(p);
     }

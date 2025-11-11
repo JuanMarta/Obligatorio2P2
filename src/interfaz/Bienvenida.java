@@ -70,7 +70,7 @@ public class Bienvenida extends javax.swing.JFrame {
         jPanel2.add(jLabel1);
         jLabel1.setBounds(0, 30, 597, 144);
 
-        jLabel2.setText("Santiago Nicolas Alonso Bentancor ()  Juan Ignacio Marta Fernández (332281)");
+        jLabel2.setText("Santiago Nicolas Alonso Bentancor (349491)  Juan Ignacio Marta Fernández (332281)");
         jPanel2.add(jLabel2);
         jLabel2.setBounds(70, 190, 470, 16);
 
