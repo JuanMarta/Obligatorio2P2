@@ -52,7 +52,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         reportesMenu = new javax.swing.JMenu();
         jMenuReporteInteligente = new javax.swing.JMenuItem();
         jMenuItemReporteArea = new javax.swing.JMenuItem();
-        jMenuReporteMovimiento = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -167,8 +167,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         reportesMenu.add(jMenuItemReporteArea);
 
-        jMenuReporteMovimiento.setText("Reporte de Movimiento");
-        reportesMenu.add(jMenuReporteMovimiento);
+        jMenuItem3.setText("Reporte de Movimiento");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        reportesMenu.add(jMenuItem3);
 
         menuBar.add(reportesMenu);
 
@@ -236,6 +241,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         ReporteEstadoAreas r = new ReporteEstadoAreas(sistema);
         r.setVisible(true);
     }//GEN-LAST:event_jMenuItemReporteAreaActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        ReporteMovimientos r = new ReporteMovimientos(sistema);
+        r.setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
     
     private void confirmarCierre(){
         int opcion = JOptionPane.showConfirmDialog(this, "Desea salir del sistema?", "Salir", JOptionPane.YES_NO_OPTION);
@@ -269,12 +279,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuBajaManagers;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItemReporteArea;
     private javax.swing.JMenuItem jMenuModificacionArea;
     private javax.swing.JMenuItem jMenuModificacionManagers;
     private javax.swing.JMenuItem jMenuRealizarMovimiento;
     private javax.swing.JMenuItem jMenuReporteInteligente;
-    private javax.swing.JMenu jMenuReporteMovimiento;
     private javax.swing.JMenu managersMenu;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu reportesMenu;
