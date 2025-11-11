@@ -1,34 +1,30 @@
-
 package dominio;
 
 import excepciones.NumFueraDeRangoException;
 import java.util.Collections;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Observable;
 
-public class Sistema extends Observable  implements Serializable {
-    
+public class Sistema extends Observable implements Serializable {
+
     private ArrayList<Area> listaAreas;
     private ArrayList<Manager> listaManagers;
     private ArrayList<Empleado> listaEmpleados;
     private ArrayList<Movimiento> listaMovimientos;
-    
-    public Sistema(){
+
+    public Sistema() {
         listaAreas = new ArrayList<>();
         listaManagers = new ArrayList<>();
         listaEmpleados = new ArrayList<>();
         listaMovimientos = new ArrayList<>();
     }
 
-    public ArrayList<Movimiento> getListaMovimientos() {
-        return listaMovimientos;
-    }
-
-    public void setListaMovimientos(ArrayList<Movimiento> listaMovimientos) {
-        this.listaMovimientos = listaMovimientos;
-    }
-
+    // ---------------------------------------------------
+    // -------------------- Areas ------------------------
+    // ---------------------------------------------------
+    
     public ArrayList<Area> getListaAreas() {
         return listaAreas;
     }
@@ -36,7 +32,53 @@ public class Sistema extends Observable  implements Serializable {
     public void setListaAreas(ArrayList<Area> listaAreas) {
         this.listaAreas = listaAreas;
     }
+    
+    public void agregarArea(Area elArea) {
+        listaAreas.add(elArea);
+        setChanged();
+        notifyObservers();
+    }
+    
+    public boolean buscarAreaPorNombre(String elNombre) {
+        boolean ret = false;
+        for (int i = 0; i < listaAreas.size() && !ret; i++) {
+            if (listaAreas.get(i).getNombre().equalsIgnoreCase(elNombre)) {
+                ret = true;
+            }
+        }
+        return ret;
+    }
 
+    public ArrayList<Area> areasOrdenadasPorNombre() {
+        Collections.sort(listaAreas);
+        return listaAreas;
+    }
+    
+    public ArrayList<Area> areasOrdenadasPorPresupuestoAsignado() {
+    Collections.sort(getListaAreas(), new Comparator<Area>() {
+            public int compare(Area a1, Area a2) {
+                double porcentajeArea1 = a1.porcentajePresupuestoAsignado();
+                double porcentajeArea2 = a2.porcentajePresupuestoAsignado();
+                
+                return Double.compare(porcentajeArea2, porcentajeArea1);
+            }
+        });
+    
+    return getListaAreas();
+    }
+    
+    public void eliminarArea(Area a) {
+        if (a.sinEmpleados()) {
+            listaAreas.remove(a);
+            setChanged();
+            notifyObservers();
+        }
+    }
+    
+    // ---------------------------------------------------
+    // -------------------- Managers ---------------------
+    // ---------------------------------------------------
+    
     public ArrayList<Manager> getListaManagers() {
         return listaManagers;
     }
@@ -44,7 +86,30 @@ public class Sistema extends Observable  implements Serializable {
     public void setListaManagers(ArrayList<Manager> listaManagers) {
         this.listaManagers = listaManagers;
     }
-
+    
+    public void agregarManager(Manager elManager) {
+        listaManagers.add(elManager);
+        setChanged();
+        notifyObservers();
+    }
+    
+    public ArrayList<Manager> managersOrdenadosPorAntiguedad() {
+        Collections.sort(listaManagers);
+        return listaManagers;
+    }
+    
+    public void eliminarManager(Manager m) {
+        if (m.sinEmpleados()) {
+            listaManagers.remove(m);
+            setChanged();
+            notifyObservers();
+        }
+    }
+    
+    // ---------------------------------------------------
+    // -------------------- Empleados --------------------
+    // ---------------------------------------------------
+    
     public ArrayList<Empleado> getListaEmpleados() {
         return listaEmpleados;
     }
@@ -53,68 +118,14 @@ public class Sistema extends Observable  implements Serializable {
         this.listaEmpleados = listaEmpleados;
     }
     
-    public void agregarArea(Area elArea){
-        listaAreas.add(elArea);
-        setChanged();
-        notifyObservers();
-    }
-    
-    public void agregarManager(Manager elManager){
-        listaManagers.add(elManager);
-        setChanged();
-        notifyObservers();
-    }
-    
-    public void agregarEmpleado(Empleado elEmpleado){
+    public void agregarEmpleado(Empleado elEmpleado) {
         listaEmpleados.add(elEmpleado);
+        elEmpleado.getArea().agregarEmpleado(elEmpleado, 1);
+        elEmpleado.getManager().agregarEmpleado(elEmpleado);
         setChanged();
         notifyObservers();
     }
     
-    public void agregarMovimiento(Movimiento elMovimiento){
-        listaMovimientos.add(elMovimiento);
-        setChanged();
-        notifyObservers();
-    }
-    
-    public boolean unicidadPersona(Persona p) {
-        return ! getListaEmpleados().contains(p) && ! getListaManagers().contains(p);
-    }
-    
-    public boolean buscarAreaPorNombre(String elNombre){
-        boolean ret = false;
-        for (int i = 0; i < listaAreas.size()&&!ret; i++) {
-            if(listaAreas.get(i).getNombre().equalsIgnoreCase(elNombre)){
-                ret = true;
-            }
-        }
-        return ret;
-    }
-    public boolean buscarPersonaporCedula(String laCi){
-        boolean ret = false;
-        for (int i = 0; i < listaManagers.size()&&!ret; i++) {
-            if(listaManagers.get(i).getCedula().equalsIgnoreCase(laCi)){
-                ret = true;
-            }
-        }
-        for (int i = 0; i < listaEmpleados.size()&&!ret; i++) {
-            if(listaEmpleados.get(i).getCedula().equalsIgnoreCase(laCi)){
-                ret = true;
-            }
-        }
-        return ret;
-    }
-    
-    public ArrayList<Area> areasOrdenadasPorNombre(){
-        Collections.sort(listaAreas);
-        return listaAreas;
-    }
-
-    public ArrayList<Manager> managersOrdenadosPorAntiguedad() {
-        Collections.sort(listaManagers);
-        return listaManagers;
-    }
-
     public ArrayList<Empleado> empleadosOrdenadosPorSalario() {
         Collections.sort(listaEmpleados);
         return listaEmpleados;
@@ -134,33 +145,58 @@ public class Sistema extends Observable  implements Serializable {
             this.agregarMovimiento(m);
         }
         return movido;
-
-    }
-
-    public void eliminarArea(Area a) {
-        if (a.sinEmpleados()) {
-            listaAreas.remove(a);
-            setChanged();
-            notifyObservers();
-        }
     }
     
-    public void eliminarManager(Manager m){
-        if(m.sinEmpleados()){
-            listaManagers.remove(m);
-            setChanged();
-            notifyObservers();
-        }
+    // ----------------------------------------------------
+    // ------------------- Movimientos --------------------
+    // ----------------------------------------------------
+
+    public ArrayList<Movimiento> getListaMovimientos() {
+        return listaMovimientos;
     }
-    
-    public void intEnRango(int min, int max, int valor) throws NumFueraDeRangoException{
-        if(min > valor || max < valor){
+
+    public void setListaMovimientos(ArrayList<Movimiento> listaMovimientos) {
+        this.listaMovimientos = listaMovimientos;
+    }
+
+    public void agregarMovimiento(Movimiento elMovimiento) {
+        listaMovimientos.add(elMovimiento);
+        setChanged();
+        notifyObservers();
+    }
+
+    // ---------------------------------------------------
+    // ------------------- Persona -----------------------
+    // ---------------------------------------------------
+    public void intEnRango(int min, int max, int valor) throws NumFueraDeRangoException {
+        if (min > valor || max < valor) {
             throw new NumFueraDeRangoException();
         }
     }
-    public void doubleEnRango(int min, int max, double valor) throws NumFueraDeRangoException{
-        if(min > valor || max < valor){
+
+    public void doubleEnRango(int min, int max, double valor) throws NumFueraDeRangoException {
+        if (min > valor || max < valor) {
             throw new NumFueraDeRangoException();
         }
+    }
+    
+    public boolean unicidadPersona(Persona p) {
+        return !getListaEmpleados().contains(p) && !getListaManagers().contains(p);
+    }
+
+    public boolean buscarPersonaporCedula(String laCi) {
+        boolean ret = false;
+        for (int i = 0; i < listaManagers.size() && !ret; i++) {
+            if (listaManagers.get(i).getCedula().equalsIgnoreCase(laCi)) {
+                ret = true;
+            }
+        }
+        for (int i = 0; i < listaEmpleados.size() && !ret; i++) {
+            if (listaEmpleados.get(i).getCedula().equalsIgnoreCase(laCi)) {
+                ret = true;
+            }
+        }
+        return ret;
+
     }
 }

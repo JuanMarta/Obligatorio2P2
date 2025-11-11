@@ -2,6 +2,7 @@ package interfaz;
 
 import dominio.*;
 import excepciones.StringVacioException;
+import excepciones.TelefonoInvalidoException;
 import javax.swing.JOptionPane;
 import java.util.Observable;
 import java.util.Observer;
@@ -206,6 +207,8 @@ public class ModificacionManagers extends javax.swing.JFrame implements Observer
                 refrescarPantalla();
             } catch (StringVacioException e) {
                 JOptionPane.showMessageDialog(this, "Error: Deben completarse todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+            } catch (TelefonoInvalidoException ex) {
+                JOptionPane.showMessageDialog(this, "Error: Deben ingresarse numeros en el campo telefono", "Error", JOptionPane.ERROR_MESSAGE);
             }
 
         }

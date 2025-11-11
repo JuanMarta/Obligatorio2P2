@@ -5,6 +5,7 @@ import dominio.*;
 import excepciones.CedulaInvalidaException;
 import excepciones.NumFueraDeRangoException;
 import excepciones.StringVacioException;
+import excepciones.TelefonoInvalidoException;
 import javax.swing.JOptionPane;
 import java.util.Observable;
 import java.util.Observer;
@@ -199,6 +200,8 @@ public class AltaManagers extends javax.swing.JFrame implements Observer{
             JOptionPane.showMessageDialog(this, "Error: En antiguedad debe ingresarse un numero entre 0 y 60", "Error", JOptionPane.ERROR_MESSAGE);
         } catch (CedulaInvalidaException ex) {
             JOptionPane.showMessageDialog(this, "Error: Cedula invalida, ingrese solo números y verifique que el dígito veríficador sea el correcto", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (TelefonoInvalidoException ex) {
+            JOptionPane.showMessageDialog(this, "Error: Deben ingresarse numeros en el campo telefono", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonAgregarActionPerformed
 
