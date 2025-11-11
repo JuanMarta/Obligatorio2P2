@@ -1,6 +1,7 @@
 package dominio;
 
 import auxiliar.ArchivoGrabacion;
+import auxiliar.ArchivoLectura;
 import excepciones.CedulaInvalidaException;
 import excepciones.StringVacioException;
 import excepciones.TelefonoInvalidoException;
@@ -73,7 +74,13 @@ public class Empleado extends Persona implements Comparable<Empleado> {
     }
 
     public String getCv() {
-        return cv;
+        ArchivoLectura al = new ArchivoLectura(cv);
+        String ret = "";
+        while(al.hayMasLineas()){
+            ret += al.linea() + " " + "\n" ;
+        }
+        al.cerrar();
+        return ret;
     }
 
     public Manager getManager() {
