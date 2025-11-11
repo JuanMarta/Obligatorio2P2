@@ -2,6 +2,7 @@ package interfaz;
 
 import dominio.*;
 import excepciones.StringVacioException;
+import excepciones.TelefonoInvalidoException;
 import javax.swing.JOptionPane;
 import java.util.Observable;
 import java.util.Observer;
@@ -201,11 +202,13 @@ public class ModificacionManagers extends javax.swing.JFrame implements Observer
 
         } else {
             try {
-                seleccionado.setCelular(jTextTelefono.getText());
+                seleccionado.setTelefono(jTextTelefono.getText());
                 JOptionPane.showMessageDialog(this, "Manager modificada exitosamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
                 refrescarPantalla();
             } catch (StringVacioException e) {
                 JOptionPane.showMessageDialog(this, "Error: Deben completarse todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+            } catch (TelefonoInvalidoException ex) {
+                JOptionPane.showMessageDialog(this, "Error: Deben ingresarse numeros en el campo telefono", "Error", JOptionPane.ERROR_MESSAGE);
             }
 
         }
@@ -225,7 +228,7 @@ public class ModificacionManagers extends javax.swing.JFrame implements Observer
             jListaEmpleadoManager.setListData(seleccionado.empleadosOrdenadosPorSalario().toArray());
             jTextNombre.setText(seleccionado.getNombre());
             jTextCedula.setText(seleccionado.getCedula());
-            jTextTelefono.setText(seleccionado.getCelular());
+            jTextTelefono.setText(seleccionado.getTelefono());
             jTextAntiguedad.setText(seleccionado.getAntiguedad() + "");
             jTextTelefono.setEditable(true);
         }

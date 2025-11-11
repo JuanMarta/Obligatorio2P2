@@ -2,6 +2,7 @@
 package interfaz;
 
 import dominio.*;
+import excepciones.NumFueraDeRangoException;
 import excepciones.StringVacioException;
 import javax.swing.JOptionPane;
 import java.util.Observable;
@@ -47,6 +48,11 @@ public class AltaAreas extends javax.swing.JFrame implements Observer{
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jListAreasAlta.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jListAreasAlta.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jListAreasAltaValueChanged(evt);
+            }
+        });
         jScrollPane2.setViewportView(jListAreasAlta);
 
         jLabel1.setText("Areas");
@@ -144,10 +150,14 @@ public class AltaAreas extends javax.swing.JFrame implements Observer{
 
     private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
         try {
+            
             String nombre = jTextNombre.getText();
-            String descripcion = jTextDescripcion.getText();
-            double presupuesto = Double.parseDouble(jTextPresupuesto.getText());
+            
             if (!sistema.buscarAreaPorNombre(nombre)) {
+                
+                double presupuesto = Double.parseDouble(jTextPresupuesto.getText());
+                sistema.doubleEnRango(5000, 1000000, presupuesto);
+                String descripcion = jTextDescripcion.getText();
                 Area nuevoArea = new Area(nombre, descripcion, presupuesto);
                 sistema.agregarArea(nuevoArea);
                 refrescarPantalla();
@@ -155,16 +165,33 @@ public class AltaAreas extends javax.swing.JFrame implements Observer{
                 jTextNombre.setText("");
                 jTextDescripcion.setText("");
                 jTextPresupuesto.setText("");
+                
             } else {
                 JOptionPane.showMessageDialog(this, "Error: Ya existe un área con el nombre ingresado", "Error", JOptionPane.ERROR_MESSAGE);
             }
+            
         } catch (StringVacioException e) {
             JOptionPane.showMessageDialog(this, "Error: Debe completar todos los espacios", "Error", JOptionPane.ERROR_MESSAGE);
-        } catch (NumberFormatException | NullPointerException e) {
-            JOptionPane.showMessageDialog(this, "Error: En presupuesto debe ingresarse un numero", "Error", JOptionPane.ERROR_MESSAGE);
+            
+        } catch (NumberFormatException | NumFueraDeRangoException e) {
+            JOptionPane.showMessageDialog(this, "Error: En presupuesto anual debe ingresarse un numero entre 5000 y 1000000", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_jButtonAgregarActionPerformed
+
+    private void jListAreasAltaValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListAreasAltaValueChanged
+        Area a = (Area) jListAreasAlta.getSelectedValue();
+        if (a == null) {
+            jTextNombre.setText("");
+            jTextDescripcion.setText("");
+            jTextPresupuesto.setText("");
+        } else {
+            jTextNombre.setText(a.getNombre());
+            jTextDescripcion.setText(a.getDescripcion());
+            jTextPresupuesto.setText("" + a.getPresupuestoAnual());
+        }
+
+    }//GEN-LAST:event_jListAreasAltaValueChanged
 
     /**
      * @param args the command line arguments

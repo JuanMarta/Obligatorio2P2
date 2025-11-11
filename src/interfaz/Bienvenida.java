@@ -96,7 +96,7 @@ public class Bienvenida extends javax.swing.JFrame {
      */
     
     private void inicarContador(){
-        Timer temporizador = new Timer(4000, new ActionListener() {
+        Timer temporizador = new Timer(3000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();

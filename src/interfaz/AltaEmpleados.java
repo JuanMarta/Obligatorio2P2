@@ -4,7 +4,10 @@ import dominio.Area;
 import dominio.Empleado;
 import dominio.Manager;
 import dominio.Sistema;
+import excepciones.CedulaInvalidaException;
+import excepciones.NumFueraDeRangoException;
 import excepciones.StringVacioException;
+import excepciones.TelefonoInvalidoException;
 import java.awt.Dimension;
 import java.util.Observable;
 import java.util.Observer;
@@ -191,7 +194,7 @@ public class AltaEmpleados extends javax.swing.JFrame implements Observer {
 
         jTextCedula.setText(e.getCedula());
         jTextNombre.setText(e.getNombre());
-        jTextCelular.setText(e.getCelular());
+        jTextCelular.setText(e.getTelefono());
         jTextSalario.setText(String.valueOf(e.getSalarioMensual()));
         jTextAreaCurriculum.setText(e.getCv());
         jComboManager.setSelectedItem(e.getManager());
@@ -204,38 +207,29 @@ public class AltaEmpleados extends javax.swing.JFrame implements Observer {
     private void jBtnAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAltaActionPerformed
         // Datos
         String cedula = jTextCedula.getText();
-
         if (sistema.unicidadPersona(new Empleado(cedula))) {
+            String nombre = jTextNombre.getText();
+            String celular = jTextCelular.getText();
+            Double salario = Double.parseDouble(jTextSalario.getText());
+            String curriculum = jTextAreaCurriculum.getText();
+            Manager manager = (Manager) jComboManager.getSelectedItem();
+            Area area = (Area) jComboAreas.getSelectedItem();
+            Empleado empleado;
             try {
-                String nombre = jTextNombre.getText();
-                String celular = jTextCelular.getText();
-                Double salario = Double.parseDouble(jTextSalario.getText());
-                if (salario >= 0) {
-                    String curriculum = jTextAreaCurriculum.getText();
-                    Manager manager = (Manager) jComboManager.getSelectedItem();
-                    Area area = (Area) jComboAreas.getSelectedItem();
-                    Empleado empleado;
-                    if (manager != null && area != null) {
-
-                        empleado = new Empleado(nombre, cedula, celular, salario, curriculum, manager, area);
-                        if (empleado.getSalarioAnual() < area.getPresupuestoActual()) {
-                            sistema.agregarEmpleado(empleado);
-
-                            JOptionPane.showMessageDialog(this, "Empleado creado correctamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
-                            limiparComponentes();
-                        } else {
-                            JOptionPane.showMessageDialog(this, "Error: El area no dispone de fondos suficientes", "Error", JOptionPane.INFORMATION_MESSAGE);
-                        }
-                    } else {
-                        JOptionPane.showMessageDialog(this, "Error: Deben completarse todos los campos", "Error", JOptionPane.INFORMATION_MESSAGE);
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(this, "Error: No se permiten salarios negativos");
-                }
+                sistema.doubleEnRango(538, 83000, salario);
+                empleado = new Empleado(nombre, cedula, celular, salario, curriculum, manager, area);
+                sistema.agregarEmpleado(empleado);
+                area.agregarEmpleado(empleado, 1);
+                manager.agregarEmpleado(empleado);
+                JOptionPane.showMessageDialog(this, "Empleado creado correctamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
             } catch (StringVacioException e) {
-                JOptionPane.showMessageDialog(this, "Error: Deben completarse todos los campos", "Error", JOptionPane.INFORMATION_MESSAGE);
-            } catch (NumberFormatException e2) {
-                JOptionPane.showMessageDialog(this, "Error: el salario ingresado debe ser un número válido", "Error", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Error: Deben completarse todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+            } catch (NumFueraDeRangoException ex) {
+                JOptionPane.showMessageDialog(this, "Error: Deben ingresarse un salario entre 538 y 83000 USD", "Error", JOptionPane.ERROR_MESSAGE);
+            } catch (CedulaInvalidaException ex) {
+                JOptionPane.showMessageDialog(this, "Error: Cedula invalida, ingrese solo números y verifique que el dígito veríficador sea el correcto", "Error", JOptionPane.ERROR_MESSAGE);
+            } catch (TelefonoInvalidoException ex) {
+                JOptionPane.showMessageDialog(this, "Error: Deben ingresarse numeros en el campo telefono", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } else {
             JOptionPane.showMessageDialog(this, "La cedula ingresada ya existe", "Error", JOptionPane.ERROR_MESSAGE);

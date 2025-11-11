@@ -2,7 +2,10 @@
 package interfaz;
 
 import dominio.*;
+import excepciones.CedulaInvalidaException;
+import excepciones.NumFueraDeRangoException;
 import excepciones.StringVacioException;
+import excepciones.TelefonoInvalidoException;
 import javax.swing.JOptionPane;
 import java.util.Observable;
 import java.util.Observer;
@@ -50,6 +53,11 @@ public class AltaManagers extends javax.swing.JFrame implements Observer{
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jListaManagerAlta.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jListaManagerAlta.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jListaManagerAltaValueChanged(evt);
+            }
+        });
         jScrollPane2.setViewportView(jListaManagerAlta);
 
         jLabel1.setText("Managers");
@@ -168,11 +176,13 @@ public class AltaManagers extends javax.swing.JFrame implements Observer{
 
     private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
         try {
-            String nombre = jTextNombre.getText();
             String cedula = jTextCedula.getText();
-            String telefono = jTextTelefono.getText();
-            int antiguedad = Integer.parseInt(jTextAntiguedad.getText());
+
             if (!sistema.buscarPersonaporCedula(cedula)) {
+                int antiguedad = Integer.parseInt(jTextAntiguedad.getText());
+                sistema.intEnRango(0, 60, antiguedad);
+                String nombre = jTextNombre.getText();
+                String telefono = jTextTelefono.getText();
                 Manager nuevo = new Manager(nombre, cedula, telefono, antiguedad);
                 sistema.agregarManager(nuevo);
                 refrescarPantalla();
@@ -186,10 +196,29 @@ public class AltaManagers extends javax.swing.JFrame implements Observer{
             }
         } catch (StringVacioException e) {
             JOptionPane.showMessageDialog(this, "Error: Deben completarse todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Error: En antiguedad debe ingresarse un numero", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (NumberFormatException | NumFueraDeRangoException e) {
+            JOptionPane.showMessageDialog(this, "Error: En antiguedad debe ingresarse un numero entre 0 y 60", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (CedulaInvalidaException ex) {
+            JOptionPane.showMessageDialog(this, "Error: Cedula invalida, ingrese solo números y verifique que el dígito veríficador sea el correcto", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (TelefonoInvalidoException ex) {
+            JOptionPane.showMessageDialog(this, "Error: Deben ingresarse numeros en el campo telefono", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonAgregarActionPerformed
+
+    private void jListaManagerAltaValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListaManagerAltaValueChanged
+        Manager m = (Manager) jListaManagerAlta.getSelectedValue();
+        if (m == null) {
+            jTextNombre.setText("");
+            jTextCedula.setText("");
+            jTextTelefono.setText("");
+            jTextAntiguedad.setText("");
+        }else{
+            jTextNombre.setText(m.getNombre());
+            jTextCedula.setText(m.getCedula());
+            jTextTelefono.setText(m.getTelefono());
+            jTextAntiguedad.setText("" + m.getAntiguedad());
+        }
+    }//GEN-LAST:event_jListaManagerAltaValueChanged
 
     /**
      * @param args the command line arguments

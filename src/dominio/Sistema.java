@@ -1,5 +1,6 @@
 package dominio;
 
+import excepciones.NumFueraDeRangoException;
 import java.util.Collections;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -140,6 +141,8 @@ public class Sistema extends Observable implements Serializable {
             movido = true;
             setChanged();
             notifyObservers();
+            Movimiento m = new Movimiento(mesActual,areaOrigen.getNombre(),destino.getNombre(),e.getNombre());
+            this.agregarMovimiento(m);
         }
         return movido;
     }
@@ -165,6 +168,17 @@ public class Sistema extends Observable implements Serializable {
     // ---------------------------------------------------
     // ------------------- Persona -----------------------
     // ---------------------------------------------------
+    public void intEnRango(int min, int max, int valor) throws NumFueraDeRangoException {
+        if (min > valor || max < valor) {
+            throw new NumFueraDeRangoException();
+        }
+    }
+
+    public void doubleEnRango(int min, int max, double valor) throws NumFueraDeRangoException {
+        if (min > valor || max < valor) {
+            throw new NumFueraDeRangoException();
+        }
+    }
     
     public boolean unicidadPersona(Persona p) {
         return !getListaEmpleados().contains(p) && !getListaManagers().contains(p);
@@ -183,5 +197,6 @@ public class Sistema extends Observable implements Serializable {
             }
         }
         return ret;
+
     }
 }

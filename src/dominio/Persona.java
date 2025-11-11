@@ -1,18 +1,20 @@
 package dominio;
 
+import excepciones.CedulaInvalidaException;
 import excepciones.StringVacioException;
+import excepciones.TelefonoInvalidoException;
 import java.io.Serializable;
 
 public abstract class Persona implements Serializable {
 
     private String nombre;
     private String cedula;
-    private String celular;
+    private String telefono;
 
-    public Persona(String elNombre, String laCedula, String elCelular) throws StringVacioException {
+    public Persona(String elNombre, String laCedula, String elCelular) throws StringVacioException, CedulaInvalidaException, TelefonoInvalidoException {
         this.setNombre(elNombre);
         this.setCedula(laCedula);
-        this.setCelular(elCelular);
+        this.setTelefono(elCelular);
     }
 
     public Persona(String laCedula) {
@@ -22,7 +24,7 @@ public abstract class Persona implements Serializable {
     public Persona() {
         nombre = "";
         cedula = "";
-        celular = "";
+        telefono = "";
     }
 
     public String getNombre() {
@@ -30,7 +32,7 @@ public abstract class Persona implements Serializable {
     }
 
     public void setNombre(String nombre) throws StringVacioException {
-        if (nombre == null) {
+        if (nombre.isEmpty()) {
             throw new StringVacioException();
         }
         this.nombre = nombre;
@@ -40,22 +42,50 @@ public abstract class Persona implements Serializable {
         return cedula;
     }
 
-    public void setCedula(String cedula) throws StringVacioException {
-        if (cedula == null) {
+    public void setCedula(String cedula) throws StringVacioException, CedulaInvalidaException {
+        if (cedula.isEmpty()) {
             throw new StringVacioException();
         }
+        if(cedula.length() != 8){
+            throw new CedulaInvalidaException();
+        }
+        try{
+            Integer.parseInt(cedula);
+        }catch (NumberFormatException e){
+            throw new CedulaInvalidaException();
+        }
+        verificarCedula(cedula);
         this.cedula = cedula;
     }
 
-    public String getCelular() {
-        return celular;
+    public String getTelefono() {
+        return telefono;
     }
 
-    public void setCelular(String celular) throws StringVacioException {
-        if (celular == null) {
+    public void setTelefono(String telefono) throws StringVacioException, TelefonoInvalidoException {
+        if (telefono.isEmpty()) {
             throw new StringVacioException();
         }
-        this.celular = celular;
+        try{
+            Integer.parseInt(telefono);
+        }catch (NumberFormatException e){
+            throw new TelefonoInvalidoException();
+        }
+        this.telefono = telefono;
+    }
+    
+    public void verificarCedula(String cedula) throws CedulaInvalidaException{
+        int ver = Integer.parseInt("" + cedula.charAt(7));
+        int[] mult = {2, 9, 8, 7, 6, 3, 4};
+        int suma = 0;
+        for (int i = 0; i < 7; i++) {
+            suma += Integer.parseInt(cedula.charAt(i) + "") * mult[i];
+        }
+        int resto = suma % 10;
+        int digitoVerificador = (10 - resto) % 10;
+        if(ver != digitoVerificador){
+            throw new CedulaInvalidaException();
+        }
     }
 
     @Override

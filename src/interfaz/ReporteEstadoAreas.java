@@ -122,7 +122,7 @@ public class ReporteEstadoAreas extends javax.swing.JFrame implements Observer {
 
             JOptionPane.showMessageDialog(ReporteEstadoAreas.this, "Cedula: " + empleado.getCedula()
                     + "\nNombre: " + empleado.getNombre()
-                    + "\nCelular: " + empleado.getCelular()
+                    + "\nCelular: " + empleado.getTelefono()
                     + "\nSalario mensual: " + empleado.getSalarioMensual());
         }
     }
