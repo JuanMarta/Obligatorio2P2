@@ -21,19 +21,6 @@ public class Sistema extends Observable implements Serializable {
             listaManagers = new ArrayList<>();
             listaEmpleados = new ArrayList<>();
             listaMovimientos = new ArrayList<>();
-            
-            Area a = new Area("RRHH", "RRHH", 5000);
-            listaAreas.add(a);
-            
-            Area a2 = new Area("HHRR", "HHRR", 5000);
-            listaAreas.add(a2);
-            
-            Manager m = new Manager("Mario", "42245135", "092854473", 12);
-            listaManagers.add(m);
-            
-            listaEmpleados.add(new Empleado("Santiago", "56667941", "092854473", 5000, "Pene", m, a));
-            
-            listaMovimientos.add(new Movimiento(12, "RRHH", "HHRR", "56667941", "Santiago"));
         } catch (Exception ex) {
             System.getLogger(Sistema.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
@@ -148,7 +135,7 @@ public class Sistema extends Observable implements Serializable {
 
     public boolean moverEmpleado(Empleado e, int mesActual, Area destino) {
         boolean movido = false;
-        if (destino.puedeAceptar(e, mesActual)) {
+        if (destino.puedeAceptar(e.getSalarioMensual(), mesActual)) {
             Area areaOrigen = e.getArea();
             areaOrigen.quitarEmpleado(e, mesActual);
             e.setArea(destino);

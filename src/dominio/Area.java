@@ -102,8 +102,7 @@ public class Area extends Observable implements Serializable, Comparable<Area> {
         notifyObservers();
     }
 
-    public boolean puedeAceptar(Empleado e, int mesIngreso) {
-        double salarioMensual = e.getSalarioMensual();
+    public boolean puedeAceptar(double salarioMensual, int mesIngreso) {
         return this.getPresupuestoActual() >= (13 - mesIngreso) * salarioMensual;
     }
 

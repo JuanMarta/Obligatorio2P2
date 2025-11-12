@@ -251,7 +251,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         int opcion = JOptionPane.showConfirmDialog(this, "Desea salir del sistema?", "Salir", JOptionPane.YES_NO_OPTION);
         if (opcion == JOptionPane.YES_OPTION) {
             try {
-                FileOutputStream ff = new FileOutputStream("datos/guardarDatos");
+                FileOutputStream ff = new FileOutputStream("Datos/guardarDatos");
                 BufferedOutputStream b = new BufferedOutputStream(ff);
                 ObjectOutputStream sss = new ObjectOutputStream(b);
                 sss.writeObject(sistema);

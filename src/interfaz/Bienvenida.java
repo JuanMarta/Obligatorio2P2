@@ -68,11 +68,11 @@ public class Bienvenida extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Captura de pantalla 2025-10-31 084723.png"))); // NOI18N
         jLabel1.setText("jLabel1");
         jPanel2.add(jLabel1);
-        jLabel1.setBounds(0, 30, 597, 144);
+        jLabel1.setBounds(10, 30, 597, 144);
 
         jLabel2.setText("Santiago Nicolas Alonso Bentancor (349491)  Juan Ignacio Marta Fernández (332281)");
         jPanel2.add(jLabel2);
-        jLabel2.setBounds(70, 190, 470, 16);
+        jLabel2.setBounds(20, 190, 570, 16);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -81,7 +81,7 @@ public class Bienvenida extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
