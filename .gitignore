@@ -44,3 +44,8 @@ buildNumber.properties
 /dist/
 =======
 >>>>>>> origin/master
+
+# Evitar subida de carpeta Datos, csv y archivos csv
+Datos/
+csv/
+*.csv
