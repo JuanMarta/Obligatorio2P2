@@ -3,7 +3,10 @@ package interfaz;
 import dominio.Area;
 import dominio.Empleado;
 import dominio.Sistema;
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,6 +15,7 @@ import java.util.Observer;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 public class ReporteEstadoAreas extends javax.swing.JFrame implements Observer {
 
@@ -38,7 +42,7 @@ public class ReporteEstadoAreas extends javax.swing.JFrame implements Observer {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        jPanelGridButtons.setLayout(new java.awt.GridLayout(1, 3));
+        jPanelGridButtons.setLayout(new java.awt.GridLayout(0, 3, 5, 5));
         getContentPane().add(jPanelGridButtons);
         jPanelGridButtons.setBounds(190, 60, 430, 330);
 
@@ -47,7 +51,9 @@ public class ReporteEstadoAreas extends javax.swing.JFrame implements Observer {
         getContentPane().add(jLabelAreaYPresupuesto);
         jLabelAreaYPresupuesto.setBounds(190, 10, 360, 30);
 
-        jPanelListaAreas.setLayout(new java.awt.GridLayout(0, 1, 0, 5));
+        jScrollPanelListaAreas.setBorder(null);
+
+        jPanelListaAreas.setLayout(new javax.swing.BoxLayout(jPanelListaAreas, javax.swing.BoxLayout.Y_AXIS));
         jScrollPanelListaAreas.setViewportView(jPanelListaAreas);
 
         getContentPane().add(jScrollPanelListaAreas);
@@ -56,25 +62,14 @@ public class ReporteEstadoAreas extends javax.swing.JFrame implements Observer {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void cargarEmpleados(Area area) {
-        jPanelGridButtons.removeAll();
+    public void refrescarVentana() {
+        cargarAreas();
 
-        for (Empleado e : area.empleadosOrdenadosPorNombre()) {
-            JButton btnEmpleado = new JButton(e.getNombre());
-            btnEmpleado.putClientProperty("empleado", e);
-            btnEmpleado.setMargin(new Insets(-5, -5, -5, -5));
-            btnEmpleado.setBackground(Color.BLACK);
-            btnEmpleado.setForeground(Color.WHITE);
-            btnEmpleado.addActionListener(new EmpleadoListener());
-            jPanelGridButtons.add(btnEmpleado);
-        }
-
-        jPanelGridButtons.revalidate();
-        jPanelGridButtons.repaint();
-
+        jPanelListaAreas.revalidate();
+        jPanelListaAreas.repaint();
     }
 
-    public void refrescarVentana() {
+    public void cargarAreas() {
         // Quito todos las areas antes de volver a colocar
         jPanelListaAreas.removeAll();
 
@@ -87,6 +82,11 @@ public class ReporteEstadoAreas extends javax.swing.JFrame implements Observer {
             btnArea.setMargin(new Insets(-5, -5, -5, -5));
             btnArea.setForeground(Color.BLACK);
             btnArea.addActionListener(new AreaListener());
+            btnArea.setPreferredSize(new Dimension(120, 30));
+            
+            // Hace que ocupe todo el ancho del panel y que tenga 30 px como maximo
+            btnArea.setMaximumSize(new Dimension(Short.MAX_VALUE, 30));
+            btnArea.setAlignmentX(CENTER_ALIGNMENT);
 
             double porcentaje = a.porcentajePresupuestoAsignado();
             if (porcentaje > 90) {
@@ -96,11 +96,36 @@ public class ReporteEstadoAreas extends javax.swing.JFrame implements Observer {
             } else {
                 btnArea.setBackground(Color.LIGHT_GRAY);
             }
+
             jPanelListaAreas.add(btnArea);
+            
+            // Agrega una separacion de 4px
+            jPanelListaAreas.add(javax.swing.Box.createVerticalStrut(4));
+        }
+    }
+
+    public void cargarEmpleados(Area area) {
+        jPanelGridButtons.removeAll();
+
+        for (Empleado e : area.empleadosOrdenadosPorNombre()) {
+            JButton btnEmpleado = new JButton(e.getNombre());
+            btnEmpleado.putClientProperty("empleado", e);
+            btnEmpleado.setMargin(new Insets(-5, -5, -5, -5));
+            btnEmpleado.setBackground(Color.BLACK);
+            btnEmpleado.setForeground(Color.WHITE);
+            btnEmpleado.addActionListener(new EmpleadoListener());
+            btnEmpleado.setPreferredSize(new Dimension(100, 30));
+
+            JPanel panelBtn = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+            panelBtn.setOpaque(true);
+            panelBtn.add(btnEmpleado);
+
+            jPanelGridButtons.add(panelBtn);
         }
 
-        jPanelListaAreas.revalidate();
-        jPanelListaAreas.repaint();
+        jPanelGridButtons.revalidate();
+        jPanelGridButtons.repaint();
+
     }
 
     private class AreaListener implements ActionListener {
@@ -108,7 +133,7 @@ public class ReporteEstadoAreas extends javax.swing.JFrame implements Observer {
         public void actionPerformed(ActionEvent e) {
             JButton btn = ((JButton) e.getSource());
             Area area = (Area) btn.getClientProperty("area");
-            
+
             jLabelAreaYPresupuesto.setText("Área: " + area.getNombre() + " Porcentaje asignado: " + String.format("%.1f%%", area.porcentajePresupuestoAsignado()));
             cargarEmpleados(area);
         }
