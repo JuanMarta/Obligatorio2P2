@@ -21,6 +21,67 @@ public class Sistema extends Observable implements Serializable {
             listaManagers = new ArrayList<>();
             listaEmpleados = new ArrayList<>();
             listaMovimientos = new ArrayList<>();
+
+            Area a1 = new Area("Personal", "Personal", 80000);
+            listaAreas.add(a1);
+
+            Area a2 = new Area("Marketing", "Marketing", 95000);
+            listaAreas.add(a2);
+
+            Manager m1 = new Manager("Carolina Duarte", "62291293", "099442233", 6);
+            listaManagers.add(m1);
+
+            Manager m2 = new Manager("Martín Suárez", "36891524", "098765432", 3);
+            listaManagers.add(m2);
+
+            listaEmpleados.add(
+                    new Empleado(
+                            "Lucía Pereira",
+                            "41235670",
+                            "091112233",
+                            1200,
+                            "CV de Lucía",
+                            m1,
+                            a1 // Personal
+                    )
+            );
+
+            listaEmpleados.add(
+                    new Empleado(
+                            "Diego Fernández",
+                            "41124273",
+                            "094334455",
+                            1050,
+                            "CV de Diego",
+                            m2,
+                            a2 // Marketing
+                    )
+            );
+
+            listaEmpleados.add(
+                    new Empleado(
+                            "Agustina Gómez",
+                            "62083169",
+                            "098998877",
+                            900,
+                            "CV de Agustina",
+                            m1,
+                            a2 // Marketing
+                    )
+            );
+
+            listaMovimientos.add(
+                    new Movimiento(3, "Personal", "Marketing", "41235670", "Lucía Pereira")
+            );
+
+            listaMovimientos.add(
+                    new Movimiento(6, "Marketing", "Personal", "41124273", "Diego Fernández")
+            );
+
+            listaMovimientos.add(
+                    new Movimiento(9, "Marketing", "Personal", "62083169", "Agustina Gómez")
+            );
+
         } catch (Exception ex) {
             System.getLogger(Sistema.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
@@ -170,7 +231,7 @@ public class Sistema extends Observable implements Serializable {
         ArrayList<Movimiento> lista = new ArrayList<>();
 
         for (Movimiento m : getListaMovimientos()) {
-            boolean coincideMes = (! (mes > 0) || m.getMesRealizacion() == mes);
+            boolean coincideMes = (!(mes > 0) || m.getMesRealizacion() == mes);
             boolean coincideOrigen = (nomAreaOrigen == null || m.getNombreAreaOrigen().equals(nomAreaOrigen));
             boolean coincideDestino = (nomAreaDestino == null || m.getNombreAreaDestino().equals(nomAreaDestino));
             boolean coincideCedula = (cedula == null || m.getCedulaEmpleado().equals(cedula));
@@ -180,7 +241,7 @@ public class Sistema extends Observable implements Serializable {
             }
         }
         Collections.sort(lista);
-        
+
         return lista;
     }
 

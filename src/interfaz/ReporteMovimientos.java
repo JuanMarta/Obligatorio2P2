@@ -1,9 +1,12 @@
 package interfaz;
 
+import auxiliar.ArchivoGrabacion;
 import dominio.*;
 import dominio.Sistema;
 import java.util.Observable;
 import java.util.Observer;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class ReporteMovimientos extends javax.swing.JFrame implements Observer {
@@ -181,29 +184,46 @@ public class ReporteMovimientos extends javax.swing.JFrame implements Observer {
     }//GEN-LAST:event_jComboEmpleadosActionPerformed
 
     private void jButtonExportarCSVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExportarCSVActionPerformed
+        JFileChooser selectorArchivo = new JFileChooser();
+        selectorArchivo.setDialogTitle("Especifique un archivo a guardar");
 
+        if (selectorArchivo.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+            ArchivoGrabacion ag = new ArchivoGrabacion(selectorArchivo.getSelectedFile().getAbsolutePath() + ".csv", false);
+            
+            for (int i = 0; i < jTableMovimientos.getRowCount(); i++) {
+                String linea = "";
+                for (int j = 0; j < jTableMovimientos.getColumnCount(); j++) {
+                    linea += jTableMovimientos.getValueAt(i, j) + ";";
+                }
+                ag.grabarLinea(linea);
+            }
+            ag.cerrar();
+            JOptionPane.showMessageDialog(this, "Movimientos exportados correctamente.");
+        } else {
+            JOptionPane.showMessageDialog(this, "Exportación cancelada por el usuario.");
+        }
     }//GEN-LAST:event_jButtonExportarCSVActionPerformed
 
-    public void cargarTabla() {        
+    public void cargarTabla() {
         DefaultTableModel modelo = (DefaultTableModel) jTableMovimientos.getModel();
         modelo.setRowCount(0); // limpia las filas actuales
 
         int mes = jComboMes.getSelectedIndex();
 
         String nomAreaOrigen = null;
-        if (! (jComboAreaOrigen.getSelectedIndex() <= 0)) {
+        if (!(jComboAreaOrigen.getSelectedIndex() <= 0)) {
             Area a = (Area) jComboAreaOrigen.getSelectedItem();
             nomAreaOrigen = a.getNombre();
         }
-        
+
         String nomAreaDestino = null;
-        if (! (jComboAreaDestino.getSelectedIndex() <= 0)) {
+        if (!(jComboAreaDestino.getSelectedIndex() <= 0)) {
             Area a = (Area) jComboAreaDestino.getSelectedItem();
             nomAreaDestino = a.getNombre();
         }
 
         String cedula = null;
-        if (! (jComboEmpleados.getSelectedIndex() <= 0)) {
+        if (!(jComboEmpleados.getSelectedIndex() <= 0)) {
             Empleado e = (Empleado) jComboEmpleados.getSelectedItem();
             cedula = e.getCedula();
         }
