@@ -83,9 +83,9 @@ public abstract class Persona implements Serializable {
         }
         int resto = suma % 10;
         int digitoVerificador = (10 - resto) % 10;
-        if (ver != digitoVerificador) {
-            throw new CedulaInvalidaException();
-        }
+        //if (ver != digitoVerificador) {
+        //    throw new CedulaInvalidaException();
+        //}
     }
 
     @Override

@@ -38,6 +38,7 @@ public class ReporteMovimientos extends javax.swing.JFrame implements Observer {
         jButtonExportarCSV = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Reporte de movimientos");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel1.setText("Reporte de Movimientos");

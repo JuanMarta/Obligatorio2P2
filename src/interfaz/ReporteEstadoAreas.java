@@ -40,6 +40,7 @@ public class ReporteEstadoAreas extends javax.swing.JFrame implements Observer {
         jPanelListaAreas = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Reporte de estado de areas");
         getContentPane().setLayout(null);
 
         jPanelGridButtons.setLayout(new java.awt.GridLayout(0, 3, 5, 5));

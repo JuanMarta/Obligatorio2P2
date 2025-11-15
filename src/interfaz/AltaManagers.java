@@ -51,6 +51,7 @@ public class AltaManagers extends javax.swing.JFrame implements Observer{
         jTextCedula = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Alta de manager");
 
         jListaManagerAlta.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jListaManagerAlta.addListSelectionListener(new javax.swing.event.ListSelectionListener() {

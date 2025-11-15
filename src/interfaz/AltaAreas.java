@@ -46,6 +46,7 @@ public class AltaAreas extends javax.swing.JFrame implements Observer{
         jButtonAgregar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Alta de áreas");
 
         jListAreasAlta.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jListAreasAlta.addListSelectionListener(new javax.swing.event.ListSelectionListener() {

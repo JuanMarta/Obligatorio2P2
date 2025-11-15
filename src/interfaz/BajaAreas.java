@@ -34,6 +34,7 @@ public class BajaAreas extends javax.swing.JFrame implements Observer{
         jButtonEliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Baja área");
 
         jListAreasBaja.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(jListAreasBaja);

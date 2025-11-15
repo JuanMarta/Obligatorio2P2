@@ -56,6 +56,7 @@ public class ModificacionManagers extends javax.swing.JFrame implements Observer
         jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Modificación de managers");
 
         jListaEmpleadoManager.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(jListaEmpleadoManager);

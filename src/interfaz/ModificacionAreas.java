@@ -49,6 +49,7 @@ public class ModificacionAreas extends javax.swing.JFrame implements Observer{
         jButtonModificar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Modificacion de áreas");
 
         jListAreasModificacion.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jListAreasModificacion.addListSelectionListener(new javax.swing.event.ListSelectionListener() {

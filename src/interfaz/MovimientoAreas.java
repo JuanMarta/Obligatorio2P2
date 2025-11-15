@@ -47,6 +47,7 @@ public class MovimientoAreas extends javax.swing.JFrame implements Observer{
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Movimiento de areas");
 
         jListEmpleadoMover.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(jListEmpleadoMover);
