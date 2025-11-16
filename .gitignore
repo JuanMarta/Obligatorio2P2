@@ -1,8 +1,7 @@
 # Compiled class files
 *.class
 
-# Jar, War, Ear files
-*.jar
+War, Ear files
 *.war
 *.ear
 
@@ -11,7 +10,6 @@ build/
 dist/
 tmp/
 *.log
-*.zip
 *.tar.gz
 
 # IDE specific files (if applicable, e.g., for Eclipse or IntelliJ)
