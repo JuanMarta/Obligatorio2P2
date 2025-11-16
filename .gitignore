@@ -1,7 +1,8 @@
 # Compiled class files
 *.class
 
-War, Ear files
+# Jar, War, Ear files
+*.jar
 *.war
 *.ear
 
@@ -10,6 +11,7 @@ build/
 dist/
 tmp/
 *.log
+*.zip
 *.tar.gz
 
 # IDE specific files (if applicable, e.g., for Eclipse or IntelliJ)
@@ -47,3 +49,6 @@ buildNumber.properties
 Datos/
 csv/
 *.csv
+
+# Permite subir las librerias
+!librerias/*.jar
