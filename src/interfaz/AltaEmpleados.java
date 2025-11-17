@@ -192,14 +192,16 @@ public class AltaEmpleados extends javax.swing.JFrame implements Observer {
 
     private void jListEmpleadosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListEmpleadosValueChanged
         Empleado e = jListEmpleados.getSelectedValue();
+        if (e != null) {
+            jTextCedula.setText(e.getCedula());
+            jTextNombre.setText(e.getNombre());
+            jTextCelular.setText(e.getTelefono());
+            jTextSalario.setText(String.valueOf(e.getSalarioMensual()));
+            jTextAreaCurriculum.setText(e.getCv());
+            jComboManager.setSelectedItem(e.getManager());
+            jComboAreas.setSelectedItem(e.getArea());
+        }
 
-        jTextCedula.setText(e.getCedula());
-        jTextNombre.setText(e.getNombre());
-        jTextCelular.setText(e.getTelefono());
-        jTextSalario.setText(String.valueOf(e.getSalarioMensual()));
-        jTextAreaCurriculum.setText(e.getCv());
-        jComboManager.setSelectedItem(e.getManager());
-        jComboAreas.setSelectedItem(e.getArea());
 
         revalidate();
         repaint();

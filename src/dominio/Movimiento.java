@@ -1,8 +1,10 @@
 
 package dominio;
 
+import java.io.Serializable;
 
-public class Movimiento implements Comparable<Movimiento>{
+
+public class Movimiento implements Serializable,Comparable<Movimiento>{
     private int mesRealizacion;
     private String nombreAreaOrigen;
     private String nombreAreaDestino;

@@ -296,7 +296,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void confirmarCierre() {
-        int opcion = JOptionPane.showConfirmDialog(this, "Desea salir del sistema?", "Salir", JOptionPane.YES_NO_OPTION);
+        int opcion = JOptionPane.showConfirmDialog(this, "Desea guardar del sistema?", "Salir", JOptionPane.YES_NO_OPTION);
         if (opcion == JOptionPane.YES_OPTION) {
             try {
                 FileOutputStream ff = new FileOutputStream("Datos/guardarDatos");
