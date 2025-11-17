@@ -42,6 +42,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         desktopPane = new javax.swing.JDesktopPane();
+        jLabel1 = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         areasMenu = new javax.swing.JMenu();
         jMenuAltaAreas = new javax.swing.JMenuItem();
@@ -68,8 +69,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         desktopPane.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Captura de pantalla 2025-11-17 150249.png"))); // NOI18N
+        jLabel1.setText("jLabel1");
+        desktopPane.add(jLabel1);
+        jLabel1.setBounds(0, 0, 310, 230);
+
+        areasMenu.setMnemonic('f');
         areasMenu.setText("Áreas");
 
+        jMenuAltaAreas.setMnemonic('o');
         jMenuAltaAreas.setText("Alta");
         jMenuAltaAreas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,6 +86,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         areasMenu.add(jMenuAltaAreas);
 
+        jMenuBajaAreas.setMnemonic('s');
         jMenuBajaAreas.setText("Baja");
         jMenuBajaAreas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,6 +95,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         areasMenu.add(jMenuBajaAreas);
 
+        jMenuModificacionArea.setMnemonic('a');
         jMenuModificacionArea.setText("Modificación");
         jMenuModificacionArea.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,6 +104,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         areasMenu.add(jMenuModificacionArea);
 
+        jMenuRealizarMovimiento.setMnemonic('x');
         jMenuRealizarMovimiento.setText("Realizar Movimiento");
         jMenuRealizarMovimiento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,8 +115,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         menuBar.add(areasMenu);
 
+        managersMenu.setMnemonic('e');
         managersMenu.setText("Managers");
 
+        jMenuAltaManagers.setMnemonic('t');
         jMenuAltaManagers.setText("Alta");
         jMenuAltaManagers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,6 +127,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         managersMenu.add(jMenuAltaManagers);
 
+        jMenuBajaManagers.setMnemonic('y');
         jMenuBajaManagers.setText("Baja");
         jMenuBajaManagers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,6 +136,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         managersMenu.add(jMenuBajaManagers);
 
+        jMenuModificacionManagers.setMnemonic('p');
         jMenuModificacionManagers.setText("Modificación");
         jMenuModificacionManagers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -132,8 +147,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         menuBar.add(managersMenu);
 
+        empleadosMenu.setMnemonic('h');
         empleadosMenu.setText("Empleados");
 
+        jMenuAltaEmpleados.setMnemonic('c');
         jMenuAltaEmpleados.setText("Alta");
         jMenuAltaEmpleados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -178,11 +195,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(desktopPane, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
+            .addComponent(desktopPane, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -314,6 +333,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu areasMenu;
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenu empleadosMenu;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuItem jMenuAltaAreas;
     private javax.swing.JMenuItem jMenuAltaEmpleados;
     private javax.swing.JMenuItem jMenuAltaManagers;
