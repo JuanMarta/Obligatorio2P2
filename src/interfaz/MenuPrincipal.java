@@ -74,10 +74,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         desktopPane.add(jLabel1);
         jLabel1.setBounds(0, 0, 310, 230);
 
-        areasMenu.setMnemonic('f');
         areasMenu.setText("Áreas");
 
-        jMenuAltaAreas.setMnemonic('o');
         jMenuAltaAreas.setText("Alta");
         jMenuAltaAreas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,7 +84,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         areasMenu.add(jMenuAltaAreas);
 
-        jMenuBajaAreas.setMnemonic('s');
         jMenuBajaAreas.setText("Baja");
         jMenuBajaAreas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,7 +92,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         areasMenu.add(jMenuBajaAreas);
 
-        jMenuModificacionArea.setMnemonic('a');
         jMenuModificacionArea.setText("Modificación");
         jMenuModificacionArea.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,7 +100,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         areasMenu.add(jMenuModificacionArea);
 
-        jMenuRealizarMovimiento.setMnemonic('x');
         jMenuRealizarMovimiento.setText("Realizar Movimiento");
         jMenuRealizarMovimiento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,10 +110,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         menuBar.add(areasMenu);
 
-        managersMenu.setMnemonic('e');
         managersMenu.setText("Managers");
 
-        jMenuAltaManagers.setMnemonic('t');
         jMenuAltaManagers.setText("Alta");
         jMenuAltaManagers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -127,7 +120,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         managersMenu.add(jMenuAltaManagers);
 
-        jMenuBajaManagers.setMnemonic('y');
         jMenuBajaManagers.setText("Baja");
         jMenuBajaManagers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -136,7 +128,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         managersMenu.add(jMenuBajaManagers);
 
-        jMenuModificacionManagers.setMnemonic('p');
         jMenuModificacionManagers.setText("Modificación");
         jMenuModificacionManagers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -147,10 +138,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         menuBar.add(managersMenu);
 
-        empleadosMenu.setMnemonic('h');
         empleadosMenu.setText("Empleados");
 
-        jMenuAltaEmpleados.setMnemonic('c');
         jMenuAltaEmpleados.setText("Alta");
         jMenuAltaEmpleados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -195,9 +184,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(desktopPane, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(desktopPane, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,7 +195,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuRealizarMovimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuRealizarMovimientoActionPerformed
-        if (!(sistema.areasOrdenadasPorNombre().size()<2&&sistema.empleadosOrdenadosPorSalario().isEmpty())) {
+        if (!(sistema.areasOrdenadasPorNombre().size()<2)&&!sistema.empleadosOrdenadosPorSalario().isEmpty()){
             MovimientoAreas m = new MovimientoAreas(sistema);
             m.setVisible(true);
         } else {
@@ -255,7 +242,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuBajaAreasActionPerformed
 
     private void jMenuReporteInteligenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuReporteInteligenteActionPerformed
-        if (!(sistema.areasOrdenadasPorNombre().isEmpty() && sistema.managersOrdenadosPorAntiguedad().isEmpty() && sistema.empleadosOrdenadosPorSalario().isEmpty())) {
+        if (!sistema.areasOrdenadasPorNombre().isEmpty() && !sistema.managersOrdenadosPorAntiguedad().isEmpty() && !sistema.empleadosOrdenadosPorSalario().isEmpty()) {
             ReporteInteligente r = new ReporteInteligente(sistema);
             r.setVisible(true);
         } else {
@@ -274,7 +261,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuModificacionAreaActionPerformed
 
     private void jMenuAltaEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAltaEmpleadosActionPerformed
-        if (!(sistema.areasOrdenadasPorNombre().isEmpty() && sistema.managersOrdenadosPorAntiguedad().isEmpty())) {
+        if (!sistema.areasOrdenadasPorNombre().isEmpty() && !sistema.managersOrdenadosPorAntiguedad().isEmpty()) {
             AltaEmpleados a = new AltaEmpleados(sistema);
             a.setVisible(true);
         } else {
