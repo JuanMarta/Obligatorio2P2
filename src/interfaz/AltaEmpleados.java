@@ -207,36 +207,39 @@ public class AltaEmpleados extends javax.swing.JFrame implements Observer {
 
     private void jBtnAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAltaActionPerformed
         // Datos
-        String cedula = jTextCedula.getText();
-        if (sistema.unicidadPersona(new Empleado(cedula))) {
-            Double salario = Double.parseDouble(jTextSalario.getText());
-            Area area = (Area) jComboAreas.getSelectedItem();
-            if (area.puedeAceptar(salario, 1)) {
-                String nombre = jTextNombre.getText();
-                String celular = jTextCelular.getText();
-                String curriculum = jTextAreaCurriculum.getText();
-                Manager manager = (Manager) jComboManager.getSelectedItem();
-                Empleado empleado;
-                try {
-                    sistema.doubleEnRango(538, 83000, salario);
+        try {
+            String cedula = jTextCedula.getText();
+            if (sistema.unicidadPersona(new Empleado(cedula))) {
+                Double salario = Double.parseDouble(jTextSalario.getText());
+                Area area = (Area) jComboAreas.getSelectedItem();
+                if (area.puedeAceptar(salario, 1)) {
+                    String nombre = jTextNombre.getText();
+                    String celular = jTextCelular.getText();
+                    String curriculum = jTextAreaCurriculum.getText();
+                    Manager manager = (Manager) jComboManager.getSelectedItem();
+                    Empleado empleado;
+
+                    sistema.doubleEnRango(538, 830000, salario);
                     empleado = new Empleado(nombre, cedula, celular, salario, curriculum, manager, area);
                     sistema.agregarEmpleado(empleado);
                     JOptionPane.showMessageDialog(this, "Empleado creado correctamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
-                } catch (StringVacioException e) {
-                    JOptionPane.showMessageDialog(this, "Error: Deben completarse todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
-                } catch (NumFueraDeRangoException ex) {
-                    JOptionPane.showMessageDialog(this, "Error: Deben ingresarse un salario entre 538 y 83000 USD", "Error", JOptionPane.ERROR_MESSAGE);
-                } catch (CedulaInvalidaException ex) {
-                    JOptionPane.showMessageDialog(this, "Error: Cedula invalida, ingrese solo números y verifique que el dígito veríficador sea el correcto", "Error", JOptionPane.ERROR_MESSAGE);
-                } catch (TelefonoInvalidoException ex) {
-                    JOptionPane.showMessageDialog(this, "Error: Deben ingresarse numeros en el campo telefono", "Error", JOptionPane.ERROR_MESSAGE);
+
+                } else {
+                    JOptionPane.showMessageDialog(this, "El area seleccionada no tiene suficiente presupuesto", "Error", JOptionPane.ERROR_MESSAGE);
                 }
-            }else{
-                JOptionPane.showMessageDialog(this, "El area seleccionada no tiene suficiente presupuesto", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "La cedula ingresada ya existe", "Error", JOptionPane.ERROR_MESSAGE);
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "La cedula ingresada ya existe", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (StringVacioException e) {
+            JOptionPane.showMessageDialog(this, "Error: Deben completarse todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (NumberFormatException | NumFueraDeRangoException e) {
+            JOptionPane.showMessageDialog(this, "Error: Deben ingresarse un salario entre 538 y 830000 USD", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (CedulaInvalidaException ex) {
+            JOptionPane.showMessageDialog(this, "Error: Cedula invalida, ingrese solo números y verifique que el dígito veríficador sea el correcto", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (TelefonoInvalidoException ex) {
+            JOptionPane.showMessageDialog(this, "Error: Deben ingresarse numeros en el campo telefono", "Error", JOptionPane.ERROR_MESSAGE);
         }
+
     }//GEN-LAST:event_jBtnAltaActionPerformed
 
     private void jTextNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextNombreActionPerformed

@@ -9,6 +9,7 @@ public class Bienvenida extends javax.swing.JFrame {
     
     public Bienvenida() {
         initComponents();
+        this.setTitle("Información");
         jLabel1.setHorizontalAlignment(SwingConstants.CENTER);
         this.inicarContador();
     }
@@ -34,7 +35,7 @@ public class Bienvenida extends javax.swing.JFrame {
             .addGap(0, 270, Short.MAX_VALUE)
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel2.setLayout(null);
 

@@ -4,10 +4,9 @@ import auxiliar.ServicioIA;
 import dominio.Area;
 import dominio.Empleado;
 import dominio.Sistema;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Observable;
 import java.util.Observer;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.SwingWorker;
 
@@ -178,6 +177,8 @@ public class ReporteInteligente extends javax.swing.JFrame implements Observer {
             };
 
             hilo.execute();  // arranca el hilo
+        }else{
+            JOptionPane.showMessageDialog(this,"Debe seleccionar el área actual del empleado, el empleado y el área de destino","Error",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonConsultarAIActionPerformed
 
@@ -186,9 +187,12 @@ public class ReporteInteligente extends javax.swing.JFrame implements Observer {
         jComboBoxEmpleado.removeAllItems();
 
         Area a = (Area) jComboBoxAreaOrigen.getSelectedItem();
-        for (Empleado e : a.getListaEmpleados()) {
-            jComboBoxEmpleado.addItem(e);
+        if (a != null) {
+            for (Empleado e : a.getListaEmpleados()) {
+                jComboBoxEmpleado.addItem(e);
+            }
         }
+        
     }//GEN-LAST:event_jComboBoxAreaOrigenActionPerformed
 
     private void refrescarVentana() {

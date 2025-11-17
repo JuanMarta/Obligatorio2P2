@@ -157,7 +157,7 @@ public class AltaAreas extends javax.swing.JFrame implements Observer{
             if (!sistema.buscarAreaPorNombre(nombre)) {
                 
                 double presupuesto = Double.parseDouble(jTextPresupuesto.getText());
-                sistema.doubleEnRango(5000, 1000000, presupuesto);
+                sistema.doubleEnRango(5000, 10000000, presupuesto);
                 String descripcion = jTextDescripcion.getText();
                 Area nuevoArea = new Area(nombre, descripcion, presupuesto);
                 sistema.agregarArea(nuevoArea);
@@ -175,7 +175,7 @@ public class AltaAreas extends javax.swing.JFrame implements Observer{
             JOptionPane.showMessageDialog(this, "Error: Debe completar todos los espacios", "Error", JOptionPane.ERROR_MESSAGE);
             
         } catch (NumberFormatException | NumFueraDeRangoException e) {
-            JOptionPane.showMessageDialog(this, "Error: En presupuesto anual debe ingresarse un numero entre 5000 y 1000000", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error: En presupuesto anual debe ingresarse un numero entre 5000 y 10000000", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_jButtonAgregarActionPerformed

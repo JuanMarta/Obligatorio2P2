@@ -1,4 +1,3 @@
-
 package interfaz;
 
 import dominio.Sistema;
@@ -8,7 +7,6 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import javax.swing.JOptionPane;
 
-
 public class MenuPrincipal extends javax.swing.JFrame {
 
     private Sistema sistema;
@@ -17,13 +15,20 @@ public class MenuPrincipal extends javax.swing.JFrame {
         sistema = elSistema;
         initComponents();
         this.setTitle("ERP Empresarial");
+        this.addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
+            public void keyPressed(java.awt.event.KeyEvent evt){
+                if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_F1){
+                    JOptionPane.showMessageDialog(null, "Autores: Santiago Nicolas Alonso Bentancor (349491) y Juan Ignacio Marta Fernández (332281)","Información de Autores",JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        });
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 confirmarCierre();
             }
         });
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -184,43 +189,79 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuRealizarMovimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuRealizarMovimientoActionPerformed
-        MovimientoAreas m = new MovimientoAreas(sistema);
-        m.setVisible(true);
+        if (!(sistema.areasOrdenadasPorNombre().size()<2&&sistema.empleadosOrdenadosPorSalario().isEmpty())) {
+            MovimientoAreas m = new MovimientoAreas(sistema);
+            m.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Para poder realizar un movimiento de áreas deben existir al menos 2 areas y 1 empleado.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
     }//GEN-LAST:event_jMenuRealizarMovimientoActionPerformed
 
     private void jMenuAltaAreasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAltaAreasActionPerformed
+
         AltaAreas a = new AltaAreas(sistema);
         a.setVisible(true);
+
     }//GEN-LAST:event_jMenuAltaAreasActionPerformed
 
     private void jMenuBajaManagersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuBajaManagersActionPerformed
-        BajaManagers b = new BajaManagers(sistema);
-        b.setVisible(true);
+        if (!sistema.managersOrdenadosPorAntiguedad().isEmpty()) {
+            BajaManagers b = new BajaManagers(sistema);
+            b.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Para poder eliminar un manager debe existir al menos 1 mánager.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
     }//GEN-LAST:event_jMenuBajaManagersActionPerformed
 
     private void jMenuModificacionManagersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuModificacionManagersActionPerformed
-        ModificacionManagers m = new ModificacionManagers(sistema);
-        m.setVisible(true);
+        if (!sistema.managersOrdenadosPorAntiguedad().isEmpty()) {
+            ModificacionManagers m = new ModificacionManagers(sistema);
+            m.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Para poder modificar un manager debe existir al menos 1 mánager.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
     }//GEN-LAST:event_jMenuModificacionManagersActionPerformed
 
     private void jMenuBajaAreasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuBajaAreasActionPerformed
-        BajaAreas b = new BajaAreas(sistema);
-        b.setVisible(true);
+        if (!sistema.areasOrdenadasPorNombre().isEmpty()) {
+            BajaAreas b = new BajaAreas(sistema);
+            b.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Para poder eliminar un área debe existir al menos 1 área.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
     }//GEN-LAST:event_jMenuBajaAreasActionPerformed
 
     private void jMenuReporteInteligenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuReporteInteligenteActionPerformed
-        ReporteInteligente r = new ReporteInteligente(sistema);
-        r.setVisible(true);
+        if (!(sistema.areasOrdenadasPorNombre().isEmpty() && sistema.managersOrdenadosPorAntiguedad().isEmpty() && sistema.empleadosOrdenadosPorSalario().isEmpty())) {
+            ReporteInteligente r = new ReporteInteligente(sistema);
+            r.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Para poder hacer un reporte inteligente deben existir al menos 2 areas y 1 empleado.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jMenuReporteInteligenteActionPerformed
 
     private void jMenuModificacionAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuModificacionAreaActionPerformed
-        ModificacionAreas m = new ModificacionAreas(sistema);
-        m.setVisible(true);
+        if (!sistema.areasOrdenadasPorNombre().isEmpty()) {
+            ModificacionAreas m = new ModificacionAreas(sistema);
+            m.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Para poder modificar un área debe existir al menos 1 área.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
     }//GEN-LAST:event_jMenuModificacionAreaActionPerformed
 
     private void jMenuAltaEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAltaEmpleadosActionPerformed
-        AltaEmpleados a = new AltaEmpleados(sistema);
-        a.setVisible(true);
+        if (!(sistema.areasOrdenadasPorNombre().isEmpty() && sistema.managersOrdenadosPorAntiguedad().isEmpty())) {
+            AltaEmpleados a = new AltaEmpleados(sistema);
+            a.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Para poder dar de alta a un empleado debe exisitir al menos 1 área y 1 mánager.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
     }//GEN-LAST:event_jMenuAltaEmpleadosActionPerformed
 
     private void jMenuAltaManagersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAltaManagersActionPerformed
@@ -229,16 +270,26 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuAltaManagersActionPerformed
 
     private void jMenuItemReporteAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemReporteAreaActionPerformed
-        ReporteEstadoAreas r = new ReporteEstadoAreas(sistema);
-        r.setVisible(true);
+        if (!sistema.areasOrdenadasPorNombre().isEmpty()) {
+            ReporteEstadoAreas r = new ReporteEstadoAreas(sistema);
+            r.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Para poder hacer el reporte de área debe existir al menos 1 área.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
     }//GEN-LAST:event_jMenuItemReporteAreaActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        ReporteMovimientos r = new ReporteMovimientos(sistema);
-        r.setVisible(true);
+        if (!sistema.getListaMovimientos().isEmpty()) {
+            ReporteMovimientos r = new ReporteMovimientos(sistema);
+            r.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Para poder hacer el reporte de movimientos debe haberse hecho al menos 1 movimiento.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
     }//GEN-LAST:event_jMenuItem3ActionPerformed
-    
-    private void confirmarCierre(){
+
+    private void confirmarCierre() {
         int opcion = JOptionPane.showConfirmDialog(this, "Desea salir del sistema?", "Salir", JOptionPane.YES_NO_OPTION);
         if (opcion == JOptionPane.YES_OPTION) {
             try {
@@ -247,8 +298,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 ObjectOutputStream sss = new ObjectOutputStream(b);
                 sss.writeObject(sistema);
                 sss.close();
-            }catch (IOException e){
-                    JOptionPane.showMessageDialog(this, "No se pudieron guardar los datos", "Error", JOptionPane.ERROR_MESSAGE);
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(this, "No se pudieron guardar los datos", "Error", JOptionPane.ERROR_MESSAGE);
             }
 
         }
