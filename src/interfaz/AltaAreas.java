@@ -161,7 +161,6 @@ public class AltaAreas extends javax.swing.JFrame implements Observer{
                 String descripcion = jTextDescripcion.getText();
                 Area nuevoArea = new Area(nombre, descripcion, presupuesto);
                 sistema.agregarArea(nuevoArea);
-                refrescarPantalla();
                 JOptionPane.showMessageDialog(this, "Area creada con exito", "Exito", JOptionPane.INFORMATION_MESSAGE);
                 jTextNombre.setText("");
                 jTextDescripcion.setText("");

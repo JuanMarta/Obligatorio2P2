@@ -167,7 +167,6 @@ public class ModificacionAreas extends javax.swing.JFrame implements Observer{
             } else {
                 seleccionadaMod.setDescripcion(jTextDescripcion.getText());
                 JOptionPane.showMessageDialog(this, "Área modificada exitosamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
-                refrescarPantalla();
             }
         } catch (StringVacioException e) {
             JOptionPane.showMessageDialog(this, "Error: La descripción no puede estar vacía", "Error", JOptionPane.ERROR_MESSAGE);

@@ -201,10 +201,6 @@ public class AltaEmpleados extends javax.swing.JFrame implements Observer {
             jComboManager.setSelectedItem(e.getManager());
             jComboAreas.setSelectedItem(e.getArea());
         }
-
-
-        revalidate();
-        repaint();
     }//GEN-LAST:event_jListEmpleadosValueChanged
 
     private void jBtnAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAltaActionPerformed

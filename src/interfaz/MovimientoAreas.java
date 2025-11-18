@@ -168,7 +168,6 @@ public class MovimientoAreas extends javax.swing.JFrame implements Observer{
             int mes = jListMes.getSelectedIndex() + 1;
             if(sistema.moverEmpleado(empleado, mes, destino)){
                 JOptionPane.showMessageDialog(this, "El empleado se trasladó de área correctamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
-                refrescarPantalla();
             } else {
                 JOptionPane.showMessageDialog(this, "Error: El área seleccionada no tiene suficiente presupuesto para este empleado", "Error", JOptionPane.ERROR_MESSAGE);
 

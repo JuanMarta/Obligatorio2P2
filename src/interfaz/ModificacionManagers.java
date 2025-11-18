@@ -205,7 +205,6 @@ public class ModificacionManagers extends javax.swing.JFrame implements Observer
             try {
                 seleccionado.setTelefono(jTextTelefono.getText());
                 JOptionPane.showMessageDialog(this, "Manager modificada exitosamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
-                refrescarPantalla();
             } catch (StringVacioException e) {
                 JOptionPane.showMessageDialog(this, "Error: Deben completarse todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
             } catch (TelefonoInvalidoException ex) {

@@ -186,7 +186,6 @@ public class AltaManagers extends javax.swing.JFrame implements Observer{
                 String telefono = jTextTelefono.getText();
                 Manager nuevo = new Manager(nombre, cedula, telefono, antiguedad);
                 sistema.agregarManager(nuevo);
-                refrescarPantalla();
                 JOptionPane.showMessageDialog(this, "Manager creado con exito", "Exito", JOptionPane.INFORMATION_MESSAGE);
                 jTextNombre.setText("");
                 jTextCedula.setText("");

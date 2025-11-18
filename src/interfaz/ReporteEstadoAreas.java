@@ -64,8 +64,6 @@ public class ReporteEstadoAreas extends javax.swing.JFrame implements Observer {
     public void refrescarVentana() {
         cargarAreas();
 
-        jPanelListaAreas.revalidate();
-        jPanelListaAreas.repaint();
     }
 
     public void cargarAreas() {
@@ -122,8 +120,6 @@ public class ReporteEstadoAreas extends javax.swing.JFrame implements Observer {
             jPanelGridButtons.add(panelBtn);
         }
 
-        jPanelGridButtons.revalidate();
-        jPanelGridButtons.repaint();
 
     }
 
