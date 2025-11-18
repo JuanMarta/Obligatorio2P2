@@ -143,7 +143,7 @@ public class Sistema extends Observable implements Serializable {
             movido = true;
             setChanged();
             notifyObservers();
-            Movimiento m = new Movimiento(mesActual, areaOrigen.getNombre(), destino.getNombre(), e.getCedula(), e.getNombre());
+            Movimiento m = new Movimiento(mesActual, areaOrigen.getNombre(), destino.getNombre(), e.getNombre());
             this.agregarMovimiento(m);
         }
         return movido;
@@ -166,16 +166,16 @@ public class Sistema extends Observable implements Serializable {
         notifyObservers();
     }
 
-    public ArrayList<Movimiento> filtroMovimiento(int mes, String nomAreaOrigen, String nomAreaDestino, String cedula) {
+    public ArrayList<Movimiento> filtroMovimiento(int mes, String nomAreaOrigen, String nomAreaDestino, String nombre) {
         ArrayList<Movimiento> lista = new ArrayList<>();
 
         for (Movimiento m : getListaMovimientos()) {
             boolean coincideMes = (!(mes > 0) || m.getMesRealizacion() == mes);
             boolean coincideOrigen = (nomAreaOrigen == null || m.getNombreAreaOrigen().equals(nomAreaOrigen));
             boolean coincideDestino = (nomAreaDestino == null || m.getNombreAreaDestino().equals(nomAreaDestino));
-            boolean coincideCedula = (cedula == null || m.getCedulaEmpleado().equals(cedula));
+            boolean coincidenNombre = (nombre == null || m.getNombreEmpleado().equals(nombre));
 
-            if (coincideMes && coincideOrigen && coincideDestino && coincideCedula) {
+            if (coincideMes && coincideOrigen && coincideDestino && coincidenNombre) {
                 lista.add(m);
             }
         }
@@ -199,8 +199,15 @@ public class Sistema extends Observable implements Serializable {
         }
     }
 
-    public boolean unicidadPersona(Persona p) {
-        return !getListaEmpleados().contains(p) && !getListaManagers().contains(p);
+    public boolean unicidadPersona(String cedula) {
+        boolean ret = false;
+        for (int i = 0; i < listaManagers.size() && !ret; i++) {
+            ret = listaManagers.get(i).getCedula().equalsIgnoreCase(cedula);
+        }
+        for(int i = 0; i < listaEmpleados.size()&& !ret; i++){
+            ret = listaEmpleados.get(i).getCedula().equalsIgnoreCase(cedula);
+        }
+        return ret;
     }
 
     public boolean buscarPersonaporCedula(String laCi) {

@@ -207,7 +207,7 @@ public class AltaEmpleados extends javax.swing.JFrame implements Observer {
         // Datos
         try {
             String cedula = jTextCedula.getText();
-            if (!sistema.unicidadPersona(new Empleado(cedula))) {
+            if (!sistema.unicidadPersona(cedula)) {
                 Double salario = Double.parseDouble(jTextSalario.getText());
                 Area area = (Area) jComboAreas.getSelectedItem();
                 if (area.puedeAceptar(salario, 1)) {
@@ -221,7 +221,10 @@ public class AltaEmpleados extends javax.swing.JFrame implements Observer {
                     empleado = new Empleado(nombre, cedula, celular, salario, curriculum, manager, area);
                     sistema.agregarEmpleado(empleado);
                     JOptionPane.showMessageDialog(this, "Empleado creado correctamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
-
+                    jTextNombre.setText("");
+                    jTextCelular.setText("");
+                    jTextAreaCurriculum.setText("");
+                    jTextCedula.setText("");
                 } else {
                     JOptionPane.showMessageDialog(this, "El area seleccionada no tiene suficiente presupuesto", "Error", JOptionPane.ERROR_MESSAGE);
                 }

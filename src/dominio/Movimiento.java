@@ -8,14 +8,12 @@ public class Movimiento implements Serializable,Comparable<Movimiento>{
     private int mesRealizacion;
     private String nombreAreaOrigen;
     private String nombreAreaDestino;
-    private String cedulaEmpleado;
     private String nombreEmpleado;
     
-    public Movimiento(int elMes, String nombreOrigen, String nombreDestino, String cedula, String nombre){
+    public Movimiento(int elMes, String nombreOrigen, String nombreDestino, String nombre){
         mesRealizacion = elMes;
         nombreAreaOrigen = nombreOrigen;
         nombreAreaDestino = nombreDestino;
-        cedulaEmpleado = cedula;
         nombreEmpleado = nombre;
     }
 
@@ -43,13 +41,6 @@ public class Movimiento implements Serializable,Comparable<Movimiento>{
         this.nombreAreaDestino = nombreAreaDestino;
     }
 
-    public String getCedulaEmpleado() {
-        return cedulaEmpleado;
-    }
-
-    public void setCedulaEmpleado(String nombreEmpleado) {
-        this.cedulaEmpleado = nombreEmpleado;
-    }
     
     public String getNombreEmpleado() {
         return nombreEmpleado;

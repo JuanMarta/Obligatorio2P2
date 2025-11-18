@@ -61,10 +61,13 @@ public class ReporteEstadoAreas extends javax.swing.JFrame implements Observer {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void refrescarVentana() {
+     public void refrescarVentana() {
         cargarAreas();
 
+        jPanelListaAreas.revalidate();
+        jPanelListaAreas.repaint();
     }
+
 
     public void cargarAreas() {
         // Quito todos las areas antes de volver a colocar
@@ -120,6 +123,8 @@ public class ReporteEstadoAreas extends javax.swing.JFrame implements Observer {
             jPanelGridButtons.add(panelBtn);
         }
 
+        jPanelGridButtons.revalidate();
+        jPanelGridButtons.repaint();
 
     }
 
@@ -151,6 +156,7 @@ public class ReporteEstadoAreas extends javax.swing.JFrame implements Observer {
     public void update(Observable o, Object arg) {
         refrescarVentana();
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabelAreaYPresupuesto;

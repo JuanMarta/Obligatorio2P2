@@ -223,18 +223,18 @@ public class ReporteMovimientos extends javax.swing.JFrame implements Observer {
             nomAreaDestino = a.getNombre();
         }
 
-        String cedula = null;
+        String nombre = null;
         if (!(jComboEmpleados.getSelectedIndex() <= 0)) {
             Empleado e = (Empleado) jComboEmpleados.getSelectedItem();
-            cedula = e.getCedula();
+            nombre = e.getNombre();
         }
 
-        for (Movimiento m : sistema.filtroMovimiento(mes, nomAreaOrigen, nomAreaDestino, cedula)) {
+        for (Movimiento m : sistema.filtroMovimiento(mes, nomAreaOrigen, nomAreaDestino, nombre)) {
             modelo.addRow(new Object[]{
                 m.getMesRealizacion(),
                 m.getNombreAreaOrigen(),
                 m.getNombreAreaDestino(),
-                m.getCedulaEmpleado()
+                m.getNombreEmpleado()
             });
         }
     }
