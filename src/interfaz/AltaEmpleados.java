@@ -207,7 +207,7 @@ public class AltaEmpleados extends javax.swing.JFrame implements Observer {
         // Datos
         try {
             String cedula = jTextCedula.getText();
-            if (sistema.unicidadPersona(cedula)) {
+            if (!sistema.unicidadPersona(new Empleado(cedula))) {
                 Double salario = Double.parseDouble(jTextSalario.getText());
                 Area area = (Area) jComboAreas.getSelectedItem();
                 if (area.puedeAceptar(salario, 1)) {

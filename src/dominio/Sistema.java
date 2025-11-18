@@ -199,15 +199,8 @@ public class Sistema extends Observable implements Serializable {
         }
     }
 
-    public boolean unicidadPersona(String cedula) {
-        boolean ret = false;
-        for (int i = 0; i < listaManagers.size() && !ret; i++) {
-            ret = listaManagers.get(i).getCedula().equalsIgnoreCase(cedula);
-        }
-        for(int i = 0; i < listaEmpleados.size()&& !ret; i++){
-            ret = listaEmpleados.get(i).getCedula().equalsIgnoreCase(cedula);
-        }
-        return ret;
+    public boolean unicidadPersona(Persona p) {
+        return !getListaEmpleados().contains(p) && !getListaManagers().contains(p);
     }
 
     public boolean buscarPersonaporCedula(String laCi) {
