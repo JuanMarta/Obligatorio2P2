@@ -220,6 +220,6 @@ public class AltaAreas extends javax.swing.JFrame implements Observer{
     }
     
     private void refrescarPantalla(){
-        jListAreasAlta.setListData(sistema.areasOrdenadasPorNombre().toArray());
+        jListAreasAlta.setListData(sistema.getListaAreas().toArray());
     }
 }

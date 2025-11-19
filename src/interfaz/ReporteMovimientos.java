@@ -256,11 +256,11 @@ public class ReporteMovimientos extends javax.swing.JFrame implements Observer {
             jComboMes.addItem(String.valueOf(i));
         }
 
-        for (Area a : sistema.getListaAreas()) {
+        for (Area a : sistema.getListaAreasHistoricas()) {
             jComboAreaOrigen.addItem(a);
         }
 
-        for (Area a : sistema.getListaAreas()) {
+        for (Area a : sistema.getListaAreasHistoricas()) {
             jComboAreaDestino.addItem(a);
         }
 

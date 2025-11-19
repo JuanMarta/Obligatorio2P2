@@ -41,6 +41,7 @@ public class Manager extends Persona implements Comparable<Manager> {
 
     public void agregarEmpleado(Empleado elEmpleado) {
         listaEmpleados.add(elEmpleado);
+        empleadosOrdenadosPorSalario();
     }
 
     public void quitarEmpleado(Empleado elEmpleado) {
@@ -55,9 +56,8 @@ public class Manager extends Persona implements Comparable<Manager> {
         return listaEmpleados.isEmpty();
     }
 
-    public ArrayList<Empleado> empleadosOrdenadosPorSalario() {
+    public void empleadosOrdenadosPorSalario() {
         Collections.sort(listaEmpleados);
-        return listaEmpleados;
     }
 
     @Override

@@ -84,12 +84,9 @@ public class BajaAreas extends javax.swing.JFrame implements Observer{
         Area seleccionadaBaja = (Area) jListAreasBaja.getSelectedValue();
         if (seleccionadaBaja == null) {
             JOptionPane.showMessageDialog(this, "Debe seleccionar un área de la lista", "Error", JOptionPane.ERROR_MESSAGE);
-        } else if (seleccionadaBaja.sinEmpleados()) {
+        } else  {
             sistema.eliminarArea(seleccionadaBaja);
             JOptionPane.showMessageDialog(this, "Área eliminada exitosamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(this, "No pueden haber empleados en el área a eliminar", "Error", JOptionPane.ERROR_MESSAGE);
-
         }
 
 
@@ -112,6 +109,6 @@ public class BajaAreas extends javax.swing.JFrame implements Observer{
     }
     
     private void refrescarPantalla(){
-        jListAreasBaja.setListData(sistema.areasOrdenadasPorNombre().toArray());
+        jListAreasBaja.setListData(sistema.getListAreasBajables().toArray());
     }
 }

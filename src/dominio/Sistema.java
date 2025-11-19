@@ -11,6 +11,7 @@ import java.util.Observable;
 public class Sistema extends Observable implements Serializable {
 
     private ArrayList<Area> listaAreas;
+    private ArrayList<Area> listaAreasHistoricas;
     private ArrayList<Manager> listaManagers;
     private ArrayList<Empleado> listaEmpleados;
     private ArrayList<Movimiento> listaMovimientos;
@@ -18,6 +19,7 @@ public class Sistema extends Observable implements Serializable {
     public Sistema() {
         try {
             listaAreas = new ArrayList<>();
+            listaAreasHistoricas = new ArrayList<>();
             listaManagers = new ArrayList<>();
             listaEmpleados = new ArrayList<>();
             listaMovimientos = new ArrayList<>();
@@ -29,8 +31,26 @@ public class Sistema extends Observable implements Serializable {
     // ---------------------------------------------------
     // -------------------- Areas ------------------------
     // ---------------------------------------------------
+    public ArrayList<Area> getListaAreasHistoricas() {
+        return listaAreasHistoricas;
+    }
+
+    public void setListaAreasHistoricas(ArrayList<Area> listaAreasHistoricas) {
+        this.listaAreasHistoricas = listaAreasHistoricas;
+    }
+
     public ArrayList<Area> getListaAreas() {
         return listaAreas;
+    }
+
+    public ArrayList<Area> getListAreasBajables() {
+        ArrayList<Area> ret = new ArrayList<>();
+        for (Area a : listaAreas) {
+            if (a.sinEmpleados()) {
+                ret.add(a);
+            }
+        }
+        return ret;
     }
 
     public void setListaAreas(ArrayList<Area> listaAreas) {
@@ -39,6 +59,8 @@ public class Sistema extends Observable implements Serializable {
 
     public void agregarArea(Area elArea) {
         listaAreas.add(elArea);
+        listaAreasHistoricas.add(elArea);
+        areasOrdenadasPorNombre();
         setChanged();
         notifyObservers();
     }
@@ -53,13 +75,14 @@ public class Sistema extends Observable implements Serializable {
         return ret;
     }
 
-    public ArrayList<Area> areasOrdenadasPorNombre() {
+    public void areasOrdenadasPorNombre() {
         Collections.sort(listaAreas);
-        return listaAreas;
+        Collections.sort(listaAreasHistoricas);
     }
 
     public ArrayList<Area> areasOrdenadasPorPresupuestoAsignado() {
         Collections.sort(getListaAreas(), new Comparator<Area>() {
+            @Override
             public int compare(Area a1, Area a2) {
                 double porcentajeArea1 = a1.porcentajePresupuestoAsignado();
                 double porcentajeArea2 = a2.porcentajePresupuestoAsignado();
@@ -90,15 +113,25 @@ public class Sistema extends Observable implements Serializable {
         this.listaManagers = listaManagers;
     }
 
+    public ArrayList<Manager> getListManagersBajables() {
+        ArrayList<Manager> ret = new ArrayList<>();
+        for (Manager m : listaManagers) {
+            if (m.sinEmpleados()) {
+                ret.add(m);
+            }
+        }
+        return ret;
+    }
+
     public void agregarManager(Manager elManager) {
         listaManagers.add(elManager);
+        managersOrdenadosPorAntiguedad();
         setChanged();
         notifyObservers();
     }
 
-    public ArrayList<Manager> managersOrdenadosPorAntiguedad() {
+    public void managersOrdenadosPorAntiguedad() {
         Collections.sort(listaManagers);
-        return listaManagers;
     }
 
     public void eliminarManager(Manager m) {
@@ -124,13 +157,13 @@ public class Sistema extends Observable implements Serializable {
         listaEmpleados.add(elEmpleado);
         elEmpleado.getArea().agregarEmpleado(elEmpleado, 1);
         elEmpleado.getManager().agregarEmpleado(elEmpleado);
+        empleadosOrdenadosPorSalario();
         setChanged();
         notifyObservers();
     }
 
-    public ArrayList<Empleado> empleadosOrdenadosPorSalario() {
+    public void empleadosOrdenadosPorSalario() {
         Collections.sort(listaEmpleados);
-        return listaEmpleados;
     }
 
     public boolean moverEmpleado(Empleado e, int mesActual, Area destino) {
@@ -187,24 +220,12 @@ public class Sistema extends Observable implements Serializable {
     // ---------------------------------------------------
     // ------------------- Persona -----------------------
     // ---------------------------------------------------
-    public void intEnRango(int min, int max, int valor) throws NumFueraDeRangoException {
-        if (min > valor || max < valor) {
-            throw new NumFueraDeRangoException();
-        }
-    }
-
-    public void doubleEnRango(int min, int max, double valor) throws NumFueraDeRangoException {
-        if (min > valor || max < valor) {
-            throw new NumFueraDeRangoException();
-        }
-    }
-
     public boolean unicidadPersona(String cedula) {
         boolean ret = false;
         for (int i = 0; i < listaManagers.size() && !ret; i++) {
             ret = listaManagers.get(i).getCedula().equalsIgnoreCase(cedula);
         }
-        for(int i = 0; i < listaEmpleados.size()&& !ret; i++){
+        for (int i = 0; i < listaEmpleados.size() && !ret; i++) {
             ret = listaEmpleados.get(i).getCedula().equalsIgnoreCase(cedula);
         }
         return ret;
@@ -224,5 +245,17 @@ public class Sistema extends Observable implements Serializable {
         }
         return ret;
 
+    }
+
+    public void intEnRango(int min, int max, int valor) throws NumFueraDeRangoException {
+        if (min > valor || max < valor) {
+            throw new NumFueraDeRangoException();
+        }
+    }
+
+    public void doubleEnRango(int min, int max, double valor) throws NumFueraDeRangoException {
+        if (min > valor || max < valor) {
+            throw new NumFueraDeRangoException();
+        }
     }
 }

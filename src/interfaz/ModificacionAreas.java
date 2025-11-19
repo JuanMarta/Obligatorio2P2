@@ -216,6 +216,6 @@ public class ModificacionAreas extends javax.swing.JFrame implements Observer{
     }
     
     private void refrescarPantalla(){
-        jListAreasModificacion.setListData(sistema.areasOrdenadasPorNombre().toArray());
+        jListAreasModificacion.setListData(sistema.getListaAreas().toArray());
     }
 }

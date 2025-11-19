@@ -195,7 +195,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuRealizarMovimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuRealizarMovimientoActionPerformed
-        if (!(sistema.areasOrdenadasPorNombre().size()<2)&&!sistema.empleadosOrdenadosPorSalario().isEmpty()){
+        if (!(sistema.getListaAreas().size()<2)&&!sistema.getListaEmpleados().isEmpty()){
             MovimientoAreas m = new MovimientoAreas(sistema);
             m.setVisible(true);
         } else {
@@ -212,17 +212,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuAltaAreasActionPerformed
 
     private void jMenuBajaManagersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuBajaManagersActionPerformed
-        if (!sistema.managersOrdenadosPorAntiguedad().isEmpty()) {
+        if (!sistema.getListManagersBajables().isEmpty()) {
             BajaManagers b = new BajaManagers(sistema);
             b.setVisible(true);
         } else {
-            JOptionPane.showMessageDialog(this, "Para poder eliminar un manager debe existir al menos 1 mánager.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Para poder eliminar un manager debe existir al menos 1 mánager sin empleados.", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_jMenuBajaManagersActionPerformed
 
     private void jMenuModificacionManagersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuModificacionManagersActionPerformed
-        if (!sistema.managersOrdenadosPorAntiguedad().isEmpty()) {
+        if (!sistema.getListaManagers().isEmpty()) {
             ModificacionManagers m = new ModificacionManagers(sistema);
             m.setVisible(true);
         } else {
@@ -232,17 +232,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuModificacionManagersActionPerformed
 
     private void jMenuBajaAreasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuBajaAreasActionPerformed
-        if (!sistema.areasOrdenadasPorNombre().isEmpty()) {
+        if (!sistema.getListAreasBajables().isEmpty()) {
             BajaAreas b = new BajaAreas(sistema);
             b.setVisible(true);
         } else {
-            JOptionPane.showMessageDialog(this, "Para poder eliminar un área debe existir al menos 1 área.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Para poder eliminar un área debe existir al menos 1 área sin empleados.", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_jMenuBajaAreasActionPerformed
 
     private void jMenuReporteInteligenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuReporteInteligenteActionPerformed
-        if (!sistema.areasOrdenadasPorNombre().isEmpty() && !sistema.managersOrdenadosPorAntiguedad().isEmpty() && !sistema.empleadosOrdenadosPorSalario().isEmpty()) {
+        if (!sistema.getListaAreas().isEmpty() && !sistema.getListaManagers().isEmpty() && !sistema.getListaEmpleados().isEmpty()) {
             ReporteInteligente r = new ReporteInteligente(sistema);
             r.setVisible(true);
         } else {
@@ -251,7 +251,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuReporteInteligenteActionPerformed
 
     private void jMenuModificacionAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuModificacionAreaActionPerformed
-        if (!sistema.areasOrdenadasPorNombre().isEmpty()) {
+        if (!sistema.getListaAreas().isEmpty()) {
             ModificacionAreas m = new ModificacionAreas(sistema);
             m.setVisible(true);
         } else {
@@ -261,7 +261,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuModificacionAreaActionPerformed
 
     private void jMenuAltaEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAltaEmpleadosActionPerformed
-        if (!sistema.areasOrdenadasPorNombre().isEmpty() && !sistema.managersOrdenadosPorAntiguedad().isEmpty()) {
+        if (!sistema.getListaAreas().isEmpty() && !sistema.getListaManagers().isEmpty()) {
             AltaEmpleados a = new AltaEmpleados(sistema);
             a.setVisible(true);
         } else {
@@ -276,7 +276,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuAltaManagersActionPerformed
 
     private void jMenuItemReporteAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemReporteAreaActionPerformed
-        if (!sistema.areasOrdenadasPorNombre().isEmpty()) {
+        if (!sistema.getListaAreas().isEmpty()) {
             ReporteEstadoAreas r = new ReporteEstadoAreas(sistema);
             r.setVisible(true);
         } else {

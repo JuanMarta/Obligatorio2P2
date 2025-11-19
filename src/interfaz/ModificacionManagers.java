@@ -225,7 +225,7 @@ public class ModificacionManagers extends javax.swing.JFrame implements Observer
             jTextAntiguedad.setText("");
             jTextTelefono.setEditable(false);
         } else {
-            jListaEmpleadoManager.setListData(seleccionado.empleadosOrdenadosPorSalario().toArray());
+            jListaEmpleadoManager.setListData(seleccionado.getListaEmpleados().toArray());
             jTextNombre.setText(seleccionado.getNombre());
             jTextCedula.setText(seleccionado.getCedula());
             jTextTelefono.setText(seleccionado.getTelefono());
@@ -268,7 +268,7 @@ public class ModificacionManagers extends javax.swing.JFrame implements Observer
     }
     
     private void refrescarPantalla(){
-        jListaManagerMod.setListData(sistema.managersOrdenadosPorAntiguedad().toArray());
+        jListaManagerMod.setListData(sistema.getListaManagers().toArray());
         jListaEmpleadoManager.clearSelection();
         jListaEmpleadoManager.setListData(new String[0]);
     }

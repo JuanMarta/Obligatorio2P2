@@ -91,6 +91,7 @@ public class Area extends Observable implements Serializable, Comparable<Area> {
     public void agregarEmpleado(Empleado elEmpleado, int mesIngreso) {
         listaEmpleados.add(elEmpleado);
         setPresupuestoActual(presupuestoActual - (13 - mesIngreso) * elEmpleado.getSalarioMensual());
+        empleadosOrdenadosPorSalario();
         setChanged();
         notifyObservers();
     }
@@ -110,9 +111,8 @@ public class Area extends Observable implements Serializable, Comparable<Area> {
         return listaEmpleados.isEmpty();
     }
 
-    public ArrayList<Empleado> empleadosOrdenadosPorSalario() {
+    public void empleadosOrdenadosPorSalario() {
         Collections.sort(listaEmpleados);
-        return listaEmpleados;
     }
 
     public ArrayList<Empleado> empleadosOrdenadosPorNombre() {

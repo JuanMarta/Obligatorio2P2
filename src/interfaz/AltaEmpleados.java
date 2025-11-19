@@ -251,7 +251,7 @@ public class AltaEmpleados extends javax.swing.JFrame implements Observer {
         // Cargo lista con empleados
         DefaultListModel<Empleado> modelo = new DefaultListModel<>();
 
-        for (Empleado e : sistema.empleadosOrdenadosPorSalario()) {
+        for (Empleado e : sistema.getListaEmpleados()) {
             modelo.addElement(e);
         }
 

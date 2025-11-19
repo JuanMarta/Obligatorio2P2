@@ -83,12 +83,9 @@ public class BajaManagers extends javax.swing.JFrame implements Observer{
         Manager seleccionadaBaja = (Manager) jListManagersBaja.getSelectedValue();
         if (seleccionadaBaja == null) {
             JOptionPane.showMessageDialog(this, "Debe seleccionar un manager de la lista", "Error", JOptionPane.ERROR_MESSAGE);
-        } else if (seleccionadaBaja.sinEmpleados()) {
+        } else {
             sistema.eliminarManager(seleccionadaBaja);
             JOptionPane.showMessageDialog(this, "Manager eliminado/a exitosamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(this, "El manager a eliminar no puede tener empleados", "Error", JOptionPane.ERROR_MESSAGE);
-
         }
 
 
@@ -111,6 +108,6 @@ public class BajaManagers extends javax.swing.JFrame implements Observer{
     }
     
     private void refrescarPantalla(){
-        jListManagersBaja.setListData(sistema.managersOrdenadosPorAntiguedad().toArray());
+        jListManagersBaja.setListData(sistema.getListManagersBajables().toArray());
     }
 }

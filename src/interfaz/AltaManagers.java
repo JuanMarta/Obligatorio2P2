@@ -250,6 +250,6 @@ public class AltaManagers extends javax.swing.JFrame implements Observer{
     }
     
     private void refrescarPantalla(){
-        jListaManagerAlta.setListData(sistema.managersOrdenadosPorAntiguedad().toArray());
+        jListaManagerAlta.setListData(sistema.getListaManagers().toArray());
     }
 }
