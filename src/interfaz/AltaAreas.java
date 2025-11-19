@@ -36,7 +36,7 @@ public class AltaAreas extends javax.swing.JFrame implements Observer{
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextNombre = new javax.swing.JTextPane();
-        jLabel3 = new javax.swing.JLabel();
+        jLabelNombre = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -60,9 +60,14 @@ public class AltaAreas extends javax.swing.JFrame implements Observer{
 
         jLabel2.setText("Crear Area");
 
+        jTextNombre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextNombreFocusLost(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTextNombre);
 
-        jLabel3.setText("Nombre");
+        jLabelNombre.setText("Nombre");
 
         jLabel4.setText("Descripción");
 
@@ -70,6 +75,11 @@ public class AltaAreas extends javax.swing.JFrame implements Observer{
 
         jScrollPane3.setViewportView(jTextPresupuesto);
 
+        jTextDescripcion.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextDescripcionFocusLost(evt);
+            }
+        });
         jScrollPane4.setViewportView(jTextDescripcion);
 
         jButtonAgregar.setText("Agregar");
@@ -95,7 +105,7 @@ public class AltaAreas extends javax.swing.JFrame implements Observer{
                         .addGap(38, 38, 38))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(80, 80, 80)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(83, 83, 83))))
@@ -131,7 +141,7 @@ public class AltaAreas extends javax.swing.JFrame implements Observer{
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabelNombre, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -193,6 +203,14 @@ public class AltaAreas extends javax.swing.JFrame implements Observer{
 
     }//GEN-LAST:event_jListAreasAltaValueChanged
 
+    private void jTextNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextNombreFocusLost
+       
+    }//GEN-LAST:event_jTextNombreFocusLost
+
+    private void jTextDescripcionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextDescripcionFocusLost
+       
+    }//GEN-LAST:event_jTextDescripcionFocusLost
+
     /**
      * @param args the command line arguments
      */
@@ -201,9 +219,9 @@ public class AltaAreas extends javax.swing.JFrame implements Observer{
     private javax.swing.JButton jButtonAgregar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabelNombre;
     private javax.swing.JList<Object> jListAreasAlta;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

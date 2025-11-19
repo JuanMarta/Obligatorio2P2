@@ -3,6 +3,7 @@ package interfaz;
 
 import dominio.Sistema;
 import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -83,6 +84,7 @@ public class seleccionSistema extends javax.swing.JFrame {
 
     private void jButtonSistemaNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSistemaNuevoActionPerformed
         sistema = new Sistema();
+        eliminarcvs();
         CrearVentana(sistema);
     }//GEN-LAST:event_jButtonSistemaNuevoActionPerformed
 
@@ -110,6 +112,7 @@ public class seleccionSistema extends javax.swing.JFrame {
             BufferedInputStream b = new BufferedInputStream(ff);
             ObjectInputStream sss = new ObjectInputStream(b);
             sistema = (Sistema) sss.readObject();
+            eliminarcvs();
             sss.close();
             CrearVentana(sistema);
         } catch (FileNotFoundException e) {
@@ -127,6 +130,17 @@ public class seleccionSistema extends javax.swing.JFrame {
         m.setVisible(true);
         this.dispose();
     }
+    
+    private void eliminarcvs(){
+        File carpeta = new File("cvs");
+        if(carpeta.exists()){
+            File[] listaArchivos = carpeta.listFiles();
+            for(int i = 0; i< listaArchivos.length; i++){
+                listaArchivos[i].delete();
+            }
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */

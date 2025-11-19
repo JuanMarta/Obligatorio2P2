@@ -145,19 +145,19 @@ public class ReporteInteligente extends javax.swing.JFrame implements Observer {
         Area a1 = (Area) jComboBoxAreaOrigen.getSelectedItem();
         Area a2 = (Area) jComboBoxAreaDestino.getSelectedItem();
         Empleado e = (Empleado) jComboBoxEmpleado.getSelectedItem();
-        
+
         if (a1 != null && a2 != null && e != null && !a1.equals(a2)) {
 
             jLabelResultado.setIcon(new ImageIcon(getClass().getResource("/img/reloj_icon.png")));
-            
+
             SwingWorker<String, Void> hilo = new SwingWorker<String, Void>() {
 
                 @Override
                 protected String doInBackground() throws Exception {
                     // Este código NO congela la interfaz
                     String informacion = "Información area origen: Nombre:" + a1.getNombre() + " Descripción: " + a1.getDescripcion()
-                                       + "Información empleado: CV: " + e.getCv()
-                                       + "Informacion area destino: Nombre: " + a2.getNombre() + " Descripción " + a2.getDescripcion();
+                            + "Información empleado: CV: " + e.getCv()
+                            + "Informacion area destino: Nombre: " + a2.getNombre() + " Descripción " + a2.getDescripcion();
                     return ServicioIA.LlamarIA(informacion);
                 }
 
@@ -177,8 +177,8 @@ public class ReporteInteligente extends javax.swing.JFrame implements Observer {
             };
 
             hilo.execute();  // arranca el hilo
-        }else{
-            JOptionPane.showMessageDialog(this,"Debe seleccionar el área actual del empleado, el empleado y el área de destino","Error",JOptionPane.ERROR_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar el área actual del empleado, el empleado y el área de destino", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonConsultarAIActionPerformed
 
@@ -192,18 +192,20 @@ public class ReporteInteligente extends javax.swing.JFrame implements Observer {
                 jComboBoxEmpleado.addItem(e);
             }
         }
-        
+
+
     }//GEN-LAST:event_jComboBoxAreaOrigenActionPerformed
 
     private void refrescarVentana() {
         jComboBoxAreaOrigen.removeAllItems();
         jComboBoxAreaDestino.removeAllItems();
-        
+
         for (Area a : sistema.getListaAreas()) {
             jComboBoxAreaOrigen.addItem(a);
             jComboBoxAreaDestino.addItem(a);
         }
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonConsultarAI;
