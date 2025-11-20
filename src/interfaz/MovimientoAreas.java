@@ -170,7 +170,7 @@ public class MovimientoAreas extends javax.swing.JFrame implements Observer{
                 JOptionPane.showMessageDialog(this, "El empleado se trasladó de área correctamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 if (!empleado.mesAceptable(mes)) {
-                    JOptionPane.showMessageDialog(this, "Error: El ultimo núumero del mes en el cual el empleado " + empleado.getNombre() + " fue él: "+ empleado.getMesEnElArea() + ". Por favor seleccione un mes más grande o igual a este.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Error: El mes en el cual el empleado: " + empleado.getNombre() + " fue contratado para su área actual fue el: "+ empleado.getMesEnElArea() + ". Por favor seleccione un mes más grande o igual a este.", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
                     JOptionPane.showMessageDialog(this, "Error: El área seleccionada no tiene suficiente presupuesto para este empleado", "Error", JOptionPane.ERROR_MESSAGE);
                 }

@@ -226,6 +226,7 @@ public class AltaEmpleados extends javax.swing.JFrame implements Observer {
                     jTextCelular.setText("");
                     jTextAreaCurriculum.setText("");
                     jTextCedula.setText("");
+                    jTextSalario.setText("");
                 } else {
                     JOptionPane.showMessageDialog(this, "El area seleccionada no tiene suficiente presupuesto", "Error", JOptionPane.ERROR_MESSAGE);
                 }
