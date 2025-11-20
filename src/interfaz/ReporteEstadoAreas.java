@@ -1,3 +1,4 @@
+// Trabajo desarrollado por: Santiago Alonso 349491 Juan Marta 332281
 package interfaz;
 
 import dominio.Area;
@@ -48,7 +49,7 @@ public class ReporteEstadoAreas extends javax.swing.JFrame implements Observer {
         jLabelAreaYPresupuesto.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabelAreaYPresupuesto.setText("Area:");
         getContentPane().add(jLabelAreaYPresupuesto);
-        jLabelAreaYPresupuesto.setBounds(190, 10, 360, 30);
+        jLabelAreaYPresupuesto.setBounds(190, 10, 430, 30);
 
         jScrollPanelListaAreas.setBorder(null);
 
@@ -110,12 +111,16 @@ public class ReporteEstadoAreas extends javax.swing.JFrame implements Observer {
         for (Empleado e : area.empleadosOrdenadosPorNombre()) {
             JButton btnEmpleado = new JButton(e.getNombre());
             btnEmpleado.putClientProperty("empleado", e);
-            btnEmpleado.setMargin(new Insets(-5, -5, -5, -5));
-            btnEmpleado.setBackground(Color.BLACK);
+            
+            // Devuelve un valor entre 0 y 255 para el color del boton
+            int factor = (int) Math.ceil(e.getSalarioAnual()*255/area.getPresupuestoAnual());
+            btnEmpleado.setBackground(new Color(0,0, factor));
+            
             btnEmpleado.setForeground(Color.WHITE);
+            btnEmpleado.setMargin(new Insets(-5, -5, -5, -5));
             btnEmpleado.addActionListener(new EmpleadoListener());
             btnEmpleado.setPreferredSize(new Dimension(100, 30));
-
+            
             JPanel panelBtn = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
             panelBtn.setOpaque(true);
             panelBtn.add(btnEmpleado);

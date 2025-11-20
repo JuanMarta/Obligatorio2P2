@@ -1,3 +1,4 @@
+// Trabajo desarrollado por: Santiago Alonso 349491 Juan Marta 332281
 package interfaz;
 
 import auxiliar.ArchivoGrabacion;
@@ -223,13 +224,13 @@ public class ReporteMovimientos extends javax.swing.JFrame implements Observer {
             nomAreaDestino = a.getNombre();
         }
 
-        String nombre = null;
+        String cedula = null;
         if (!(jComboEmpleados.getSelectedIndex() <= 0)) {
             Empleado e = (Empleado) jComboEmpleados.getSelectedItem();
-            nombre = e.getNombre();
+            cedula = e.getCedula();
         }
 
-        for (Movimiento m : sistema.filtroMovimiento(mes, nomAreaOrigen, nomAreaDestino, nombre)) {
+        for (Movimiento m : sistema.filtroMovimiento(mes, nomAreaOrigen, nomAreaDestino, cedula)) {
             modelo.addRow(new Object[]{
                 m.getMesRealizacion(),
                 m.getNombreAreaOrigen(),

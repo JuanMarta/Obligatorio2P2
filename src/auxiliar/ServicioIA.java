@@ -1,3 +1,4 @@
+// Trabajo desarrollado por: Santiago Alonso 349491 Juan Marta 332281
 package auxiliar;
 
 import com.google.genai.Client;

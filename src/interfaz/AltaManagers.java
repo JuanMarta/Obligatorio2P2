@@ -1,4 +1,4 @@
-
+// Trabajo desarrollado por: Santiago Alonso 349491 Juan Marta 332281
 package interfaz;
 
 import dominio.*;
@@ -179,7 +179,7 @@ public class AltaManagers extends javax.swing.JFrame implements Observer{
         try {
             String cedula = jTextCedula.getText();
 
-            if (!sistema.buscarPersonaporCedula(cedula)) {
+            if (!sistema.unicidadPersona(cedula)) {
                 int antiguedad = Integer.parseInt(jTextAntiguedad.getText());
                 sistema.intEnRango(0, 60, antiguedad);
                 String nombre = jTextNombre.getText();

@@ -1,3 +1,4 @@
+// Trabajo desarrollado por: Santiago Alonso 349491 Juan Marta 332281
 package dominio;
 
 import excepciones.CedulaInvalidaException;
@@ -74,7 +75,7 @@ public abstract class Persona implements Serializable {
         this.telefono = telefono;
     }
 
-    public void verificarCedula(String cedula) throws CedulaInvalidaException {
+    private void verificarCedula(String cedula) throws CedulaInvalidaException {
         int ver = Integer.parseInt("" + cedula.charAt(7));
         int[] mult = {2, 9, 8, 7, 6, 3, 4};
         int suma = 0;
@@ -87,7 +88,6 @@ public abstract class Persona implements Serializable {
             throw new CedulaInvalidaException();
         }
     }
-
 
     @Override
     public String toString() {

@@ -1,3 +1,4 @@
+// Trabajo desarrollado por: Santiago Alonso 349491 Juan Marta 332281
 package dominio;
 
 import excepciones.NumFueraDeRangoException;
@@ -43,6 +44,10 @@ public class Sistema extends Observable implements Serializable {
         return listaAreas;
     }
 
+    public void setListaAreas(ArrayList<Area> listaAreas) {
+        this.listaAreas = listaAreas;
+    }
+
     public ArrayList<Area> getListAreasBajables() {
         ArrayList<Area> ret = new ArrayList<>();
         for (Area a : listaAreas) {
@@ -51,10 +56,6 @@ public class Sistema extends Observable implements Serializable {
             }
         }
         return ret;
-    }
-
-    public void setListaAreas(ArrayList<Area> listaAreas) {
-        this.listaAreas = listaAreas;
     }
 
     public void agregarArea(Area elArea) {
@@ -176,7 +177,7 @@ public class Sistema extends Observable implements Serializable {
             movido = true;
             setChanged();
             notifyObservers();
-            Movimiento m = new Movimiento(mesActual, areaOrigen.getNombre(), destino.getNombre(), e.getNombre());
+            Movimiento m = new Movimiento(mesActual, areaOrigen.getNombre(), destino.getNombre(), e.getNombre(), e.getCedula());
             this.agregarMovimiento(m);
         }
         return movido;
@@ -199,16 +200,16 @@ public class Sistema extends Observable implements Serializable {
         notifyObservers();
     }
 
-    public ArrayList<Movimiento> filtroMovimiento(int mes, String nomAreaOrigen, String nomAreaDestino, String nombre) {
+    public ArrayList<Movimiento> filtroMovimiento(int mes, String nomAreaOrigen, String nomAreaDestino, String cedula) {
         ArrayList<Movimiento> lista = new ArrayList<>();
 
         for (Movimiento m : getListaMovimientos()) {
             boolean coincideMes = (!(mes > 0) || m.getMesRealizacion() == mes);
             boolean coincideOrigen = (nomAreaOrigen == null || m.getNombreAreaOrigen().equals(nomAreaOrigen));
             boolean coincideDestino = (nomAreaDestino == null || m.getNombreAreaDestino().equals(nomAreaDestino));
-            boolean coincidenNombre = (nombre == null || m.getNombreEmpleado().equals(nombre));
+            boolean coincideCedula = (cedula == null || m.getCedulaEmpleado().equals(cedula));
 
-            if (coincideMes && coincideOrigen && coincideDestino && coincidenNombre) {
+            if (coincideMes && coincideOrigen && coincideDestino && coincideCedula) {
                 lista.add(m);
             }
         }
@@ -229,22 +230,6 @@ public class Sistema extends Observable implements Serializable {
             ret = listaEmpleados.get(i).getCedula().equalsIgnoreCase(cedula);
         }
         return ret;
-    }
-
-    public boolean buscarPersonaporCedula(String laCi) {
-        boolean ret = false;
-        for (int i = 0; i < listaManagers.size() && !ret; i++) {
-            if (listaManagers.get(i).getCedula().equalsIgnoreCase(laCi)) {
-                ret = true;
-            }
-        }
-        for (int i = 0; i < listaEmpleados.size() && !ret; i++) {
-            if (listaEmpleados.get(i).getCedula().equalsIgnoreCase(laCi)) {
-                ret = true;
-            }
-        }
-        return ret;
-
     }
 
     public void intEnRango(int min, int max, int valor) throws NumFueraDeRangoException {
