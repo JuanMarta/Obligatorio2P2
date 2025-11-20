@@ -166,11 +166,14 @@ public class MovimientoAreas extends javax.swing.JFrame implements Observer{
             JOptionPane.showMessageDialog(this, "Error: El area de origen y destino no pueden ser las mismas", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             int mes = jListMes.getSelectedIndex() + 1;
-            if(sistema.moverEmpleado(empleado, mes, destino)){
+            if (sistema.moverEmpleado(empleado, mes, destino)) {
                 JOptionPane.showMessageDialog(this, "El empleado se trasladó de área correctamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(this, "Error: El área seleccionada no tiene suficiente presupuesto para este empleado", "Error", JOptionPane.ERROR_MESSAGE);
-
+                if (!empleado.mesAceptable(mes)) {
+                    JOptionPane.showMessageDialog(this, "Error: El ultimo núumero del mes en el cual el empleado " + empleado.getNombre() + " fue él: "+ empleado.getMesEnElArea() + ". Por favor seleccione un mes más grande o igual a este.", "Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Error: El área seleccionada no tiene suficiente presupuesto para este empleado", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed

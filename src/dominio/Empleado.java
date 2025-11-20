@@ -14,6 +14,7 @@ public class Empleado extends Persona implements Comparable<Empleado> {
     private String cv;
     private Manager manager;
     private Area area;
+    private int mesEnElArea;
 
     public Empleado(String elNombre, String laCedula, String elCelular, double elSalario, String elCv, Manager elManager, Area elArea) throws StringVacioException, CedulaInvalidaException, TelefonoInvalidoException {
         super(elNombre, laCedula, elCelular);
@@ -21,6 +22,7 @@ public class Empleado extends Persona implements Comparable<Empleado> {
         this.setCv(elCv);
         this.setManager(elManager);
         this.setArea(elArea);
+        this.setMesEnElArea(1);
     }
 
     public Empleado() {
@@ -29,11 +31,6 @@ public class Empleado extends Persona implements Comparable<Empleado> {
         cv = "";
         manager = null;
         area = null;
-    }
-    
-    // Generalmente usado en la unicidad de la cedula
-    public Empleado(String laCedula) {
-        super(laCedula);
     }
     
     // Setters
@@ -64,6 +61,15 @@ public class Empleado extends Persona implements Comparable<Empleado> {
     public void setArea(Area area) {
         this.area = area;
     }
+
+    public int getMesEnElArea() {
+        return mesEnElArea;
+    }
+
+    public void setMesEnElArea(int mesEnElArea) {
+        this.mesEnElArea = mesEnElArea;
+    }
+    
     
     // Getters
     public double getSalarioAnual() {
@@ -90,6 +96,10 @@ public class Empleado extends Persona implements Comparable<Empleado> {
 
     public Area getArea() {
         return area;
+    }
+    
+    public boolean mesAceptable(int mes){
+        return mes>=this.getMesEnElArea();
     }
     
     @Override

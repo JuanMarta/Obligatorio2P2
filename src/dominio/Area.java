@@ -99,7 +99,7 @@ public class Area extends Observable implements Serializable, Comparable<Area> {
 
     public void quitarEmpleado(Empleado elEmpleado, int mesEgreso) {
         listaEmpleados.remove(elEmpleado);
-        setPresupuestoActual(presupuestoActual + (13 - mesEgreso) * elEmpleado.getSalarioMensual());
+        setPresupuestoActual(presupuestoActual + ((13-elEmpleado.getMesEnElArea())-(mesEgreso-elEmpleado.getMesEnElArea())) * elEmpleado.getSalarioMensual());
         setChanged();
         notifyObservers();
     }

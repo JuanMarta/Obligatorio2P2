@@ -1,7 +1,10 @@
 // Trabajo desarrollado por: Santiago Alonso 349491 Juan Marta 332281
 package interfaz;
 
-import dominio.Sistema;
+import dominio.*;
+import excepciones.CedulaInvalidaException;
+import excepciones.StringVacioException;
+import excepciones.TelefonoInvalidoException;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -90,7 +93,7 @@ public class seleccionSistema extends javax.swing.JFrame {
 
     private void jButtonSistemaGuardadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSistemaGuardadoActionPerformed
         try {
-            FileInputStream ff = new FileInputStream("datos/guardarDatos");
+            FileInputStream ff = new FileInputStream("Datos/guardarDatos");
             BufferedInputStream b = new BufferedInputStream(ff);
             ObjectInputStream sss = new ObjectInputStream(b);
             sistema = (Sistema) sss.readObject();
@@ -107,22 +110,28 @@ public class seleccionSistema extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSistemaGuardadoActionPerformed
 
     private void jButtonSistemaDemoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSistemaDemoActionPerformed
+        sistema = new Sistema();
         try {
-            FileInputStream ff = new FileInputStream("datos/datosMuestra");
-            BufferedInputStream b = new BufferedInputStream(ff);
-            ObjectInputStream sss = new ObjectInputStream(b);
-            sistema = (Sistema) sss.readObject();
+            sistema.agregarArea(new Area("Personal","Reclutamiento de personal, promociones, gestión de cargos",100000.00));
+            sistema.agregarArea(new Area("RRHH","Relacionamiento en la empresa, organigrama, gestión de equipos",80000.00));
+            sistema.agregarArea(new Area("Seguridad","Seguridad física, vigilancia, seguridad informática, protocolos y políticas de seguridad",120000.00));
+            sistema.agregarArea(new Area("Comunicaciones","Comunicaciones internas, reglas y protocolos, comunicaciones con proveedores y clientes",20000.00));
+            sistema.agregarArea(new Area("Marketing","Acciones planificadas, publicidad en medios masivos, publicidad en redes, gestión de redes",95000.00));
+            sistema.agregarManager(new Manager("Ana Martínez","45683691","099123456",10));
+            sistema.agregarManager(new Manager("Ricardo Morales","32145893","094121212",4));
+            sistema.agregarManager(new Manager("Laura Torales","35892575","099654321",1));
+            sistema.agregarManager(new Manager("Juan Pablo Zapata","45551977","099202020",5));
             eliminarcvs();
-            sss.close();
             CrearVentana(sistema);
-        } catch (FileNotFoundException e) {
-            JOptionPane.showMessageDialog(this, "Error: No se ha creado un sistema previamente", "Error", JOptionPane.ERROR_MESSAGE);
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(this, "Error al leer el archivo", "Error", JOptionPane.ERROR_MESSAGE);
-            sistema = new Sistema();
-        } catch (ClassNotFoundException ex) {
-            JOptionPane.showMessageDialog(this, "Error: no se encontro sistema para leer los datos", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (StringVacioException ex) {
+            System.getLogger(seleccionSistema.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } catch (CedulaInvalidaException ex) {
+            System.getLogger(seleccionSistema.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } catch (TelefonoInvalidoException ex) {
+            System.getLogger(seleccionSistema.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
+        
+        eliminarcvs();
     }//GEN-LAST:event_jButtonSistemaDemoActionPerformed
 
     private void CrearVentana(Sistema sistema) {

@@ -70,4 +70,10 @@
     nbproject/build-impl.xml file. 
 
     -->
+    <!-- Empaqueta todas las librerías dentro del .jar final -->
+    <target name="-post-jar">
+        <jar jarfile="${dist.jar}" update="true">
+            <zipgroupfileset dir="${dist.dir}/lib" includes="*.jar"/>
+        </jar>
+    </target>
 </project>

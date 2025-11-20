@@ -169,10 +169,11 @@ public class Sistema extends Observable implements Serializable {
 
     public boolean moverEmpleado(Empleado e, int mesActual, Area destino) {
         boolean movido = false;
-        if (destino.puedeAceptar(e.getSalarioMensual(), mesActual)) {
+        if (destino.puedeAceptar(e.getSalarioMensual(), mesActual)&&e.mesAceptable(mesActual)) {
             Area areaOrigen = e.getArea();
             areaOrigen.quitarEmpleado(e, mesActual);
             e.setArea(destino);
+            e.setMesEnElArea(mesActual);
             destino.agregarEmpleado(e, mesActual);
             movido = true;
             setChanged();

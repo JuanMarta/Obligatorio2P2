@@ -55,7 +55,6 @@ public abstract class Persona implements Serializable {
         } catch (NumberFormatException e) {
             throw new CedulaInvalidaException();
         }
-        verificarCedula(cedula);
         this.cedula = cedula;
     }
 
@@ -75,19 +74,6 @@ public abstract class Persona implements Serializable {
         this.telefono = telefono;
     }
 
-    private void verificarCedula(String cedula) throws CedulaInvalidaException {
-        int ver = Integer.parseInt("" + cedula.charAt(7));
-        int[] mult = {2, 9, 8, 7, 6, 3, 4};
-        int suma = 0;
-        for (int i = 0; i < 7; i++) {
-            suma += Integer.parseInt(cedula.charAt(i) + "") * mult[i];
-        }
-        int resto = suma % 10;
-        int digitoVerificador = (10 - resto) % 10;
-        if (ver != digitoVerificador) {
-            throw new CedulaInvalidaException();
-        }
-    }
 
     @Override
     public String toString() {
