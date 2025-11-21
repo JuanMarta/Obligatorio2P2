@@ -3,20 +3,18 @@ package dominio;
 
 import java.io.Serializable;
 
+public class Movimiento implements Serializable, Comparable<Movimiento> {
 
-public class Movimiento implements Serializable,Comparable<Movimiento>{
     private int mesRealizacion;
-    private String nombreAreaOrigen;
-    private String nombreAreaDestino;
-    private String nombreEmpleado;
-    private String cedulaEmpleado;
-    
-    public Movimiento(int elMes, String nombreOrigen, String nombreDestino, String nombre, String cedula){
-        mesRealizacion = elMes;
-        nombreAreaOrigen = nombreOrigen;
-        nombreAreaDestino = nombreDestino;
-        nombreEmpleado = nombre;
-        cedulaEmpleado = cedula;
+    private Area areaOrigen;
+    private Area areaDestino;
+    private Empleado empleado;
+
+    public Movimiento(int mesRealizacion, Area areaOrigen, Area areaDestino, Empleado empleado) {
+        this.mesRealizacion = mesRealizacion;
+        this.areaOrigen = areaOrigen;
+        this.areaDestino = areaDestino;
+        this.empleado = empleado;
     }
 
     public int getMesRealizacion() {
@@ -27,37 +25,28 @@ public class Movimiento implements Serializable,Comparable<Movimiento>{
         this.mesRealizacion = mesRealizacion;
     }
 
-    public String getNombreAreaOrigen() {
-        return nombreAreaOrigen;
+    public Area getAreaOrigen() {
+        return areaOrigen;
     }
 
-    public void setNombreAreaOrigen(String nombreAreaOrigen) {
-        this.nombreAreaOrigen = nombreAreaOrigen;
+    public void setNombreAreaOrigen(Area area) {
+        this.areaOrigen = area;
     }
 
-    public String getNombreAreaDestino() {
-        return nombreAreaDestino;
+    public Area getAreaDestino() {
+        return areaDestino;
     }
 
-    public void setNombreAreaDestino(String nombreAreaDestino) {
-        this.nombreAreaDestino = nombreAreaDestino;
-    }
-
-    
-    public String getNombreEmpleado() {
-        return nombreEmpleado;
+    public void setAreaDestino(Area area) {
+        this.areaDestino = area;
     }
     
-    public void setNombreEmpleado(String nombre) {
-        this.nombreEmpleado = nombre;
+    public Empleado getEmpleado() {
+        return empleado;
     }
     
-    public String getCedulaEmpleado() {
-        return cedulaEmpleado;
-    }
-    
-    public void setCedulaEmpleado(String cedula) {
-        this.cedulaEmpleado = cedula;
+    public void setEmpleado(Empleado e) {
+        this.empleado = e;
     }
 
     @Override

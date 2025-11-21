@@ -233,9 +233,9 @@ public class ReporteMovimientos extends javax.swing.JFrame implements Observer {
         for (Movimiento m : sistema.filtroMovimiento(mes, nomAreaOrigen, nomAreaDestino, cedula)) {
             modelo.addRow(new Object[]{
                 m.getMesRealizacion(),
-                m.getNombreAreaOrigen(),
-                m.getNombreAreaDestino(),
-                m.getNombreEmpleado()
+                m.getAreaOrigen().getNombre(),
+                m.getAreaDestino().getNombre(),
+                m.getEmpleado().getNombre()
             });
         }
     }

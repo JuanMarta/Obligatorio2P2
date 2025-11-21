@@ -178,7 +178,7 @@ public class Sistema extends Observable implements Serializable {
             movido = true;
             setChanged();
             notifyObservers();
-            Movimiento m = new Movimiento(mesActual, areaOrigen.getNombre(), destino.getNombre(), e.getNombre(), e.getCedula());
+            Movimiento m = new Movimiento(mesActual, areaOrigen, destino, e);
             this.agregarMovimiento(m);
         }
         return movido;
@@ -206,9 +206,9 @@ public class Sistema extends Observable implements Serializable {
 
         for (Movimiento m : getListaMovimientos()) {
             boolean coincideMes = (!(mes > 0) || m.getMesRealizacion() == mes);
-            boolean coincideOrigen = (nomAreaOrigen == null || m.getNombreAreaOrigen().equals(nomAreaOrigen));
-            boolean coincideDestino = (nomAreaDestino == null || m.getNombreAreaDestino().equals(nomAreaDestino));
-            boolean coincideCedula = (cedula == null || m.getCedulaEmpleado().equals(cedula));
+            boolean coincideOrigen = (nomAreaOrigen == null || m.getAreaOrigen().getNombre().equals(nomAreaOrigen));
+            boolean coincideDestino = (nomAreaDestino == null || m.getAreaDestino().getNombre().equals(nomAreaDestino));
+            boolean coincideCedula = (cedula == null || m.getEmpleado().getCedula().equals(cedula));
 
             if (coincideMes && coincideOrigen && coincideDestino && coincideCedula) {
                 lista.add(m);

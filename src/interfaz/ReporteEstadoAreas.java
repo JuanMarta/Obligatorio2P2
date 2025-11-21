@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 public class ReporteEstadoAreas extends javax.swing.JFrame implements Observer {
 
     private Sistema sistema;
+    private Area areaSelecionada;
 
     public ReporteEstadoAreas(Sistema sis) {
         initComponents();
@@ -62,13 +63,16 @@ public class ReporteEstadoAreas extends javax.swing.JFrame implements Observer {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-     public void refrescarVentana() {
+    public void refrescarVentana() {
         cargarAreas();
+        if (sistema.getListaAreas().contains(areaSelecionada)) {
+            jLabelAreaYPresupuesto.setText("Área: " + areaSelecionada.getNombre() + " Porcentaje asignado: " + String.format("%.1f%%", areaSelecionada.porcentajePresupuestoAsignado()));
+            cargarEmpleados(areaSelecionada);
+        }
 
         jPanelListaAreas.revalidate();
         jPanelListaAreas.repaint();
     }
-
 
     public void cargarAreas() {
         // Quito todos las areas antes de volver a colocar
@@ -84,7 +88,7 @@ public class ReporteEstadoAreas extends javax.swing.JFrame implements Observer {
             btnArea.setForeground(Color.BLACK);
             btnArea.addActionListener(new AreaListener());
             btnArea.setPreferredSize(new Dimension(120, 30));
-            
+
             // Hace que ocupe todo el ancho del panel y que tenga 30 px como maximo
             btnArea.setMaximumSize(new Dimension(Short.MAX_VALUE, 30));
             btnArea.setAlignmentX(CENTER_ALIGNMENT);
@@ -99,7 +103,7 @@ public class ReporteEstadoAreas extends javax.swing.JFrame implements Observer {
             }
 
             jPanelListaAreas.add(btnArea);
-            
+
             // Agrega una separacion de 4px
             jPanelListaAreas.add(javax.swing.Box.createVerticalStrut(4));
         }
@@ -111,16 +115,16 @@ public class ReporteEstadoAreas extends javax.swing.JFrame implements Observer {
         for (Empleado e : area.empleadosOrdenadosPorNombre()) {
             JButton btnEmpleado = new JButton(e.getNombre());
             btnEmpleado.putClientProperty("empleado", e);
-            
+
             // Devuelve un valor entre 0 y 255 para el color del boton
-            int factor = (int) Math.ceil(e.getSalarioAnual()*255/area.getPresupuestoAnual());
-            btnEmpleado.setBackground(new Color(0,0, factor));
-            
+            int factor = (int) Math.ceil(e.getSalarioAnual() * 255 / area.getPresupuestoAnual());
+            btnEmpleado.setBackground(new Color(0, 0, factor));
+
             btnEmpleado.setForeground(Color.WHITE);
             btnEmpleado.setMargin(new Insets(-5, -5, -5, -5));
             btnEmpleado.addActionListener(new EmpleadoListener());
             btnEmpleado.setPreferredSize(new Dimension(100, 30));
-            
+
             JPanel panelBtn = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
             panelBtn.setOpaque(true);
             panelBtn.add(btnEmpleado);
@@ -139,6 +143,7 @@ public class ReporteEstadoAreas extends javax.swing.JFrame implements Observer {
             JButton btn = ((JButton) e.getSource());
             Area area = (Area) btn.getClientProperty("area");
 
+            areaSelecionada = area;
             jLabelAreaYPresupuesto.setText("Área: " + area.getNombre() + " Porcentaje asignado: " + String.format("%.1f%%", area.porcentajePresupuestoAsignado()));
             cargarEmpleados(area);
         }

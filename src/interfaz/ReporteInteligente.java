@@ -14,6 +14,7 @@ import javax.swing.SwingWorker;
 public class ReporteInteligente extends javax.swing.JFrame implements Observer {
 
     private Sistema sistema;
+    private Area areaOrigenSeleccionada;
 
     public ReporteInteligente(Sistema sis) {
         initComponents();
@@ -193,8 +194,6 @@ public class ReporteInteligente extends javax.swing.JFrame implements Observer {
                 jComboBoxEmpleado.addItem(e);
             }
         }
-
-
     }//GEN-LAST:event_jComboBoxAreaOrigenActionPerformed
 
     private void refrescarVentana() {
@@ -205,8 +204,14 @@ public class ReporteInteligente extends javax.swing.JFrame implements Observer {
             jComboBoxAreaOrigen.addItem(a);
             jComboBoxAreaDestino.addItem(a);
         }
-    }
 
+        if (areaOrigenSeleccionada != null
+                && sistema.getListaAreas().contains(areaOrigenSeleccionada)) {
+
+            // Esto NO llama el actionPerformed
+            jComboBoxAreaOrigen.setSelectedItem(areaOrigenSeleccionada);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonConsultarAI;
@@ -225,6 +230,7 @@ public class ReporteInteligente extends javax.swing.JFrame implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
+        this.areaOrigenSeleccionada = (Area) jComboBoxAreaOrigen.getSelectedItem();
         refrescarVentana();
     }
 }
