@@ -93,7 +93,7 @@ public class seleccionSistema extends javax.swing.JFrame {
 
     private void jButtonSistemaGuardadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSistemaGuardadoActionPerformed
         try {
-            FileInputStream ff = new FileInputStream("Datos/guardarDatos");
+            FileInputStream ff = new FileInputStream("guardarDatos");
             BufferedInputStream b = new BufferedInputStream(ff);
             ObjectInputStream sss = new ObjectInputStream(b);
             sistema = (Sistema) sss.readObject();
