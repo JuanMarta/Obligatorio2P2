@@ -30,7 +30,7 @@ public class Movimiento implements Serializable, Comparable<Movimiento> {
         return areaOrigen;
     }
 
-    public void setNombreAreaOrigen(Area area) {
+    public void setAreaOrigen(Area area) {
         this.areaOrigen = area;
     }
 

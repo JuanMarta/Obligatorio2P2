@@ -17,7 +17,6 @@ public class Manager extends Persona implements Comparable<Manager> {
         super(elNombre, laCedula, elCelular);
         antiguedad = laAntiguedad;
         listaEmpleados = new ArrayList<>();
-        
     }
 
     public Manager() {

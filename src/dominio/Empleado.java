@@ -71,7 +71,6 @@ public class Empleado extends Persona implements Comparable<Empleado> {
         this.mesEnElArea = mesEnElArea;
     }
     
-    
     // Getters
     public double getSalarioAnual() {
         return salarioMensual * 12;
