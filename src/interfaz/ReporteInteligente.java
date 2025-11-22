@@ -205,10 +205,7 @@ public class ReporteInteligente extends javax.swing.JFrame implements Observer {
             jComboBoxAreaDestino.addItem(a);
         }
 
-        if (areaOrigenSeleccionada != null
-                && sistema.getListaAreas().contains(areaOrigenSeleccionada)) {
-
-            // Esto NO llama el actionPerformed
+        if (areaOrigenSeleccionada != null && sistema.getListaAreas().contains(areaOrigenSeleccionada)) {
             jComboBoxAreaOrigen.setSelectedItem(areaOrigenSeleccionada);
         }
     }

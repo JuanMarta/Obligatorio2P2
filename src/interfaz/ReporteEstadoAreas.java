@@ -117,7 +117,10 @@ public class ReporteEstadoAreas extends javax.swing.JFrame implements Observer {
             btnEmpleado.putClientProperty("empleado", e);
 
             // Devuelve un valor entre 0 y 255 para el color del boton
-            int factor = (int) Math.ceil(e.getSalarioAnual() * 255 / area.getPresupuestoAnual());
+            int factor = (int) Math.ceil(e.getSalarioAnual() * 85 / area.getPresupuestoAnual()) * 3;
+            if (factor > 255) {
+                factor = 255;
+            }
             btnEmpleado.setBackground(new Color(0, 0, factor));
 
             btnEmpleado.setForeground(Color.WHITE);
