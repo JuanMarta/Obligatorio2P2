@@ -2,7 +2,6 @@
 package dominio;
 
 import excepciones.NumFueraDeRangoException;
-import excepciones.StringVacioException;
 import java.util.Collections;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,6 +15,7 @@ public class Sistema extends Observable implements Serializable {
     private ArrayList<Manager> listaManagers;
     private ArrayList<Empleado> listaEmpleados;
     private ArrayList<Movimiento> listaMovimientos;
+    private static final long serialVersionUID = 1;
 
     public Sistema() {
         try {
@@ -47,7 +47,6 @@ public class Sistema extends Observable implements Serializable {
     public void setListaAreas(ArrayList<Area> listaAreas) {
         this.listaAreas = listaAreas;
     }
-
     public ArrayList<Area> getListAreasBajables() {
         ArrayList<Area> ret = new ArrayList<>();
         for (Area a : listaAreas) {
@@ -57,7 +56,7 @@ public class Sistema extends Observable implements Serializable {
         }
         return ret;
     }
-
+    
     public void agregarArea(Area elArea) {
         listaAreas.add(elArea);
         listaAreasHistoricas.add(elArea);
@@ -109,7 +108,7 @@ public class Sistema extends Observable implements Serializable {
     public ArrayList<Manager> getListaManagers() {
         return listaManagers;
     }
-
+    
     public void setListaManagers(ArrayList<Manager> listaManagers) {
         this.listaManagers = listaManagers;
     }

@@ -9,6 +9,7 @@ public class Movimiento implements Serializable, Comparable<Movimiento> {
     private Area areaOrigen;
     private Area areaDestino;
     private Empleado empleado;
+    private static final long serialVersionUID = 1;
 
     public Movimiento(int mesRealizacion, Area areaOrigen, Area areaDestino, Empleado empleado) {
         this.mesRealizacion = mesRealizacion;

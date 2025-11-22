@@ -11,6 +11,7 @@ public abstract class Persona implements Serializable {
     private String nombre;
     private String cedula;
     private String telefono;
+    private static final long serialVersionUID = 1;
 
     public Persona(String elNombre, String laCedula, String elCelular) throws StringVacioException, CedulaInvalidaException, TelefonoInvalidoException {
         this.setNombre(elNombre);

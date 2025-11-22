@@ -15,6 +15,7 @@ public class Empleado extends Persona implements Comparable<Empleado> {
     private Manager manager;
     private Area area;
     private int mesEnElArea;
+    private static final long serialVersionUID = 1;
 
     public Empleado(String elNombre, String laCedula, String elCelular, double elSalario, String elCv, Manager elManager, Area elArea) throws StringVacioException, CedulaInvalidaException, TelefonoInvalidoException {
         super(elNombre, laCedula, elCelular);

@@ -11,11 +11,13 @@ public class Manager extends Persona implements Comparable<Manager> {
 
     private int antiguedad;
     private ArrayList<Empleado> listaEmpleados;
+    private static final long serialVersionUID = 1;
 
     public Manager(String elNombre, String laCedula, String elCelular, int laAntiguedad) throws StringVacioException, CedulaInvalidaException, TelefonoInvalidoException {
         super(elNombre, laCedula, elCelular);
         antiguedad = laAntiguedad;
         listaEmpleados = new ArrayList<>();
+        
     }
 
     public Manager() {

@@ -15,6 +15,7 @@ public class Area extends Observable implements Serializable, Comparable<Area> {
     private double presupuestoAnual;
     private double presupuestoActual;
     private ArrayList<Empleado> listaEmpleados;
+    private static final long serialVersionUID = 1;
 
     public Area(String elNombre, String laDescripcion, double elPresupuesto) throws StringVacioException {
         setNombre(elNombre);
