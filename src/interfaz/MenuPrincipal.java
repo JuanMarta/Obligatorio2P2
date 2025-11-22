@@ -301,11 +301,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         int opcion = JOptionPane.showConfirmDialog(this, "Desea guardar del sistema?", "Salir", JOptionPane.YES_NO_OPTION);
         if (opcion == JOptionPane.YES_OPTION) {
             try {
-                File carpeta = new File("Datos");
-                if (!carpeta.exists()) {
-                    carpeta.mkdir();
-                }
-                FileOutputStream ff = new FileOutputStream("Datos/guardarDatos");
+                FileOutputStream ff = new FileOutputStream("guardarDatos");
                 BufferedOutputStream b = new BufferedOutputStream(ff);
                 ObjectOutputStream sss = new ObjectOutputStream(b);
                 sss.writeObject(sistema);
