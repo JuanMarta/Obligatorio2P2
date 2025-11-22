@@ -216,6 +216,7 @@ public class MovimientoAreas extends javax.swing.JFrame implements Observer{
         jListAreaOrigen.setListData(sistema.getListaAreas().toArray());
         jListEmpleadoMover.clearSelection();
         jListEmpleadoMover.setListData(new String[0]);
+        jListMes.clearSelection();
         
     }
 }
